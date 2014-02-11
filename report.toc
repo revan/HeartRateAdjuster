@@ -3,7 +3,7 @@
 \contentsline {subsection}{\numberline {1.1.1}More Specifically}{3}
 \contentsline {subsection}{\numberline {1.1.2}Background}{4}
 \contentsline {subsection}{\numberline {1.1.3}Devices and Specifications}{5}
-\contentsline {section}{\numberline {1.2}Solution}{5}
+\contentsline {section}{\numberline {1.2}Solution}{6}
 \contentsline {subsection}{\numberline {1.2.1}Music}{6}
 \contentsline {subsection}{\numberline {1.2.2}Web Platform/Database}{7}
 \contentsline {subsection}{\numberline {1.2.3}Product Usage}{7}
