@@ -5,8 +5,8 @@
 
 Date | Members | Subject
 ---- | ------- | -------
-1-24-14 | Kenny, Jonathan, Tae-Min, Nikhil, Revan | Project ideas
-1-27-14 | Kenny, Jonathan, Tae-Min, Nikhil, Revan | Write proposal, assign roles
-1-30-14 | Jonathan, Tae-Min, Nikhil, Revan | Refine proposal, experiment with devices
-2-05-14 | Jonathan, Tae-Min, Nikhil, Revan | Divide work for first report, decide on documentation
-
+1-24| Kenny, Jonathan, Tae-Min, Nikhil, Revan | Project ideas
+1-27| Kenny, Jonathan, Tae-Min, Nikhil, Revan | Write proposal, assign roles
+1-30| Jonathan, Tae-Min, Nikhil, Revan | Refine proposal, experiment with devices
+2-05| Jonathan, Tae-Min, Nikhil, Revan | Divide work for first report, decide on documentation
+2-10| Kenny, Jonathan, Samani, Tae-Min, Nikhil, Revan | Review first report, divide work for second report
