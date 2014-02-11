@@ -1,5 +1,7 @@
 \documentclass[letterpaper,english]{scrreprt}
 \usepackage[T1]{fontenc}
+\usepackage{array}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
 \begin{document}
 \title{Musical Heart Rate Adjuster}
@@ -22,12 +24,12 @@ Website: https://github.com/revansopher/HeartRateAdjuster
  
 As seen by the list above, each team member possesses different qualifications and strengths. We seek to play to these strengths, and assigned roles accordingly as seen in the product breakdown below. In general, Nikhil and Jonathan will serve to organize meetings, ensure that deadlines are met, and be responsible for documentation. Kenny and Samani will lend their experience and insight with the web portion of the project. Tae-min and Revan will work with programming any necessary Android applications.
  
-\section*{Customer Statement of Requirements/Project Proposal}
+\chapter{Customer Statement of Requirements/Project Proposal}
  
-\subsection*{Problem}
+\section{Problem}
 There seems to be a growing concern over the bevy of health-related issues that society faces: cancer, obesity, heart diseases. This is evidenced by the estimated \$25.9 billion that consumers spent on fitness membership in 2013 or the government's seemingly carte blanche spending on "perfecting" the healthcare.gov website. While it is impossible to completely eliminate health problems, we focus on a small, albeit interesting subset of the health industry - personal health monitoring. Just like "an apple a day keeps the doctor away," our project seeks to maintain the personal health of an individual, keeping him in the best physical shape possible, and reducing the risk of health problems.
  
-\subsection*{More Specifically}
+\subsection{More Specifically}
 Lack of education about proper fitness is a widespread problem. Many people in the country would like to exercise and stay in shape, but only a small subset of those people know how to monitor their health in a way that allows them to stay fit. There are several methods out there which people can use to get the proper information; tools such as fitness blogs, the President's Council on Fitness, Sports, and Nutrition, and the classic visit to the doctor's office are all excellent examples. However, many people don't know about those methods or choose not to utilize them, and they do their body a disservice by performing exercises that could be detrimental to their health. The Internet is littered with articles such as "9 Exercises You're Doing Wrong" and "The 7 Fitness Myths You Need to Know". With information like this readily available to exercisers, it can be hard to find correct information. And even if one does find correct information, he must check to see if that information applies to a person with his body shape and size. The general problem of finding correct exercise information is that there is no set standard; there is no "one size fits all" set of guidelines which one can follow to have an effective workout. Everybody's body responds differently to different exercises, so the best that the medical community can do is to provide a set of recommendations for people of the most average body type. While this set of recommendations is good in the general, they will never tailor to the needs of one's body and workout. Finding the correct exercise information for one's body type is quite a difficult problem, and it will continue to be a problem until a solution is provided to track each person's exercise routine.
  
 Of all the different metrics for measuring the quality of one's fitness, heart rate is the most important factor in determining whether a workout was effective. Monitoring one's heart rate is useful because it determines whether the exerciser is performing his exercise safely as well as successfully. Experts recommend that one's target heart rate during exercise should be between 60-85\% percent of the maximum heart rate, and that anything higher than 85\% increases cardiovascular and orthopedic risk to the exerciser. Naturally, the target heart rate varies for people of different ages, so one should always take this into account before starting a fitness regimen. Also, the frequency of exercise before the new regimen should be considered. If one has not exercised frequently before starting the new regimen, then he should start exercising at a rate that is towards the lower end of the target heart rate zone and then gradually increase his activity once his body gets accustomed to the exercise. Heart rate is a significant, if not the most important, factor in determining whether a workout was done correctly and effectively, and it must be monitored closely in order to prevent injury.
@@ -36,32 +38,32 @@ Unfortunately, there are people who don't know how to correctly monitor their he
  
 A solution to the problem of uninformed exercise must have three main components; it must include all relevant medical data such as heart rate information, create a fitness plan that fits relatively well to the client's body, and provide the client with feedback about the effectiveness of his workout. Once all these components come together, the client will be able to correctly monitor his health during exercise and get the most out of his workout.
  
-\subsection*{Background}
+\subsection{Background}
 A healthy lifestyle depends upon a plethora of factors including environment, nutrition, socialization, and mental stability. However, we identified physical fitness and sleep as the two key factors to leading a healthy lifestyle. Their importance cannot be overstated.
  
 Physical fitness or exercise fortifies the body, allowing one to stay in shape, avoid injuries, develop confidence, become stronger, and sleep better. Sufficient physical activity can reduce the risk of such symptoms as stress, depression, diabetes, high blood pressure, osteoporosis, and obesity.
  
 Meanwhile, sleep is critical to the mind. It refreshes the brain, helps with daily functioning, uplifts one's mood and emotional well being, increases productivity, and improves learning and memory. "Good" sleep can lower the probability of contracting the following: heart disease, kidney disease, high blood pressure, diabetes, and stroke.
  
-\subsection*{Devices and Specifications}
-Motoactv:
-600 MHz ARMv7 CPU
-256MB RAM
-8GB Flash Memory
-802.11B/G/N
-Bluetooth 4.0 low energy
-ANT+ for connectivity to fitness sensors
-1.6" 220x176 LCD
-
-Heart Rate monitor:
-Either ANT+ or Bluetooth to connect to Motoactv and/or smart phone
+\subsection{Devices and Specifications}
+Motoactv:\\
+600 MHz ARMv7 CPU\\
+256MB RAM\\
+8GB Flash Memory\\
+802.11B/G/N\\
+Bluetooth 4.0 low energy\\
+ANT+ for connectivity to fitness sensors\\
+1.6" 220x176 LCD\\
+\\
+Heart Rate monitor:\\
+Either ANT+ or Bluetooth to connect to Motoactv and/or smart phone\\
 
 Our project is centered around the Motoactv device, whose specifications are listed above.The Motoactv is essentially a Motorola-manufactured smartwatch that combines features that would normally be found on a GPS, pedometer, and music player. It also runs Android, contains bluetooth, and provides web-based analytics. We plan on using the Motoactv in conjunction with a compatible heart rate monitor because we are primarily interested with the ability of our music to affect heart rate. Besides monitoring the subject's heart rate and collecting the relevant data, the Motoactv will also be responsible for running our customized Android music player as well as hold our special music library. We wish to to categorize how strenuous the user's current workout is, and encourage them to select a more challenging category to push themselves. Our music player will then play a song and adjust its tempo based on the selected category and the measured heart rate.
 
 Zeo:
 The Zeo headband, similar to a personal EEG, uses conductive sensors to collect electrical signals produced by the brain, as wella s eye movement. Then, Zeo takes this information and produces graphs to summarize the user's sleep, pointing out trends or critical points such as the ranges of REM sleep. It also offers a "Sleep Score." (We may use the Zeo to analyze and compare the quality of sleep when our Musical Heart Rate Adjuster is being used. More research will be done on the product and its features when we receive the device.)
 			 
-\subsection*{Solution}
+\section{Solution}
 It has been well documented that exercise and sleep both hold a significant impact on heart rate. However from experience, we believe that the link between exercise and sleep and heart rate holds true for the converse as well. One of the targets of a good workout is an increased heart rate. On the other hand, high-quality sleep entails a decreasing heart rate.
 			 
 Our proposed solution is designed to affect people's health by providing limited control to their heart rates. Our Musical Heart Rate Adjuster can be very effective in two areas - workouts and sleep - which in turn offer the aforementioned health benefits. We do not plan on adjusting heart rate with the intent of skipping the rigors of exercise or the process of falling asleep; on the contrary, we wish to adjust heart rate to induce better quality workouts and sleep.
@@ -70,7 +72,7 @@ Our plan is composed of a few steps. First, we intend to increase the effectiven
 			 
 Then, we seek to improve the quality of sleep by finding soothing music to gradually slow down a user's heart rate. In this instance, we use music as an instrument to aid users in falling asleep more quickly, and hopefully improve the performance of their rest. This will be determined by the sleep graphs provided by the Zeo Sleep Monitor. Looking at the peaks and troughs of the graph will allow us to recognize when the user has fallen asleep, as well as the time and quality of his deepest slumber. Listening to right music can also improve the quality of sleep; for instance, music by classical composer Mozart has been shown to increase health factors such as relaxation and mental stimulation.
 			 
-\subsection*{Music}
+\subsection{Music}
 We utilize music to affect heart rate in two ways. In addition to identifying and playing music with speeds in the same vicinity as heartbeat, we also wish to be able to adjust the tempo of the music. A simple compound microscope has both a coarse adjustment knob as well as a fine adjustment knob. Our song library will organize songs into different categories, acting as a coarse adjuster for heart rates. Meanwhile, to add a little fine-tuning to adjust the heart rates, we will either write or find an existing application for an audio tempo changer. Given current heart rate, and subsequently, current music tempo, we will continually adjust the music tempo while measuring for changes in heart rate. This will occur until we hit the specified target heart rate, give or a take a few BPM. Thus, if there is no difference in heart rate, either the targeted heart rate has been reached - otherwise,  the music tempo has not been adjusted enough.
 			 
 We are interested in analyzing the magnitude of the effect of our music application on heart rate and finding a rough correlation based on the data that the Motoactv provides.
@@ -79,10 +81,10 @@ This will probably take some experimentation with test subjects in several situa
 			 
 Finally, we will be able to develop an algorithm for ranking the songs that induce the best performance. Even better, we could potentially toy around with machine learning to have our algorithm improve after more and more data sets. This way, our Motoactv will be able to increase both exercise and sleep performance through our own custom music player application, located on and loaded by the device. This application will utilize the user's music library stored locally on the device's memory.
 
-\subsection*{Web Platform/Database}
+\subsection{Web Platform/Database}
 Users will want to monitor their personal health status, so our project will include a web component. The Motoactv device does have its own website, but our project is primarily interested with music and heart rate, so we will be able to better customize our own website, tailoring it to a potential customer's needs in this context. The Zeo device has limited support because the company went out of business, so we will need our own website to combine information from both the Motoactv and the Zeo. Data from the Motoactv and the Zeo will go to a web server, which will then go to a database performs storage and processing. Our website will pull information from the database and display a useful graph of the correlation between music and heart rate. (The exact features of this website will be determined later on because it is one of the later steps of our project. A diagram will also be provided later.)
 
-\subsection*{Product Usage}
+\subsection{Product Usage}
 \begin{itemize}
 	\item The device should only be worn while it is in use - while sleeping or while exercising. The device may be worn at other times, but there will be no benefit.
 	\item The user will run the android application, and then input a target heart rate. The software will then choose a song based on your current heart rate and begin to either raise or lower it. Once the target heart rate is obtained within a certain tolerance, the software will work to maintain this heart rate rather than increasing/decreasing it.
@@ -91,7 +93,7 @@ Users will want to monitor their personal health status, so our project will inc
 	\item Receive information on the songs that are listened to in relation to their usage of the MOTOACTV. (What songs were listened to, which songs were the most effective at changing their heart rate, etc.)
 \end{itemize}
 
-\subsection*{Product Ownership (tentative)}
+\subsection{Product Ownership (tentative)}
 Our team will be divided into three smaller sub-teams of two individuals each, the pairings listed below. Each sub-team will be responsible for music, hardware, or web and provide a brief description of their work on a shared Google drive folder. They will also include the necessary UML diagrams and charts. Every week (or bi-week) we will meet together for 1-3 hours during the timeframe determined by When2meet. During the meeting, we will have a specific agenda that primarily involves the week's progress and upcoming deliverable. Our discussion will probably be centered along the following questions: 1) What did you work on this past week? 2) What do you plan on working on next week? 3) Are there any changes that need to be made to the project? Every week, a different team member will take the lead for the next deliverable to ensure that everything is on time.          	
 
 \begin{itemize}
