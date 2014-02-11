@@ -120,8 +120,52 @@ Our team will be divided into three smaller sub-teams of two individuals each, t
 	\item[Heart Rate Monitor] A device which is able to monitor the user’s heart rate. In our experiment we will be using a third party heart rate monitor (worn as a chest strap) which has sensors that are connected to the skin along with the MOTOACTV watch. The chest strap will record the heart rate while the watch will display the user’s current heart rate in real time.
 \end{description}
 
-\section{Non-Functional Requirements}
+\chapter{System Requirements}
+Based upon our consumer needs, we derived a list of requirements for our system to
+possess. For features that must be implemented by the system, we state that "The
+user shall," whereas for features that are preferred, but not "mandatory," we state
+that "The user should." For each requirement, we assign an identifier in the form of
+REQ-x, as well as a priority weight from 1 to 5. A higher priority weight indicates
+that the corresponding requirement is more essential to the success of the project,
+and more critical to fulfilling the customer's needs.
 
+\section{Functional Requirements}
+\begin{center}
+	\begin{tabular}{|C{2cm}|C{2cm}|C{8cm}|}
+		\hline
+			Identifier & Priority & Description\\
+		\hline
+			REQ-1 & 5 &  The system shall log user BPM data using the Heart Rate Monitor sensor.\\
+		\hline
+			REQ-2 & 5 & The system shall sync the information to Android device via Bluetooth.\\
+		\hline
+			REQ-3 & 4 & The system shall allow user to select a target heart rate on the Android application.\\
+		\hline
+			REQ-4 & 3 & The system shall determine a song from the user’s music library in the tempo range of the user’s selection.\\
+		\hline
+			REQ-5 & 5 & The system shall play the designated song through either headphones or Bluetooth speakers to adjust user heart rate.\\
+		\hline
+			REQ-6 & 3 & The system shall store the BPM data in the database.\\
+		\hline
+			REQ-7 & 2 & The system shall output useful graphs of user workout data on the website to demonstrate the effects of music on BPM.\\
+		\hline
+			REQ-8 & 1 & The system should adjust the tempo of the song to further match the user’s BPM and stop when within a defined range.\\
+		\hline
+			REQ-9 & 1 & The system should allow the user some control when they use the website. That is, they should be able to customize the look and feel of the account on their website as well as the details of how the data is displayed (type of graph or specific categories of data).\\
+		\hline
+			REQ-10 & 1 & The system should rank the songs that induce the best performance and use machine learning to improve the song selection algorithm.\\
+		\hline
+	\end{tabular}
+\end{center}
+
+Our functional requirements spell out the behavior of our system and reaction to
+user input. Our system is composed of several aspects such as the heart rate
+monitor, android device, server and database, and website. These requirements
+describe some of the interactions between these components and the effects that
+he system as a whole produces. The images in the appearance requirements section
+ater on provide more insight on the requirements and functionality of our system.
+
+\section{Non-Functional Requirements}
 \begin{center}
 	\begin{tabular}{|C{2cm}|C{2cm}|C{8cm}|}
 		\hline
@@ -141,4 +185,9 @@ Our team will be divided into three smaller sub-teams of two individuals each, t
 		\hline
 	\end{tabular}
 \end{center}
+
+Meanwhile, our non-functional requirements are more descriptive than practical,
+listing the qualities of our system. These requirements are based on the term
+FURPS+, which includes functionality, usability, reliability, and performance.
+
 \end{document}
