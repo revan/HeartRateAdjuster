@@ -3,15 +3,17 @@
 \usepackage{array}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{titlepic}
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
-\begin{document}
 \title{Musical Heart Rate Adjuster}
 \subtitle{Software Engineering Project \\ https://github.com/revansopher/HeartRateAdjuster}
 \author{Group \#12}
+\titlepic{\includegraphics{img/title.png}}
 
+\begin{document}
 \maketitle
- 
+
 \tableofcontents
 
 \section*{Team Profile}
@@ -197,36 +199,41 @@ by the app. The phone then wirelessly uploads the data to the server and databas
 which processes the data. The phone app is then able to select the appropriate
 songs, and the website is able to display suitable graphs.
 
-(DIAGRAM GOES HERE)
+\begin{figure}[H]
+	\centering
+	\includegraphics{img/system.png}\\
+	\caption{System design}
+\end{figure}
+
 \subsection{Mobile Application}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics{mobile_ui/1.png}
+	\includegraphics{img/mobile_ui/1.png}\\
 	\caption{The main screen of the app provides a menu button, a selector for Target BPM, a display of the current track, a display of the current BPM, and the option to Play/Pause and Skip the current track.}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics{mobile_ui/2.png}\\
+	\includegraphics{img/mobile_ui/2.png}\\
 	\caption{Pressing the menu button opens the context menu, providing the option to edit settings and view information about the app.}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics{mobile_ui/3.png}\\
+	\includegraphics{img/mobile_ui/3.png}\\
 	\caption{The settings page allows the user to open a menu to Log in, to edit the location of the media library (this is done via the OS's directory selection), and configure additional parameters such as music generation (if there is time to implement this feature).}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics{mobile_ui/4.png}\\
+	\includegraphics{img/mobile_ui/4.png}\\
 	\caption{Selecting the Log in option prompts the user for their credentials.}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics{mobile_ui/5.png}\\
+	\includegraphics{img/mobile_ui/5.png}\\
 	\caption{Selecting the About option from the context menu provides a description of the application.}
 \end{figure}
 

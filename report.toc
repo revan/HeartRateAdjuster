@@ -13,4 +13,4 @@
 \contentsline {section}{\numberline {2.1}Functional Requirements}{11}
 \contentsline {section}{\numberline {2.2}Non-Functional Requirements}{12}
 \contentsline {section}{\numberline {2.3}On-Screen Appearance Requirements}{12}
-\contentsline {subsection}{\numberline {2.3.1}Mobile Application}{13}
+\contentsline {subsection}{\numberline {2.3.1}Mobile Application}{14}
