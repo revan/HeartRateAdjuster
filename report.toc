@@ -14,3 +14,5 @@
 \contentsline {section}{\numberline {2.2}Non-Functional Requirements}{12}
 \contentsline {section}{\numberline {2.3}On-Screen Appearance Requirements}{12}
 \contentsline {subsection}{\numberline {2.3.1}Mobile Application}{14}
+\contentsline {subsection}{\numberline {2.3.2}Stakeholders}{18}
+\contentsline {subsection}{\numberline {2.3.3}Actors and Goals}{20}
