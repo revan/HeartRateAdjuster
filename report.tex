@@ -68,7 +68,7 @@ The Zeo headband, similar to a personal EEG, uses conductive sensors to collect 
 \section{Solution}
 It has been well documented that exercise and sleep both hold a significant impact on heart rate. However from experience, we believe that the link between exercise and sleep and heart rate holds true for the converse as well. One of the targets of a good workout is an increased heart rate. On the other hand, high-quality sleep entails a decreasing heart rate.
 			 
-Our proposed solution is designed to affect people's health by providing limited control to their heart rates. Our Musical Heart Rate Adjuster can be very effective in two areas - workouts and sleep - which in turn offer the aforementioned health benefits. We do not plan on adjusting heart rate with the intent of skipping the rigors of exercise or the process of falling asleep; on the contrary, we wish to adjust heart rate to induce better quality workouts and sleep.
+Our proposed solution is designed to affect people's health by providing limited control to their heart rates. Our Musical Heart Rate Adjuster is targeted to operate in two areas where it can be the most effective - workouts and sleep - which in turn offer the aforementioned health benefits. We do not plan on adjusting heart rate with the intent of skipping the rigors of exercise or the process of falling asleep; on the contrary, we wish to adjust heart rate to induce better quality workouts and sleep.
 			 
 Our plan is composed of a few steps. First, we intend to increase the effectiveness of workouts by matching heart rate to an appropriate selection and tempo of music. This music can be adjusted accordingly to stimulate heart rates to reach a desired intensity of exercise. The music, which will be discussed later, performs the task of simulating workout difficulty. As an added benefit, studies have shown exercising while listening to music to provide many benefits, such as increased motivation and endurance, distraction from otherwise unbearable stress, and increased heart rate, among others.
 			 
@@ -77,20 +77,22 @@ Then, we seek to improve the quality of sleep by finding soothing music to gradu
 \subsection{Music}
 We utilize music to affect heart rate in two ways. In addition to identifying and playing music with speeds in the same vicinity as heartbeat, we also wish to be able to adjust the tempo of the music. A simple compound microscope has both a coarse adjustment knob as well as a fine adjustment knob. Our song library will organize songs into different categories, acting as a coarse adjuster for heart rates. Meanwhile, to add a little fine-tuning to adjust the heart rates, we will either write or find an existing application for an audio tempo changer. Given current heart rate, and subsequently, current music tempo, we will continually adjust the music tempo while measuring for changes in heart rate. This will occur until we hit the specified target heart rate, give or a take a few BPM. Thus, if there is no difference in heart rate, either the targeted heart rate has been reached - otherwise,  the music tempo has not been adjusted enough.
 			 
-We are interested in analyzing the magnitude of the effect of our music application on heart rate and finding a rough correlation based on the data that the Motoactv provides.
+We are interested in analyzing the magnitude of the effect of our music application on heart rate and finding a rough correlation based on the data that the Motoactv provides. All parties should remember, however, that correlation is not causation. While we take the assumption that the general public will react to music in similar ways (music with a slower tempo will decrease heart rate while music with a higher tempo will increase heart rate), it is difficult to know how every individual will react to the same music and can never be 100 percent accurate.
 
 This will probably take some experimentation with test subjects in several situations such as rest, running, weight-lifting, and playing basketball. Time-permitting, we will also find the ability of music to slow down heart rate and affect sleep by analyzing the Zeo sleep monitor graphs. As a side experiment, we could measure the effect of several well-known classical songs on sleep quality.
 			 
-Finally, we will be able to develop an algorithm for ranking the songs that induce the best performance. Even better, we could potentially toy around with machine learning to have our algorithm improve after more and more data sets. This way, our Motoactv will be able to increase both exercise and sleep performance through our own custom music player application, located on and loaded by the device. This application will utilize the user's music library stored locally on the device's memory.
+Finally, we will be able to develop an algorithm for ranking the songs that induce the best performance. Even better, we could potentially toy around with machine learning to have our algorithm improve after more and more data sets. With the application of machine learning, each user's individual MotoActv device may correct itself in the case that a specific user does not follow the general trend as stated previously (a user's heart rate might increase from slow music rather than fast music). This way, our Motoactv will be able to increase both exercise and sleep performance through our own custom music player application, located on and loaded by the device. This application will utilize the user's music library stored locally on the device's memory.
 
 \subsection{Web Platform/Database}
 Users will want to monitor their personal health status, so our project will include a web component. The Motoactv device does have its own website, but our project is primarily interested with music and heart rate, so we will be able to better customize our own website, tailoring it to a potential customer's needs in this context. The Zeo device has limited support because the company went out of business, so we will need our own website to combine information from both the Motoactv and the Zeo. Data from the Motoactv and the Zeo will go to a web server, which will then go to a database performs storage and processing. Our website will pull information from the database and display a useful graph of the correlation between music and heart rate. (The exact features of this website will be determined later on because it is one of the later steps of our project. A diagram will also be provided later.)
 
 \subsection{Product Usage}
 \begin{itemize}
-	\item The device should only be worn while it is in use - while sleeping or while exercising. The device may be worn at other times, but there will be no benefit.
+	\item The heart rate monitor should only be worn while it is in use - while sleeping or while exercising. While it is safe to wear the heart rate monitor during other times, there will be no benefit unless the application is currently running. 
+	\item Users may choose to use the Musical Heart Rate Adjuster while not sleeping or exercising if they wish to adjust their heart rate for alternate reasons (possibly for playing video games or preparing for an exam). 
 	\item The user will run the android application, and then input a target heart rate. The software will then choose a song based on your current heart rate and begin to either raise or lower it. Once the target heart rate is obtained within a certain tolerance, the software will work to maintain this heart rate rather than increasing/decreasing it.
-	\item Music will be selected from your own personal music library (which should be stored on the flash memory of the MOTOACTV) to either increase or decrease heart-rate. Music will be played by our software.
+	\item Music will be selected from the user's own personal music library (which should be stored on the flash memory of the MOTOACTV) to either increase or decrease the user's heart-rate. Music will be played by our software.
+	\item The software will select and play music according to the user's current heart rate in real-time as it receives information from the connected heart rate monitor.
 	\item Music will be delivered through the headphone jack on the MOTOACTV or through any bluetooth device.
 	\item Receive information on the songs that are listened to in relation to their usage of the MOTOACTV. (What songs were listened to, which songs were the most effective at changing their heart rate, etc.)
 \end{itemize}
@@ -181,7 +183,7 @@ ater on provide more insight on the requirements and functionality of our system
 		\hline
 			REQ-4 & 3 & The web interface shall have a minimal, but sufficient number of options to display different information about the user's workout. \\
 		\hline
-			REQ-5 & 3 & The user should wear the device only during an actual workout; the device will not provide useful information if it is worn when the user is not exercising. \\
+			REQ-5 & 3 & The user should wear the device only when the user wishes to alter their heart-rate; the device will not provide useful information if it is worn when the user does not plan to increase or decrease their heart-rate. \\
 		\hline	
 			REQ-6 & 3 & Both the web site and the Android application should be intuitive and simple to use. \\
 		\hline
@@ -329,7 +331,7 @@ References 11-12 are pictures that we used for our cover.
 \end{verbatim}
 
 
-References 13-14 are information about target heart rates
+References 13-14 are information about target heart rates.
 \begin{verbatim}
 [13] http://www.webmd.com/fitness-exercise/healthtool-target-heart-rate-calculator
 [14] http://www.livestrong.com/article/105256-normal-heart-rate-sleeping/
