@@ -3,13 +3,13 @@
 \usepackage{array}
 \usepackage{graphicx}
 \usepackage{float}
-\usepackage{titlepic}
+%\usepackage{titlepic}
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
 \title{Musical Heart Rate Adjuster}
 \subtitle{Software Engineering Project \\ https://github.com/revansopher/HeartRateAdjuster}
 \author{Group \#12}
-\titlepic{\includegraphics{img/title.png}}
+%\titlepic{\includegraphics{img/title.png}}
 
 \begin{document}
 \maketitle
@@ -159,6 +159,10 @@ and more critical to fulfilling the customer's needs.
 		\hline
 			REQ-10 & 1 & The system should rank the songs that induce the best performance and use machine learning to improve the song selection algorithm.\\
 		\hline
+                        REQ-11 & 1 & The user should be able to change the current song if he is unsatisfied with it. \\
+                \hline
+                        REQ-12 & 1 & The user should be able to view his current heart rate as long as the chest strap is recording that information. \\
+		\hline
 	\end{tabular}
 \end{center}
 
@@ -279,6 +283,268 @@ Actors can be defined as are people or devices that will directly interact with 
 	\end{tabular}
 \end{center}
 This product is one which only requires the interaction of one human actor, the user of the product. While there is the potential for other humans to interact with the user’s health information which is produced, only the user himself is considered an actor. The headband and chest strap are participating actors that are worn by the user to monitor information and relay the information via Bluetooth back to the smartphone which is running the application.
+
+\section{Use Cases}
+Use Cases are specific tasks that are created together by the designer and the client to simulate what the client wants out of his software solution. They are meant to describe the main features of the project such that the designer can easily address the needs of the client and create a product around those needs. Below is a casual description of the use cases for the reader to get a general idea of how the software should be used. Later, fully described use cases are shown for additional insight into the different cases.
+
+\subsection{Casual Description of Use Cases}
+\begin{center}
+        \begin{tabular}{|C{2cm}|C{2cm}|C{10cm}|}
+                \hline
+                        Use Case & Action & Description \\
+                \hline
+                        UC-1 & increaseHeartRate & The user should enter a target heart rate and begin the workout \\
+                \hline
+                        UC-2 & decreaseHeartRate & The system will bring the user's heart rate down from an exercise rate to a resting rate \\
+                \hline
+                        UC-3 & getNextSong & The user can elect to change the song if he does not like the current one. The new song will be adjusted to reflect the current heart rate of the user and keep the user on track towards the target heart rate. \\
+                \hline
+                        UC-4 & pausePlayback & The user can pause the playback of the music if he would like. \\
+                \hline
+                        UC-5 & getStatistics & The user can request the statistics about the current workout. This can be performed while the workout is in progress or after the workout has been completed. \\
+                \hline
+                        UC-6 & getHeartRate & The user can view his current heart rate. This can be used when the user does not want to see all of the statistics from the workout and just wants his heart rate. \\
+                \hline
+        \end{tabular}
+\end{center}
+
+\subsection{Detailed Description of Use Cases}
+
+\begin{center}
+        \begin{tabular}{|C{15cm}|}
+                \hline
+                        \textbf{Use Case UC-1: increaseHeartRate}\\
+                \hline
+                        \begin{flushleft}
+                                \textbf{Related Requirements: } REQ-1, REQ-3, REQ-4, REQ-5, REQ-6, REQ-8
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Initiating Actor: } User
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Actor's Goal: } To enter a target heart rate and begin the workout
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Preconditions: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The system displays the selection menu for heart rate
+                                        \item The user is exercising at a heart rate which is below the peak rate
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Postconditions: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The system starts recording the heart rate of the user and the data from the workout if not already recording.
+                                        \item The system uses the recorded heart rate to run the music selection algorithm
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Flow of Events for Main Success Scenario: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item $\rightarrow$ User enters the target heart rate into the application.
+                                        \item $\leftarrow$ System initates a five-second countdown until the start of the exercise.
+                                        \item User begins his workout
+                                        \item $\leftarrow$ System uses music algorithm to play appropriate music.
+                                        \item $\leftarrow$ System begins recording data about the workout and stores it in the database.
+                                \end{itemize}
+                %\hline
+        \end{tabular}
+\end{center}
+
+\begin{center}
+        \begin{tabular}{|C{15cm}|}
+                \hline
+                        \textbf{Use Case UC-2: decreaseHeartRate}\\
+                \hline
+                        \begin{flushleft}
+                                \textbf{Related Requirements: } REQ-1, REQ-3, REQ-4, REQ-5, REQ-6, REQ-8
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Initiating Actor: } User
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Actor's Goal: } Reach a resting heart rate
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Preconditions: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The user is exercising at a heart rate which is above that of the resting rate.
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Postconditions: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The system starts recording the heart rate of the user and the data from the workout if not already recording.
+                                        \item The system uses the initial resting heart rate as a target for the music selection algorithm
+                                        \item The user is returned to the resting heart rate he was at before the workout.
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Flow of Events for Main Success Scenario: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item $\rightarrow$ User selects "Lower" option on main UI.
+                                        \item System feeds previous resting heart rate as a target for the music selection algorithm. Initiates the decline.
+                                        \item $\leftarrow$ System initiates a five-second crossfade as the music algorithm starts playing slower music.
+                                        \item User starts walking to the tempo of the music to cool down.
+                                        \item $\leftarrow$ System uses music algorithm to play appropriate music. Records the current heart rate to manage the decline of the heart rate.
+                                \end{itemize}
+                %\hline
+        \end{tabular}
+\end{center}
+
+\begin{center}
+        \begin{tabular}{|C{15cm}|}
+                \hline
+                        \textbf{Use Case UC-3: getNextSong}\\
+                \hline
+                        \begin{flushleft}
+                                \textbf{Related Requirements: } REQ-5, REQ-8, REQ-11
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Initiating Actor: } User
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Actor's Goal: } To play a different song
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Preconditions: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The user is unsatisfied with the song currently being played
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Postconditions: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item A different song is being played at the same rate at which the previous song was playing
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Flow of Events for Main Success Scenario: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item $\rightarrow$ User selects the "Next Song" button.
+                                        \item System retrieves next track from recommendation algorithm.
+                                        \item $\leftarrow$ System begins playing next track
+                                \end{itemize}
+                %\hline
+        \end{tabular}
+\end{center}
+
+\begin{center}
+        \begin{tabular}{|C{15cm}|}
+                \hline
+                        \textbf{Use Case UC-4: pausePlayback}\\
+                \hline
+                        \begin{flushleft}
+                                \textbf{Related Requirements: } REQ-1, REQ-5
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Initiating Actor: } User
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Actor's Goal: } Pause the playback of music
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Preconditions: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The system is playing music
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Postconditions: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The system stops recording the heart rate of the user and the data from the workout.
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Flow of Events for Main Success Scenario: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item $\rightarrow$ User selects "Pause" option on main UI.
+                                        \item $\leftarrow$ System stops playing music.
+                                \end{itemize}
+                %\hline
+        \end{tabular}
+\end{center}
+
+\begin{center}
+        \begin{tabular}{|C{15cm}|}
+                \hline
+                        \textbf{Use Case UC-5: getStatistics}\\
+                \hline
+                        \begin{flushleft}
+                                \textbf{Related Requirements: } REQ-6, REQ-7, REQ-10
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Initiating Actor: } User
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Actor's Goal: } Return statistics about the user's workout.
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Preconditions: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The user has finished his workout and would like to see his statistics
+                                        \item The user also has the option to display the statistics during the workout
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Postconditions: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The Android application displays the graphs of the user's heart rate versus time, along with other metrics.
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Flow of Events for Main Success Scenario: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item $\rightarrow$ User selects the "Display Statistics" option.
+                                        \item System retrieves data from the current workout and creates graphs of the various metrics.
+                                        \item $\leftarrow$ System displays the graphs to the user.
+                                \end{itemize}
+                %\hline
+        \end{tabular}
+\end{center}
+
+\begin{center}
+        \begin{tabular}{|C{15cm}|}
+                \hline
+                        \textbf{Use Case UC-6: getHeartRate}\\
+                \hline
+                        \begin{flushleft}
+                                \textbf{Related Requirements: } REQ-12
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Initiating Actor: } User
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Actor's Goal: } View the current heart rate.
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Preconditions: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The device should already be monitoring the user's heart rate.
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Postconditions: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The current heart rate is displayed on the screen of the Android application.
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Flow of Events for Main Success Scenario: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item $\rightarrow$ User selects the "Display Heart Rate" option.
+                                        \item System retrieves current heart rate from chest strap.
+                                        \item $\leftarrow$ System displays the heart rate to the user.
+                                \end{itemize}
+                %\hline
+        \end{tabular}
+\end{center}
 
 
 \chapter*{Individual Contributions Breakdown}
