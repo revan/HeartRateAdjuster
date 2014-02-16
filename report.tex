@@ -139,25 +139,25 @@ and more critical to fulfilling the customer's needs.
 		\hline
 			Identifier & Priority & Description\\
 		\hline
-			REQ-1 & 5 &  The system shall log user BPM data using the Heart Rate Monitor sensor.\\
+			REQ-1 & 5 & The system shall log user BPM data using the Heart Rate Monitor sensor during active periods. If the sensor is removed while active, any data collected and the selection of what song to play may be skewed. Time inbetween active periods is irrelevant and will have no effect on the software.\\
 		\hline
-			REQ-2 & 5 & The system shall sync the information to Android device via Bluetooth.\\
+			REQ-2 & 5 & The system shall automatically sync the information to Android device via Bluetooth during active periods.\\
 		\hline
 			REQ-3 & 4 & The system shall allow user to select a target heart rate on the Android application.\\
 		\hline
-			REQ-4 & 3 & The system shall determine a song from the user’s music library in the tempo range of the user’s selection.\\
+			REQ-4 & 3 & The system shall determine a song to play based on whether the target heart rate is greater than or less than the resting heart rate. Songs will be chosen based on each song's tempo/bpm which will be known to our software.\\
 		\hline
-			REQ-5 & 5 & The system shall play the designated song through either headphones or Bluetooth speakers to adjust user heart rate.\\
+			REQ-5 & 5 & The system shall play the designated song through either headphones or Bluetooth speakers to adjust user heart rate. The choice of whether to use headphones or speakers will not have any effect on the performance of the system. The choice is simply the user's preference.\\
 		\hline
-			REQ-6 & 3 & The system shall store the BPM data in the database.\\
+			REQ-6 & 3 & The system shall store the BPM data of each song in the database. This information will be used to select an appropriate song based on the user's current heart rate and target heart rate.\\
 		\hline
 			REQ-7 & 2 & The system shall output useful graphs of user workout data on the website to demonstrate the effects of music on BPM.\\
 		\hline
-			REQ-8 & 1 & The system should adjust the tempo of the song to further match the user’s BPM and stop when within a defined range.\\
+			REQ-8 & 1 & The system should adjust the tempo of the song to attempt to match the user’s BPM and stop when within a defined range. If the system it makes an incorrect decision, there will be no negative consequences to the user's health. It will simply re-adjust once it realizes that the song's tempo does not make sense based on the user's current and target heart rates.\\
 		\hline
 			REQ-9 & 1 & The system should allow the user some control when they use the website. That is, they should be able to customize the look and feel of the account on their website as well as the details of how the data is displayed (type of graph or specific categories of data).\\
 		\hline
-			REQ-10 & 1 & The system should rank the songs that induce the best performance and use machine learning to improve the song selection algorithm.\\
+			REQ-10 & 1 & The system should rank the songs that induce the best performance and use machine learning to improve the song selection algorithm. This ranking system will be completely local and only relevant to the user of the system. This is just an optional imporvement to our system to enhance the user's experience.\\
 		\hline
 	\end{tabular}
 \end{center}
