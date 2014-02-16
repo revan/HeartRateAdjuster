@@ -304,7 +304,53 @@ Use Cases are specific tasks that are created together by the designer and the c
         \end{tabular}
 \end{center}
 
-\subsection{Detailed Description of Use Cases}
+\subsection{Traceability Matrix}
+The Traceability Matrix allows the reader to cross the functional and non-functional requirements described earlier with the use cases. This demonstrates which use cases fulfill each requirement, and the total priority weight of each use case will determine which cases are the most important. If an X is present at any point in the the column for a Use Case, then the corresponding requirement's priority weight must be added to the sum. The remaining Xs in the column are similarly considered, and the total priority weight for the Use Case is listed at the bottom of the column. The requirements are listed in Matrix in either the form "REQ-F-1", or "REQ-NF-1". If only "F" is present in the tag, then the requirement is a Functional Requirement. If "NF" is present, then the requirement is a Non-Functional Requirement.
+
+\begin{center}
+        \begin{tabular}{|C{1cm}|C{1cm}|C{1cm}|C{1cm}|C{1cm}|C{1cm}|C{1cm}|C{1cm}|}
+                \hline
+                         & Priority Weight & UC-1 & UC-2 & UC-3 & UC-4 & UC-5 & UC-6 \\
+                \hline
+                        REQ-F-1 & 5 & X & X & & X & &  \\
+                \hline
+                        REQ-F-2 & 5 & & & & & &  \\
+                \hline
+                        REQ-F-3 & 4 & X & X & & & &  \\
+                \hline
+                        REQ-F-4 & 3 & X & X & & & &  \\
+                \hline
+                        REQ-F-5 & 5 & X & X & X & X & & \\
+                \hline
+                        REQ-F-6 & 3 & X & X & & & X & \\
+                \hline
+                        REQ-F-7 & 2 & & & & & X &  \\
+                \hline
+                        REQ-F-8 & 1 & X & X & X & & &  \\
+                \hline
+                        REQ-F-9 & 1 & & & & & &  \\
+                \hline
+                        REQ-F-10 & 1 & & & & & X &  \\
+                \hline
+                        REQ-F-11 & 1 & & & X & & &  \\
+                \hline
+                        REQ-F-12 & 1 & & & & & & X  \\
+                \hline
+                        REQ-NF-1 & 5 & X & X & X & X & X & X  \\
+                \hline
+                        REQ-NF-2 & 5 & & & & & X & X  \\
+                \hline
+                        REQ-NF-3 & 3 & X & X & X & X & X & X  \\
+                \hline
+                        REQ-NF-4 & 3 & X & X & X & X & X & X  \\
+                \hline
+                        Total & & 32 & 32 & 18 & 21 & 22 & 17  \\
+                \hline
+        \end{tabular}
+\end{center}
+
+
+\subsection{Fully-Dressed Description of Use Cases}
 
 \begin{center}
         \begin{tabular}{|C{15cm}|}

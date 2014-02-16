@@ -12,10 +12,11 @@
 \contentsline {chapter}{\numberline {2}System Requirements}{12}
 \contentsline {section}{\numberline {2.1}Functional Requirements}{13}
 \contentsline {section}{\numberline {2.2}Non-Functional Requirements}{14}
-\contentsline {section}{\numberline {2.3}On-Screen Appearance Requirements}{15}
-\contentsline {subsection}{\numberline {2.3.1}Mobile Application}{17}
-\contentsline {subsection}{\numberline {2.3.2}Stakeholders}{22}
-\contentsline {subsection}{\numberline {2.3.3}Actors and Goals}{24}
-\contentsline {section}{\numberline {2.4}Use Cases}{24}
-\contentsline {subsection}{\numberline {2.4.1}Casual Description of Use Cases}{25}
-\contentsline {subsection}{\numberline {2.4.2}Detailed Description of Use Cases}{26}
+\contentsline {section}{\numberline {2.3}On-Screen Appearance Requirements}{14}
+\contentsline {subsection}{\numberline {2.3.1}Mobile Application}{16}
+\contentsline {subsection}{\numberline {2.3.2}Stakeholders}{21}
+\contentsline {subsection}{\numberline {2.3.3}Actors and Goals}{23}
+\contentsline {section}{\numberline {2.4}Use Cases}{23}
+\contentsline {subsection}{\numberline {2.4.1}Casual Description of Use Cases}{24}
+\contentsline {subsection}{\numberline {2.4.2}Traceability Matrix}{24}
+\contentsline {subsection}{\numberline {2.4.3}Fully-Dressed Description of Use Cases}{26}
