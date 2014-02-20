@@ -14,16 +14,16 @@
 \contentsline {section}{\numberline {2.2}Non-Functional Requirements}{14}
 \contentsline {section}{\numberline {2.3}On-Screen Appearance Requirements}{14}
 \contentsline {subsection}{\numberline {2.3.1}Mobile Application}{16}
-\contentsline {section}{\numberline {2.4}Organization}{21}
-\contentsline {subsection}{\numberline {2.4.1}Stakeholders}{21}
-\contentsline {subsection}{\numberline {2.4.2}Actors and Goals}{23}
-\contentsline {section}{\numberline {2.5}Use Cases}{23}
-\contentsline {subsection}{\numberline {2.5.1}Casual Description of Use Cases}{24}
-\contentsline {subsection}{\numberline {2.5.2}Traceability Matrix}{24}
-\contentsline {subsection}{\numberline {2.5.3}Fully-Dressed Description of Use Cases}{26}
-\contentsline {subsection}{\numberline {2.5.4}Use Case Diagram}{32}
-\contentsline {subsection}{\numberline {2.5.5}System Sequence Diagrams}{33}
-\contentsline {subsection}{\numberline {2.5.6}Effort Estimation}{36}
-\contentsline {subsubsection}{Unadjusted Actor Weight (UAW) and Unadjusted Use Case Weight (UUCW)}{36}
-\contentsline {subsubsection}{Technical Complexity Factor (TCF)-Nonfunctional Requirements}{37}
-\contentsline {subsubsection}{Environment Complexity Factor (ECF)}{38}
+\contentsline {section}{\numberline {2.4}Organization}{22}
+\contentsline {subsection}{\numberline {2.4.1}Stakeholders}{22}
+\contentsline {subsection}{\numberline {2.4.2}Actors and Goals}{24}
+\contentsline {section}{\numberline {2.5}Use Cases}{24}
+\contentsline {subsection}{\numberline {2.5.1}Casual Description of Use Cases}{25}
+\contentsline {subsection}{\numberline {2.5.2}Traceability Matrix}{25}
+\contentsline {subsection}{\numberline {2.5.3}Fully-Dressed Description of Use Cases}{27}
+\contentsline {subsection}{\numberline {2.5.4}Use Case Diagram}{33}
+\contentsline {subsection}{\numberline {2.5.5}System Sequence Diagrams}{34}
+\contentsline {subsection}{\numberline {2.5.6}Effort Estimation}{37}
+\contentsline {subsubsection}{Unadjusted Actor Weight (UAW) and Unadjusted Use Case Weight (UUCW)}{37}
+\contentsline {subsubsection}{Technical Complexity Factor (TCF)-Nonfunctional Requirements}{38}
+\contentsline {subsubsection}{Environment Complexity Factor (ECF)}{39}
