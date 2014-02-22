@@ -1,30 +1,31 @@
-\contentsline {chapter}{\numberline {1}Customer Statement of Requirements/Project Proposal}{3}
-\contentsline {section}{\numberline {1.1}Problem}{3}
-\contentsline {subsection}{\numberline {1.1.1}More Specifically}{3}
-\contentsline {subsection}{\numberline {1.1.2}Background}{4}
-\contentsline {subsection}{\numberline {1.1.3}Devices and Specifications}{5}
-\contentsline {section}{\numberline {1.2}Solution}{6}
-\contentsline {subsection}{\numberline {1.2.1}Music}{6}
-\contentsline {subsection}{\numberline {1.2.2}Web Platform/Database}{7}
-\contentsline {subsection}{\numberline {1.2.3}Product Usage}{7}
-\contentsline {subsection}{\numberline {1.2.4}Product Ownership (tentative)}{8}
-\contentsline {section}{\numberline {1.3}Glossary of Terms}{9}
-\contentsline {chapter}{\numberline {2}System Requirements}{11}
-\contentsline {section}{\numberline {2.1}Functional Requirements}{12}
-\contentsline {section}{\numberline {2.2}Non-Functional Requirements}{13}
-\contentsline {section}{\numberline {2.3}On-Screen Appearance Requirements}{13}
-\contentsline {subsection}{\numberline {2.3.1}Mobile Application}{15}
-\contentsline {section}{\numberline {2.4}Organization}{21}
-\contentsline {subsection}{\numberline {2.4.1}Stakeholders}{21}
-\contentsline {subsection}{\numberline {2.4.2}Actors and Goals}{23}
-\contentsline {section}{\numberline {2.5}Use Cases}{23}
-\contentsline {subsection}{\numberline {2.5.1}Casual Description of Use Cases}{24}
-\contentsline {subsection}{\numberline {2.5.2}Traceability Matrix}{24}
-\contentsline {subsection}{\numberline {2.5.3}Fully-Dressed Description of Use Cases}{26}
-\contentsline {subsection}{\numberline {2.5.4}Use Case Diagram}{32}
-\contentsline {subsection}{\numberline {2.5.5}System Sequence Diagrams}{33}
-\contentsline {subsection}{\numberline {2.5.6}Preliminary Design}{36}
-\contentsline {subsection}{\numberline {2.5.7}Effort Estimation}{40}
-\contentsline {subsubsection}{Unadjusted Actor Weight (UAW) and Unadjusted Use Case Weight (UUCW)}{41}
-\contentsline {subsubsection}{Technical Complexity Factor (TCF)-Nonfunctional Requirements}{41}
-\contentsline {subsubsection}{Environment Complexity Factor (ECF)}{42}
+\contentsline {chapter}{\numberline {1}Customer Statement of Requirements/Project Proposal}{4}
+\contentsline {section}{\numberline {1.1}Problem}{4}
+\contentsline {subsection}{\numberline {1.1.1}More Specifically}{4}
+\contentsline {subsection}{\numberline {1.1.2}Background}{5}
+\contentsline {subsection}{\numberline {1.1.3}Devices and Specifications}{6}
+\contentsline {section}{\numberline {1.2}Solution}{7}
+\contentsline {subsection}{\numberline {1.2.1}Music}{7}
+\contentsline {subsection}{\numberline {1.2.2}Web Platform/Database}{8}
+\contentsline {subsection}{\numberline {1.2.3}Product Usage}{8}
+\contentsline {subsection}{\numberline {1.2.4}Product Ownership (tentative)}{9}
+\contentsline {section}{\numberline {1.3}Glossary of Terms}{10}
+\contentsline {chapter}{\numberline {2}System Requirements}{12}
+\contentsline {section}{\numberline {2.1}Functional Requirements}{13}
+\contentsline {section}{\numberline {2.2}Non-Functional Requirements}{14}
+\contentsline {section}{\numberline {2.3}On-Screen Appearance Requirements}{14}
+\contentsline {subsection}{\numberline {2.3.1}Mobile Application}{16}
+\contentsline {section}{\numberline {2.4}Organization}{22}
+\contentsline {subsection}{\numberline {2.4.1}Stakeholders}{22}
+\contentsline {subsection}{\numberline {2.4.2}Actors and Goals}{24}
+\contentsline {section}{\numberline {2.5}Use Cases}{24}
+\contentsline {subsection}{\numberline {2.5.1}Casual Description of Use Cases}{25}
+\contentsline {subsection}{\numberline {2.5.2}Traceability Matrix}{25}
+\contentsline {subsection}{\numberline {2.5.3}Fully-Dressed Description of Use Cases}{27}
+\contentsline {subsection}{\numberline {2.5.4}Use Case Diagram}{33}
+\contentsline {subsection}{\numberline {2.5.5}System Sequence Diagrams}{34}
+\contentsline {subsection}{\numberline {2.5.6}System Operation Contracts}{36}
+\contentsline {subsection}{\numberline {2.5.7}Preliminary Design}{38}
+\contentsline {subsection}{\numberline {2.5.8}Effort Estimation}{42}
+\contentsline {subsubsection}{Unadjusted Actor Weight (UAW) and Unadjusted Use Case Weight (UUCW)}{43}
+\contentsline {subsubsection}{Technical Complexity Factor (TCF)-Nonfunctional Requirements}{43}
+\contentsline {subsubsection}{Environment Complexity Factor (ECF)}{44}
