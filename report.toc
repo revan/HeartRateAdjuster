@@ -6,13 +6,14 @@
 \contentsline {section}{\numberline {1.2}Solution}{6}
 \contentsline {subsection}{\numberline {1.2.1}Music}{7}
 \contentsline {subsection}{\numberline {1.2.2}Web Platform/Database}{8}
-\contentsline {subsection}{\numberline {1.2.3}Product Usage}{8}
-\contentsline {subsection}{\numberline {1.2.4}Product Ownership (tentative)}{9}
-\contentsline {section}{\numberline {1.3}Glossary of Terms}{9}
-\contentsline {chapter}{\numberline {2}System Requirements}{11}
-\contentsline {section}{\numberline {2.1}Functional Requirements}{12}
-\contentsline {section}{\numberline {2.2}Non-Functional Requirements}{13}
-\contentsline {section}{\numberline {2.3}On-Screen Appearance Requirements}{13}
+\contentsline {subsection}{\numberline {1.2.3}System Architecture Diagram}{8}
+\contentsline {subsection}{\numberline {1.2.4}Product Usage}{9}
+\contentsline {subsection}{\numberline {1.2.5}Product Ownership (tentative)}{10}
+\contentsline {section}{\numberline {1.3}Glossary of Terms}{11}
+\contentsline {chapter}{\numberline {2}System Requirements}{12}
+\contentsline {section}{\numberline {2.1}Functional Requirements}{13}
+\contentsline {section}{\numberline {2.2}Non-Functional Requirements}{14}
+\contentsline {section}{\numberline {2.3}On-Screen Appearance Requirements}{15}
 \contentsline {subsection}{\numberline {2.3.1}Mobile Application}{15}
 \contentsline {section}{\numberline {2.4}Organization}{21}
 \contentsline {subsection}{\numberline {2.4.1}Stakeholders}{21}

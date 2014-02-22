@@ -83,6 +83,19 @@ Finally, we will be able to develop an algorithm for ranking the songs that indu
 \subsection{Web Platform/Database}
 Users will want to monitor their personal health status, so our project will include a web component. The Motoactv device does have its own website, but our project is primarily interested with music and heart rate, so we will be able to better customize our own website, tailoring it to a potential customer's needs in this context. Data from the Motoactv will go to a web server, which will then go to a database performs storage and processing. Our website will pull information from the database and display a useful graph of the correlation between music and heart rate. (The exact features of this website will be determined later on because it is one of the later steps of our project. A diagram will also be provided later.)
 
+\subsection{System Architecture Diagram}
+This diagram highlights our system architecture: Our heart rate monitor senses the
+user's BPM and transmits the data to the Android phone via Bluetooth as requested
+by the app. The phone then wirelessly uploads the data to the server and database
+which processes the data. The phone app is then able to select the appropriate
+songs, and the website is able to display suitable graphs.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics{img/system.png}\\
+	\caption{System design}
+\end{figure}
+
 \subsection{Product Usage}
 \begin{itemize}
 	\item The heart rate monitor should only be worn while it is in use - while sleeping or while exercising. While it is safe to wear the heart rate monitor during other times, there will be no benefit unless the application is currently running. 
@@ -191,17 +204,6 @@ listing the qualities of our system. These requirements are based on the term
 FURPS+, which includes functionality, usability, reliability, and performance.
 
 \section{On-Screen Appearance Requirements}
-This diagram highlights our system architecture: Our heart rate monitor senses the
-user's BPM and transmits the data to the Android phone via Bluetooth as requested
-by the app. The phone then wirelessly uploads the data to the server and database
-which processes the data. The phone app is then able to select the appropriate
-songs, and the website is able to display suitable graphs.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics{img/system.png}\\
-	\caption{System design}
-\end{figure}
 
 \subsection{Mobile Application}
 
@@ -869,7 +871,7 @@ If we assume that productivity factor is 30 hours per user case point. The effor
 			System Requirements	&				&		X		&				&			&		X		&		\\ \hline
 			Func. Requirements	&				&		X		&				&		X	&				&		\\ \hline
 			Non-Func. Req.		&				&				&				&			&		X		&		\\ \hline
-			Appearance Req.		&				&		X		&				&			&				&		X\\ \hline
+			Appearance Req.		&				&				&				&			&				&		X\\ \hline
 			Stakeholders		&				&				&				&		X	&				&		 \\ \hline
 			Actors and Goals	&				&				&				&		X	&				&		 \\ \hline
 			System Sequence Diagram &				&				&		X		&			&				&		 \\ \hline
