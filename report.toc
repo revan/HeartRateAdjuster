@@ -24,8 +24,13 @@
 \contentsline {subsection}{\numberline {2.5.4}Use Case Diagram}{33}
 \contentsline {subsection}{\numberline {2.5.5}System Sequence Diagrams}{34}
 \contentsline {subsection}{\numberline {2.5.6}System Operation Contracts}{36}
-\contentsline {subsection}{\numberline {2.5.7}Preliminary Design}{37}
-\contentsline {subsection}{\numberline {2.5.8}Effort Estimation}{41}
+\contentsline {chapter}{\numberline {3}User Interface Specification}{38}
+\contentsline {section}{\numberline {3.1}Preliminary Design}{38}
+\contentsline {subsection}{\numberline {3.1.1}Use Case UC-2: decreaseHeartRate}{38}
+\contentsline {subsection}{\numberline {3.1.2}Use Case UC-3: getNextSong}{39}
+\contentsline {subsection}{\numberline {3.1.3}Use Case UC-4: pausePlayback}{40}
+\contentsline {subsection}{\numberline {3.1.4}Use Case UC-5: getStatistics}{41}
+\contentsline {section}{\numberline {3.2}Effort Estimation}{41}
 \contentsline {subsubsection}{Unadjusted Actor Weight (UAW) and Unadjusted Use Case Weight (UUCW)}{42}
 \contentsline {subsubsection}{Technical Complexity Factor (TCF)-Nonfunctional Requirements}{42}
 \contentsline {subsubsection}{Environment Complexity Factor (ECF)}{43}
