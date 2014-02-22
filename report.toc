@@ -24,6 +24,7 @@
 \contentsline {subsection}{\numberline {2.5.4}Use Case Diagram}{33}
 \contentsline {subsection}{\numberline {2.5.5}System Sequence Diagrams}{34}
 \contentsline {subsection}{\numberline {2.5.6}System Operation Contracts}{36}
+\contentsline {subsection}{\numberline {2.5.7}Mathematical Model}{37}
 \contentsline {chapter}{\numberline {3}User Interface Specification}{38}
 \contentsline {section}{\numberline {3.1}Preliminary Design}{38}
 \contentsline {subsection}{\numberline {3.1.1}Use Case UC-2: decreaseHeartRate}{38}

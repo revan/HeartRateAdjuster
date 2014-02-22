@@ -687,8 +687,12 @@ The getHeartRate case is similar to the getStatistics case, but it allows the us
 	\item {\bf Postcondition: } The device is able to retrieve the user's heart rate from the chest strap and display it on the screen.
 \end{itemize}
 
-
-
+\subsection{Mathematical Model}
+The selection of which track to play requires a mathematical model. At its simplest, this consists of selecting the track with the closest BPM, that is to say minimizing the difference in BPM:
+\begin{equation}
+  min(\mid target_{BPM} - track_{BPM} \mid)
+\end{equation}
+If time permits, this simple model can be replaced with a more complex model incorporating Machine Learning to learn which tracks are more effective than others at changing pulse.
 
 \chapter{User Interface Specification}
 \section{Preliminary Design}
