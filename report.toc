@@ -24,8 +24,8 @@
 \contentsline {subsection}{\numberline {2.5.4}Use Case Diagram}{33}
 \contentsline {subsection}{\numberline {2.5.5}System Sequence Diagrams}{34}
 \contentsline {subsection}{\numberline {2.5.6}System Operation Contracts}{36}
-\contentsline {subsection}{\numberline {2.5.7}Preliminary Design}{38}
-\contentsline {subsection}{\numberline {2.5.8}Effort Estimation}{42}
-\contentsline {subsubsection}{Unadjusted Actor Weight (UAW) and Unadjusted Use Case Weight (UUCW)}{43}
-\contentsline {subsubsection}{Technical Complexity Factor (TCF)-Nonfunctional Requirements}{43}
-\contentsline {subsubsection}{Environment Complexity Factor (ECF)}{44}
+\contentsline {subsection}{\numberline {2.5.7}Preliminary Design}{37}
+\contentsline {subsection}{\numberline {2.5.8}Effort Estimation}{41}
+\contentsline {subsubsection}{Unadjusted Actor Weight (UAW) and Unadjusted Use Case Weight (UUCW)}{42}
+\contentsline {subsubsection}{Technical Complexity Factor (TCF)-Nonfunctional Requirements}{42}
+\contentsline {subsubsection}{Environment Complexity Factor (ECF)}{43}
