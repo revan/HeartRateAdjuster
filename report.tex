@@ -176,6 +176,7 @@ and more critical to fulfilling the customer's needs.
                         REQ-11 & 1 & The user should be able to view his current heart rate as long as the chest strap is recording that information. \\
 		\hline
 			REQ-12 & 1 & The user should be able to pause the current track if he needs to interrupt his activity for some reason \\
+		\hline
 	\end{tabular}
 \end{center}
 
@@ -300,25 +301,25 @@ Use Cases are specific tasks that are created together by the designer and the c
 \begin{center}
         \begin{tabular}{|C{2cm}|C{2cm}|C{10cm}|}
                 \hline
-                        Use Case & Action & Description & Weights \\
+                        Use Case & Action & Description \\
                 \hline
-                        UC-1 & increaseHeartRate & The user should enter a target heart rate and begin the workout & 15 \\
+                        UC-1 & increaseHeartRate & The user should enter a target heart rate and begin the workout \\
                 \hline
-                        UC-2 & decreaseHeartRate & The system will bring the user's heart rate down from an exercise rate to a resting rate & 15\\
+                        UC-2 & decreaseHeartRate & The system will bring the user's heart rate down from an exercise rate to a resting rate \\
                 \hline
-                        UC-3 & getNextSong & The user can elect to change the song if he does not like the current one. The new song will be adjusted to reflect the current heart rate of the user and keep the user on track towards the target heart rate. & 10 \\
+                        UC-3 & getNextSong & The user can elect to change the song if he does not like the current one. The new song will be adjusted to reflect the current heart rate of the user and keep the user on track towards the target heart rate. \\
                 \hline
-                        UC-4 & pausePlayback & The user can pause the playback of the music if he would like. & 8 \\
+                        UC-4 & pausePlayback & The user can pause the playback of the music if he would like. \\
                 \hline
-                        UC-5 & getStatistics & The user can request the statistics about the current workout. This can be performed while the workout is in progress or after the workout has been completed.  & 12 \\
+                        UC-5 & getStatistics & The user can request the statistics about the current workout. This can be performed while the workout is in progress or after the workout has been completed. \\
                 \hline
-                        UC-6 & getHeartRate & The user can view his current heart rate. This can be used when the user does not want to see all of the statistics from the workout and just wants his heart rate.  & 18\\
+                        UC-6 & getHeartRate & The user can view his current heart rate. This can be used when the user does not want to see all of the statistics from the workout and just wants his heart rate. \\
                 \hline
         \end{tabular}
 \end{center}
 
 \subsection{Traceability Matrix}
-The Traceability Matrix allows the reader to cross the functional and non-functional requirements described earlier with the use cases. This demonstrates which use cases fulfill each requirement, and the total priority weight of each use case will determine which cases are the most important. If an X is present at any point in the the column for a Use Case, then the corresponding requirement's priority weight must be added to the sum. The remaining Xs in the column are similarly considered, and the total priority weight for the Use Case is listed at the bottom of the column. The requirements are listed in Matrix in either the form "REQ-F-1", or "REQ-NF-1". If only "F" is present in the tag, then the requirement is a Functional Requirement. If "NF" is present, then the requirement is a Non-Functional Requirement.
+The Traceability Matrix allows the reader to cross the functional and non-functional requirements described earlier with the use cases. This demonstrates which use cases fulfill each requirement, and the total priority weight of each use case will determine which cases are the most important. If an X is present at any point in the the column for a Use Case, then the corresponding requirement's priority weight must be added to the sum. The remaining Xs in the column are similarly considered, and the total priority weight for the Use Case is listed at the bottom of the column. 
 
 \renewcommand{\arraystretch}{0.4}
 \begin{center}
@@ -326,37 +327,39 @@ The Traceability Matrix allows the reader to cross the functional and non-functi
                 \hline
                          & Priority Weight & UC-1 & UC-2 & UC-3 & UC-4 & UC-5 & UC-6 \\
                 \hline
-                        REQ-1 & 5 & X & X & & X & &  \\
+                        REQ-1 & 5 & X & X & & X & X & X  \\
                 \hline
                         REQ-2 & 4 & X & X & & & &  \\
                 \hline
-                        REQ-3 & 3 & X & X & & & &  \\
+                        REQ-3 & 3 & X & X & X  & & &  \\
                 \hline
-                        REQ-4 & 5 & X & X & X & X & & \\
+                        REQ-4 & 5 & X & X & X & & & \\
                 \hline
                         REQ-5 & 3 & X & X & & & X & \\
                 \hline
-                        REQ-6 & 2 & & & & & X &  \\
+                        REQ-6 & 2 & & & & & X &  \\ %something wrong here. Needs to be included in a use case
                 \hline
                         REQ-7 & 1 & X & X & X & & &  \\
                 \hline
-                        REQ-8 & 1 & & & & & &  \\
+                        REQ-8 & 1 & & & & & X  &  \\
                 \hline
                         REQ-9 & 1 & & & & & X &  \\
                 \hline
                         REQ-10 & 1 & & & X & & &  \\
                 \hline
                         REQ-11 & 1 & & & & & & X  \\
+		\hline	
+			REQ-12 & 1 & & & & X & & \\
                 \hline
-                        REQ-12 & 5 & X & X & X & X & X & X  \\
+                        REQ-13 & 5 & X & X & X & X & X & X  \\
                 \hline
-                        REQ-13 & 5 & & & & & X & X  \\
-                \hline
-                        REQ-14 & 3 & X & X & X & X & X & X  \\
+                        REQ-14 & 5 & X & X & & & X &   \\
                 \hline
                         REQ-15 & 3 & X & X & X & X & X & X  \\
                 \hline
-                        Total & & 32 & 32 & 18 & 21 & 22 & 17  \\
+                        REQ-16 & 3 & X & X & X & X & X & X  \\
+                \hline
+                        Total Weight & & 37 & 37 & 21 & 17 & 23 & 17  \\
                 \hline
         \end{tabular}
 \end{center}
@@ -499,7 +502,7 @@ The getNextSong case is one of the conveniences for the user. If the user does n
                         \textbf{Use Case UC-4: pausePlayback}\\
                 \hline
                         \begin{flushleft}
-                                \textbf{Related Requirements: } REQ-1, REQ-5
+                                \textbf{Related Requirements: } REQ-1, REQ-12, REQ-13, REQ-16
                         \end{flushleft}
                         \begin{flushleft}
                                 \textbf{Initiating Actor: } User
@@ -538,7 +541,7 @@ The pausePlayback case is another straightforward, convenience-based use case. I
                         \textbf{Use Case UC-5: getStatistics}\\
                 \hline
                         \begin{flushleft}
-                                \textbf{Related Requirements: } REQ-6, REQ-7, REQ-10
+                                \textbf{Related Requirements: } REQ-1, REQ-5, REQ-8, REQ-9, REQ-13, REQ-14, REQ-16
                         \end{flushleft}
                         \begin{flushleft}
                                 \textbf{Initiating Actor: } User
@@ -579,7 +582,7 @@ The getStatistics use case is important because it allows the user to see the re
                         \textbf{Use Case UC-6: getHeartRate}\\
                 \hline
                         \begin{flushleft}
-                                \textbf{Related Requirements: } REQ-12
+                                \textbf{Related Requirements: } REQ-1, REQ-11, REQ-13, REQ-16
                         \end{flushleft}
                         \begin{flushleft}
                                 \textbf{Initiating Actor: } User
