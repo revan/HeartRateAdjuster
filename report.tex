@@ -387,7 +387,6 @@ The Traceability Matrix allows the reader to cross the functional and non-functi
                         \end{flushleft}
                                 \begin{itemize}
                                         \item The system displays the selection menu for heart rate
-                                        \item The user is exercising at a heart rate which is below the peak rate
                                 \end{itemize}
                         \begin{flushleft}
                                 \textbf{Postconditions: }
@@ -410,7 +409,9 @@ The Traceability Matrix allows the reader to cross the functional and non-functi
         \end{tabular}
 \end{center}
 
-This is one of the main use cases for the software. It allows the user to increase his heart rate to the proper level according to the data that he inputs. Specifically, the user will initate the process by entering the target heart rate for his exercise. The system will also pick up the user's current heart rate via the chest strap. Once the system has this data, it will initiate the music selection algorithm to play the correct music based on the inputted data. As the algorithm is running, the system will store data about the workout in a database.
+This is one of the main use cases for the software. It allows the user to increase his heart rate to the proper level according to the data that he inputs. Specifically, the user will initate the process by entering the target heart rate for his exercise. The system will also pick up the user's current heart rate via the chest strap. Once the system has this data, it will initiate the music selection algorithm to play the correct music based on the inputted data. As the algorithm is running, the system will store data about the workout, notably heart rate over time and song playing records, in a database. \\
+If the user is exercising at a heart rate above the target, the system will attempt to maintain this heart rate.\\
+Incorrect number entry is impossible due to the slider selector UI element.\\
 
 \begin{center}
         \begin{tabular}{|C{15cm}|}
@@ -430,7 +431,7 @@ This is one of the main use cases for the software. It allows the user to increa
                                 \textbf{Preconditions: }
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item The user is exercising at a heart rate which is above that of the resting rate.
+                                        \item The system displays the selection menu for heart rate
                                 \end{itemize}
                         \begin{flushleft}
                                 \textbf{Postconditions: }
@@ -454,8 +455,9 @@ This is one of the main use cases for the software. It allows the user to increa
         \end{tabular}
 \end{center}
 
-This is another one of the main use cases for the software. In this case, the system will allow the user to lower his heart rate to a resting level, or the level he was at before the workout began. The user initates the action by selecting the "Lower" option. The system then takes the current heart rate and the initial resting heart rate, passes them to the music selection algorithm, and applies the algorrithm in reverse to lower the user's heart rate. The user must also synchronize his walking to the tempo of the music in order for the algorithm to work properly.
-
+This is another one of the main use cases for the software. In this case, the system will allow the user to lower his heart rate to a resting level, or the level he was at before the workout began. The user initates the action by selecting the "Lower" option. The system then takes the current heart rate and the initial resting heart rate, passes them to the music selection algorithm, and applies the algorrithm in reverse to lower the user's heart rate. The user must also synchronize his walking to the tempo of the music in order for the algorithm to work properly.\\
+If the user is exercising at a heart rate below the target, the system will attempt to maintain this heart rate.\\
+Incorrect number entry is impossible due to the slider selector UI element.\\
 
 \begin{center}
         \begin{tabular}{|C{15cm}|}
@@ -475,7 +477,7 @@ This is another one of the main use cases for the software. In this case, the sy
                                 \textbf{Preconditions: }
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item The user is unsatisfied with the song currently being played
+                                        \item The system is currently playing music.
                                 \end{itemize}
                         \begin{flushleft}
                                 \textbf{Postconditions: }
@@ -554,14 +556,13 @@ The pausePlayback case is another straightforward, convenience-based use case. I
                                 \textbf{Preconditions: }
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item The user has finished his workout and would like to see his statistics
-                                        \item The user also has the option to display the statistics during the workout
+                                        \item The system is no longer playing music.
                                 \end{itemize}
                         \begin{flushleft}
                                 \textbf{Postconditions: }
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item The Android application displays the graphs of the user's heart rate versus time, along with other metrics.
+                                        \item The application displays the graphs of the user's heart rate versus time, along with other metrics.
                                 \end{itemize}
                         \begin{flushleft}
                                 \textbf{Flow of Events for Main Success Scenario: }
