@@ -497,6 +497,7 @@ Incorrect number entry is impossible due to the slider selector UI element.\\
 \end{center}
 
 The getNextSong case is one of the conveniences for the user. If the user does not like the song he is currently listening to, he can select a button on the Android device to advance to the next song. The next song will be adjusted to match the path that the algorithm has set out to reach the target heart rate. The songs will be selected from the user's music library which has already been loaded onto the device.
+In the case that the device does not contain another song which matches the current song's bpm/tempo to switch to, the device will select a song from the next highest/lowest level to reach the target heart rate (a faster song if heart rate is to be increased, a slower song if heart rate is to be decreased). Although the song may be out of range for the user's current heart rate, there will be no negative effects of using a song which is only slightly lower or slightly higher. The device will not choose a song that is very far out of the current range. 
 
 \begin{center}
         \begin{tabular}{|C{15cm}|}
@@ -536,6 +537,7 @@ The getNextSong case is one of the conveniences for the user. If the user does n
 \end{center}
 
 The pausePlayback case is another straightforward, convenience-based use case. If the user needs to interrupt the workout for some reason and needs to stop the music, then all he has to do is press the pause button on the device. To resume the music, he must press the button again.
+The system will make sure that this function is working properly. If no music is currently being played, it is considered to be paused and may be resumed. If music is being played, it is considered to be resumed and may be paused. The system will know whether music is playing or not. The heart rate shall also be paused/resumed as the music is. If it is not already recording, and should be, it will start recording (refer to postconditions for UC1, UC2).
 
 \begin{center}
         \begin{tabular}{|C{15cm}|}
@@ -936,7 +938,7 @@ Actors and Goals	&				&				&				&		X	&				&		 \\ \hline
 System Sequence Diagram &				&				&		X		&			&				&		 \\ \hline
 Preliminary Design	&				&		X		&				&			&				&	X	 \\ \hline
 User Effort Estimation  &		X		&				&				&			&				&		 \\ \hline
-Use Cases		&				&				&				&			&		X		&	X	 \\ \hline
+Use Cases		&				&				&				&		X	&		X		&	X	 \\ \hline
 System Sequence Diagrams&		  		&				&		X		&			&				&		 \\ \hline
 Preliminary Design	&				&				&				&			&				&		 \\ \hline
 User Effor Estimation	&				&				&				&			&				&		 \\ \hline
@@ -944,8 +946,8 @@ Domain Model		&				&				&				&			&				&		 \\ \hline
 Operation Contracts	&				&				&				&		X	&		X		&		 \\ \hline
 Mathematical Model	&				&				&				&			&				&		 \\ \hline
 Plan of Work		&				&				&				&			&				&		 \\ \hline
-Project Management	&				&		X		&		X		&			&		X		&		X\\ \hline
-LaTeX Maintenance	&				&				&				&			&		X		&		X\\ \hline
+Project Management	&		X		&		X		&		X		&		X	&		X		&		X\\ \hline
+LaTeX Maintenance	&		X		&		X		&		X		&		X	&		X		&		X\\ \hline
 	\end{tabular}
 \end{center}
 
