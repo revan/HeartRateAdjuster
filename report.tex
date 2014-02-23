@@ -337,7 +337,7 @@ The Traceability Matrix allows the reader to cross the functional and non-functi
                 \hline
                         REQ-5 & 3 & X & X & & & X & \\
                 \hline
-                        REQ-6 & 2 & & & & & X &  \\ %something wrong here. Needs to be included in a use case
+                        REQ-6 & 2 & & & & & X & X \\ %something wrong here. Needs to be included in a use case
                 \hline
                         REQ-7 & 1 & X & X & X & & &  \\
                 \hline
@@ -359,7 +359,7 @@ The Traceability Matrix allows the reader to cross the functional and non-functi
                 \hline
                         REQ-16 & 3 & X & X & X & X & X & X  \\
                 \hline
-                        Total Weight & & 37 & 37 & 21 & 17 & 23 & 17  \\
+                        Total Weight & & 37 & 37 & 21 & 17 & 25 & 19  \\
                 \hline
         \end{tabular}
 \end{center}
@@ -541,7 +541,7 @@ The pausePlayback case is another straightforward, convenience-based use case. I
                         \textbf{Use Case UC-5: getStatistics}\\
                 \hline
                         \begin{flushleft}
-                                \textbf{Related Requirements: } REQ-1, REQ-5, REQ-8, REQ-9, REQ-13, REQ-14, REQ-16
+                                \textbf{Related Requirements: } REQ-1, REQ-5, REQ-6, REQ-8, REQ-9, REQ-13, REQ-14, REQ-16
                         \end{flushleft}
                         \begin{flushleft}
                                 \textbf{Initiating Actor: } User
@@ -582,7 +582,7 @@ The getStatistics use case is important because it allows the user to see the re
                         \textbf{Use Case UC-6: getHeartRate}\\
                 \hline
                         \begin{flushleft}
-                                \textbf{Related Requirements: } REQ-1, REQ-11, REQ-13, REQ-16
+                                \textbf{Related Requirements: } REQ-1, REQ-6, REQ-11, REQ-13, REQ-16
                         \end{flushleft}
                         \begin{flushleft}
                                 \textbf{Initiating Actor: } User
@@ -796,7 +796,7 @@ UUCP = 5 + 78 = 83
 Below is a table of Technical complexity factors and their weghts.
 
 \begin{center}
-        \begin{tabular}{|C{2cm}|C{5cm}|C{1cm}|C{1cm}|C{1cm}|}
+        \begin{tabular}{|C{2cm}|C{5cm}|C{1.5cm}|C{2cm}|C{2cm}|}
                 \hline
                         Technical Factor & Description & Weight & Perceived Complexity & Caculated Factor \\
                 \hline
@@ -828,7 +828,7 @@ TCF = 0.6 + 0.01*27 = 0.87
 The environmental factors measure the experience level of the people on the project and the stability of the project. 
 
 \begin{center}
-        \begin{tabular}{|C{2cm}|C{5cm}|C{1cm}|C{1cm}|C{1cm}|}
+        \begin{tabular}{|C{3cm}|C{5cm}|C{1.5cm}|C{2cm}|C{2cm}|}
                 \hline
                         Environmental Factor & Description & Weight & Perceived Impact & Caculated Factor \\
                 \hline
@@ -842,7 +842,7 @@ The environmental factors measure the experience level of the people on the proj
                 \hline
                         E5 & Progamming language proficiency & 2 & 3 & 6 \\
                 \hline
-                         \multicolumn{5}{c}{Environmental Factor Total (TFT)} & 15.5 \\
+                           & Environmental Factor Total (EFT) & & & 15.5 \\
                 \hline
         \end{tabular}
 \end{center}
@@ -872,21 +872,28 @@ If we assume that productivity factor is 30 hours per user case point. The effor
 \begin{center}
 	\begin{tabular}{|l|C{2cm}|C{1.5cm}|C{1.5cm}|C{1.5cm}|C{1.5cm}|C{1.5cm}|}
 		\hline
-								&Kenny Bambridge&Jonathan Chang	&Samani Gikandi	&Tae-Min Kim&Nikhil Shenoy	&Revan Sopher\\ \hline
-			Problem Statement	&		X		&		X		&		X		&		X	&		X		&		X\\ \hline
-			Glossary of Terms	&				&				&				&		X	&				&		\\ \hline
-			System Requirements	&				&		X		&				&			&		X		&		\\ \hline
-			Func. Requirements	&				&		X		&				&		X	&				&		\\ \hline
-			Non-Func. Req.		&				&				&				&			&		X		&		\\ \hline
-			Appearance Req.		&				&				&				&			&				&		X\\ \hline
-			Stakeholders		&				&				&				&		X	&				&		 \\ \hline
-			Actors and Goals	&				&				&				&		X	&				&		 \\ \hline
-			System Sequence Diagram &				&				&		X		&			&				&		 \\ \hline
-			Preliminary Design	&				&		X		&				&			&				&	X	 \\ \hline
-			User Effort Estimation  &		X		&				&				&			&				&		 \\ \hline
-			Use Cases		&				&				&				&			&		X		&	X	 \\ \hline
-			Project Management	&				&		X		&		X		&			&		X		&		X\\ \hline
-            LaTeX Maintenance	&				&				&				&			&				&		X\\ \hline
+			&	Kenny Bambridge		&	Jonathan Chang		&	Samani Gikandi		&	Tae-Min Kim	&	  Nikhil Shenoy		&	Revan Sopher\\ \hline
+Problem Statement	&		X		&		X		&		X		&		X	&		X		&	X	    \\ \hline
+Glossary of Terms	&				&				&				&		X	&				&      		\\ \hline
+System Requirements	&				&		X		&				&			&		X		&		\\ \hline
+Func. Requirements	&				&		X		&				&		X	&				&		\\ \hline
+Non-Func. Req.		&				&				&				&			&		X		&		\\ \hline
+Appearance Req.		&				&				&				&			&				&		X\\ \hline
+Stakeholders		&				&				&				&		X	&				&		 \\ \hline
+Actors and Goals	&				&				&				&		X	&				&		 \\ \hline
+System Sequence Diagram &				&				&		X		&			&				&		 \\ \hline
+Preliminary Design	&				&		X		&				&			&				&	X	 \\ \hline
+User Effort Estimation  &		X		&				&				&			&				&		 \\ \hline
+Use Cases		&				&				&				&			&		X		&	X	 \\ \hline
+System Sequence Diagrams&		  		&				&		X		&			&				&		 \\ \hline
+Preliminary Design	&				&				&				&			&				&		 \\ \hline
+User Effor Estimation	&				&				&				&			&				&		 \\ \hline
+Domain Model		&				&				&				&			&				&		 \\ \hline
+Operation Contracts	&				&				&				&		X	&		X		&		 \\ \hline
+Mathematical Model	&				&				&				&			&				&		 \\ \hline
+Plan of Work		&				&				&				&			&				&		 \\ \hline
+Project Management	&				&		X		&		X		&			&		X		&		X\\ \hline
+LaTeX Maintenance	&				&				&				&			&		X		&		X\\ \hline
 	\end{tabular}
 \end{center}
 
