@@ -149,15 +149,15 @@ and more critical to fulfilling the customer's needs.
 		\hline
 			Identifier & Priority & Description\\
 		\hline
-			REQ-1 & 5 & The system shall log user BPM data using the Heart Rate Monitor sensor during active periods. If the sensor is removed while active, any data collected and the selection of what song to play may be skewed. Time inbetween active periods is irrelevant and will have no effect on the software.\\
+			REQ-1 & 5 & The system shall log user BPM data using the Heart Rate Monitor sensor during active periods.\\
 		\hline
 			REQ-2 & 4 & The system shall allow user to select a target heart rate on the Android application.\\
 		\hline
-			REQ-3 & 3 & The system shall determine a song to play based on whether the target heart rate is greater than or less than the resting heart rate. Songs will be chosen based on each song's tempo/bpm which will be known to our software.\\
+			REQ-3 & 3 & The system shall determine a song to play based on whether the target heart rate is greater than or less than the resting heart rate. \\
 		\hline
-			REQ-4 & 5 & The system shall play the designated song through either headphones or Bluetooth speakers to adjust user heart rate. The choice of whether to use headphones or speakers will not have any effect on the performance of the system. The choice is simply the user's preference.\\
+			REQ-4 & 5 & The system shall play the designated song through either headphones or Bluetooth speakers to adjust user heart rate. \\
 		\hline
-			REQ-5 & 3 & The system shall store the BPM data of each song in the database. This information will be used to select an appropriate song based on the user's current heart rate and target heart rate.\\
+			REQ-5 & 3 & The system shall store the BPM data of each song in the database. \\
 		\hline
 			REQ-6 & 2 & The system shall at the very least, output graphs relating BPM versus song speed.\\
         \hline
@@ -166,11 +166,11 @@ and more critical to fulfilling the customer's needs.
 \begin{center}
 	\begin{tabular}{|C{2cm}|C{2cm}|C{8cm}|}
 		\hline
-			REQ-7 & 1 & The system should adjust the tempo of the song to attempt to match the user's BPM and stop when within a defined range. If the system it makes an incorrect decision, there will be no negative consequences to the user's health. It will simply re-adjust once it realizes that the song's tempo does not make sense based on the user's current and target heart rates.\\
+			REQ-7 & 1 & The system should adjust the tempo of the song to attempt to match the user's BPM and stop when within a defined range. \\
 		\hline
 			REQ-8 & 1 & The system should allow the user some control when they use the "Display Stastics" feature. That is, they should be able to customize the details of how the data is displayed (type of graph or specific categories of data).\\
 		\hline
-			REQ-9 & 1 & The system should rank the songs that induce the best performance and use machine learning to improve the song selection algorithm. This ranking system will be completely local and only relevant to the user of the system. This is just an optional imporvement to our system to enhance the user's experience.\\
+			REQ-9 & 1 & The system should rank the songs that induce the best performance and use machine learning to improve the song selection algorithm. \\
 		\hline
                         REQ-10 & 1 & The user should be able to change the current song if he is unsatisfied with it. \\
                 \hline
@@ -187,6 +187,13 @@ monitor, android device, server and database. These requirements
 describe some of the interactions between these components and the effects that
 the system as a whole produces. The images in the appearance requirements section
 later on provide more insight on the requirements and functionality of our system. 
+
+For our system to be able to accomplish any of its goals, it must first be able to record the relevant BPM data. Therefore, our REQ-1 is of utmost important. There is, however, an important scenario we must consider. If the the heart rate sensor is removed (accidentally or intentionally) while the user is active, any later data collected and song played may be skewed. Thus, the time inbetween active periods is irrelevant and will have no effect on the software.
+
+In regards to music playback, it is desirable for our system to do the data processing and song section, to reduce the burden on the user. Again, after collecting the BPM data and storing it in our database, our system will use a pre-determined algorithm to analyze song tempo and bpm correlation to determine song selection (REQ-3 & REQ-5). As for physical playback, the choice of whether to use headphones or speakers will not have any effect on the performance of the system. The choice is simply the user's preference (REQ-4).
+
+To safeguard against mistakes, and prevent negative side-effects, if the system makes an incorrect decision, there will be no negative consequences on the user's health. It should be able to re-adjust once it realizes that the song's tempo does not match the user's current and target heart rates (REQ-7). For REQ-9, this ranking system will be completely local and only relevant to the user of the system. This is just an optional improvement to our system to enhance the user's experience.
+
 
 \section{Non-Functional Requirements}
 \begin{center}
