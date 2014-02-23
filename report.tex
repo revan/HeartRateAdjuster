@@ -378,7 +378,7 @@ The Traceability Matrix allows the reader to cross the functional and non-functi
                         \end{flushleft}
                                 \begin{itemize}
                                         \item The system displays the selection menu for heart rate
-                                        \item The user is exercising at a heart rate which is below the peak rate
+                                        \item The device displays a heart rate lower than the peak heart rate.
                                 \end{itemize}
                         \begin{flushleft}
                                 \textbf{Postconditions: }
@@ -421,7 +421,7 @@ This is one of the main use cases for the software. It allows the user to increa
                                 \textbf{Preconditions: }
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item The user is exercising at a heart rate which is above that of the resting rate.
+                                        \item The device displays a heart rate which is higher than the resting heart rate.
                                 \end{itemize}
                         \begin{flushleft}
                                 \textbf{Postconditions: }
@@ -429,7 +429,6 @@ This is one of the main use cases for the software. It allows the user to increa
                                 \begin{itemize}
                                         \item The system starts recording the heart rate of the user and the data from the workout if not already recording.
                                         \item The system uses the initial resting heart rate as a target for the music selection algorithm
-                                        \item The user is returned to the resting heart rate he was at before the workout.
                                 \end{itemize}
                         \begin{flushleft}
                                 \textbf{Flow of Events for Main Success Scenario: }
@@ -466,7 +465,7 @@ This is another one of the main use cases for the software. In this case, the sy
                                 \textbf{Preconditions: }
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item The device is playing a song and the user would like to listen to a different one.
+                                        \item The device is playing a song which needs to be changed manually.
                                 \end{itemize}
                         \begin{flushleft}
                                 \textbf{Postconditions: }
@@ -545,8 +544,8 @@ The pausePlayback case is another straightforward, convenience-based use case. I
                                 \textbf{Preconditions: }
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item The user has finished his workout and would like to see his statistics
-                                        \item The user also has the option to display the statistics during the workout
+                                        \item The workout has been completed and statistics need to be displayed.
+                                        \item The workout is in progress but statistics need to be displayed.
                                 \end{itemize}
                         \begin{flushleft}
                                 \textbf{Postconditions: }
