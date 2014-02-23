@@ -5,7 +5,7 @@
 \contentsline {subsection}{\numberline {1.1.3}Devices and Specifications}{6}
 \contentsline {section}{\numberline {1.2}Solution}{6}
 \contentsline {subsection}{\numberline {1.2.1}Music}{7}
-\contentsline {subsection}{\numberline {1.2.2}Web Platform/Database}{8}
+\contentsline {subsection}{\numberline {1.2.2}Database}{8}
 \contentsline {subsection}{\numberline {1.2.3}System Architecture Diagram}{8}
 \contentsline {subsection}{\numberline {1.2.4}Product Usage}{9}
 \contentsline {subsection}{\numberline {1.2.5}Product Ownership (tentative)}{10}

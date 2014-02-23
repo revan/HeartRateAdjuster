@@ -80,15 +80,16 @@ This will probably take some experimentation with test subjects in several situa
 			 
 Finally, we will be able to develop an algorithm for ranking the songs that induce the best performance. Even better, we could potentially toy around with machine learning to have our algorithm improve after more and more data sets. With the application of machine learning, each user's individual MotoActv device may correct itself in the case that a specific user does not follow the general trend as stated previously (a user's heart rate might increase from slow music rather than fast music). This way, our Motoactv will be able to increase both exercise and sleep performance through our own custom music player application, located on and loaded by the device. This application will utilize the user's music library stored locally on the device's memory.
 
-\subsection{Web Platform/Database}
-Users will want to monitor their personal health status, so our project will include a web component. The Motoactv device does have its own website, but our project is primarily interested with music and heart rate, so we will be able to better customize our own website, tailoring it to a potential customer's needs in this context. Data from the Motoactv will go to a web server, which will then go to a database performs storage and processing. Our website will pull information from the database and display a useful graph of the correlation between music and heart rate. (The exact features of this website will be determined later on because it is one of the later steps of our project. A diagram will also be provided later.)
+\subsection{Database}
+Users will want to monitor their personal health status, so our project will allow the user to view his workout data directly on his phone. This eliminates the inconvenience of having the user log in to a personal account on a website to view his data, because everything he needs will be on the phone itself. All the data collected from the workout will be stored locally on the phone, and the system will peform the necessary database calls to retrieve that data. That data will be processed and formatted into different graphs that will display the correlation between music and heart rate.
+
 
 \subsection{System Architecture Diagram}
 This diagram highlights our system architecture: Our heart rate monitor senses the
 user's BPM and transmits the data to the Android phone via Bluetooth as requested
-by the app. The phone then wirelessly uploads the data to the server and database
-which processes the data. The phone app is then able to select the appropriate
-songs, and the website is able to display suitable graphs.
+by the app. The phone then uploads the data to the server and database
+which processes the data. The system is then able to select the appropriate
+songs, and then display suitable graphs once the workout is completed.
 
 \begin{figure}[H]
 	\centering
@@ -124,7 +125,7 @@ Our team will be divided into three smaller sub-teams of two individuals each, t
 
 	\item[Resting Heart Rate] The resting heart rate is the heart rate measured while the subject is both awake and inactive, not having performed physical activity prior. This resting heart rate, measured in bpm, is the initial value that the user should have before using our device to raise or lower their heart rate.
 
-	\item[Database] Databases are a place to store information. In our case, this is where we will store and process important data received from our health devices, allowing our website to simply act as a pleasant interface for the user.
+	\item[Database] Databases are a place to store information. In our case, this is where we will store and process important data received from our health devices, allowing our system to simply act as a pleasant interface for the user.
 
 	\item[Target Heart Rate] The target heart rate is the heart rate which the user wishes to achieve. This will be lower than the recorded resting heart rate if the user is attempting to sleep, and higher than the recorded resting heart rate if the user is planning to work out. The user's maximum heart rate is based on how old the user is (220 minus the user's age), and the recommended target heart rate while exercising is between 50 and 85 percent, depending on how active the user normally is. While sleeping, people's heart rates generally drop approximately 8 percent from their resting heart rate, so the user's target heart rate should be approximately [(heart rate before sleeping)*0.92]
 
@@ -158,7 +159,7 @@ and more critical to fulfilling the customer's needs.
 		\hline
 			REQ-5 & 3 & The system shall store the BPM data of each song in the database. This information will be used to select an appropriate song based on the user's current heart rate and target heart rate.\\
 		\hline
-			REQ-6 & 2 & The system shall output useful graphs of user workout data on the website to demonstrate the effects of music on BPM.\\
+			REQ-6 & 2 & The system shall output useful graphs of user workout data to demonstrate the effects of music on BPM.\\
         \hline
     \end{tabular}
 \end{center}
@@ -182,7 +183,7 @@ and more critical to fulfilling the customer's needs.
 
 Our functional requirements spell out the behavior of our system and reaction to
 user input. Our system is composed of several aspects such as the heart rate
-monitor, android device, server and database, and website. These requirements
+monitor, android device, server and database. These requirements
 describe some of the interactions between these components and the effects that
 the system as a whole produces. The images in the appearance requirements section
 later on provide more insight on the requirements and functionality of our system.
