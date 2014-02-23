@@ -1,0 +1,992 @@
+\documentclass[letterpaper,english, 12pt]{scrreprt}
+\usepackage[T1]{fontenc}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{titlepic}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\title{Musical Heart Rate Adjuster}
+\subtitle{Software Engineering Project \\ https://github.com/revansopher/HeartRateAdjuster}
+\author{Group \#12}
+
+\begin{document}
+\titlepic{\includegraphics{img/title.png}}
+\maketitle
+
+\tableofcontents
+
+\section*{Team Profile}
+\begin{description}
+\item[Nikhil Shenoy] C++, Python
+\item[Revan Sopher] Android programming, web programming, Java, Python
+\item[Tae-Min Kim] Java, C++, Python
+\item[Samani Gikandi] Java, C, Ruby, Network programming, Device driver/firmware programming
+\item[Kenny Bambridge] IOS programming, web programming, Java, Python
+\item[Jonathan Chang] documentation, organization, C++
+\end{description}
+ 
+\chapter{Customer Statement of Requirements/Project Proposal}
+ 
+\section{Problem}
+There seems to be a growing concern over the bevy of health-related issues that society faces: cancer, obesity, heart diseases. This is evidenced by the estimated \$25.9 billion that consumers spent on fitness membership in 2013 or the government's seemingly carte blanche spending on "perfecting" the healthcare.gov website. While it is impossible to completely eliminate health problems, we focus on a small, albeit interesting subset of the health industry - personal health monitoring. Just like "an apple a day keeps the doctor away," our project seeks to maintain the personal health of an individual, keeping him in the best physical shape possible, and reducing the risk of health problems.
+ 
+\subsection{More Specifically}
+Lack of education about proper fitness is a widespread problem. Many people in the country would like to exercise and stay in shape, but only a small subset of those people know how to monitor their health in a way that allows them to stay fit. There are several methods out there which people can use to get the proper information; tools such as fitness blogs, the President's Council on Fitness, Sports, and Nutrition, and the classic visit to the doctor's office are all excellent examples. However, many people don't know about those methods or choose not to utilize them, and they do their body a disservice by performing exercises that could be detrimental to their health. The Internet is littered with articles such as "9 Exercises You're Doing Wrong" and "The 7 Fitness Myths You Need to Know". With information like this readily available to exercisers, it can be hard to find correct information. And even if one does find correct information, he must check to see if that information applies to a person with his body shape and size. The general problem of finding correct exercise information is that there is no set standard; there is no "one size fits all" set of guidelines which one can follow to have an effective workout. Everybody's body responds differently to different exercises, so the best that the medical community can do is to provide a set of recommendations for people of the most average body type. While this set of recommendations is good in the general, they will never tailor to the needs of one's body and workout. Finding the correct exercise information for one's body type is quite a difficult problem, and it will continue to be a problem until a solution is provided to track each person's exercise routine.
+ 
+Of all the different metrics for measuring the quality of one's fitness, heart rate is the most important factor in determining whether a workout was effective. Monitoring one's heart rate is useful because it determines whether the exerciser is performing his exercise safely as well as successfully. Experts recommend that one's target heart rate during exercise should be between 60-85\% percent of the maximum heart rate, and that anything higher than 85\% increases cardiovascular and orthopedic risk to the exerciser. Naturally, the target heart rate varies for people of different ages, so one should always take this into account before starting a fitness regimen. Also, the frequency of exercise before the new regimen should be considered. If one has not exercised frequently before starting the new regimen, then he should start exercising at a rate that is towards the lower end of the target heart rate zone and then gradually increase his activity once his body gets accustomed to the exercise. Heart rate is a significant, if not the most important, factor in determining whether a workout was done correctly and effectively, and it must be monitored closely in order to prevent injury.
+ 
+Unfortunately, there are people who don't know how to correctly monitor their heart rate, and they mistakenly create a certain fitness plan based on wrong information and end up not optimizing their workout. They go to the gym, run on the treadmill at a light pace, and consider that enough to maintain their health. They do not check their heart rate and make sure they are in the safe region of activity. This critical lack of measurement affects the entire workout. For an exercise to be effective, one must maintain a heart rate that is within the target range for an extended period of time. If not, the exerciser either puts himself at risk of injury or completes a workout that does very little to improve his fitness. Some use exhaustion and soreness after a workout as a judge of an effective workout. Although these methods do give an indication as to how effective the exercise was, they do not provide an insightful and accurate description of one's health. As a result, these people continue bad habits and routines that hinder their progress to stay fit; in fact, they may not be even making progress.
+ 
+A solution to the problem of uninformed exercise must have three main components; it must include all relevant medical data such as heart rate information, create a fitness plan that fits relatively well to the client's body, and provide the client with feedback about the effectiveness of his workout. Once all these components come together, the client will be able to correctly monitor his health during exercise and get the most out of his workout.
+ 
+\subsection{Background}
+A healthy lifestyle depends upon a plethora of factors including environment, nutrition, socialization, and mental stability. However, we identified physical fitness and sleep as the two key factors to leading a healthy lifestyle. Their importance cannot be overstated.
+ 
+Physical fitness or exercise fortifies the body, allowing one to stay in shape, avoid injuries, develop confidence, become stronger, and sleep better. Sufficient physical activity can reduce the risk of such symptoms as stress, depression, diabetes, high blood pressure, osteoporosis, and obesity.
+ 
+Meanwhile, sleep is critical to the mind. It refreshes the brain, helps with daily functioning, uplifts one's mood and emotional well being, increases productivity, and improves learning and memory. "Good" sleep can lower the probability of contracting the following: heart disease, kidney disease, high blood pressure, diabetes, and stroke.
+ 
+\subsection{Devices and Specifications}
+Motoactv:\\
+600 MHz ARMv7 CPU\\
+256MB RAM\\
+8GB Flash Memory\\
+802.11B/G/N\\
+Bluetooth 4.0 low energy\\
+ANT+ for connectivity to fitness sensors\\
+1.6" 220x176 LCD\\
+\\
+Heart Rate monitor:\\
+Either ANT+ or Bluetooth to connect to Motoactv and/or smart phone\\
+
+Our project is centered around the Motoactv device, whose specifications are listed above.The Motoactv is essentially a Motorola-manufactured smartwatch that combines features that would normally be found on a GPS, pedometer, and music player. It also runs Android, contains bluetooth, and provides web-based analytics. We plan on using the Motoactv in conjunction with a compatible heart rate monitor because we are primarily interested with the ability of our music to affect heart rate. Besides monitoring the subject's heart rate and collecting the relevant data, the Motoactv will also be responsible for running our customized Android music player as well as hold our special music library. We wish to to categorize how strenuous the user's current workout is, and encourage them to select a more challenging category to push themselves. Our music player will then play a song and adjust its tempo based on the selected category and the measured heart rate.
+
+\section{Solution}
+It has been well documented that exercise and sleep both hold a significant impact on heart rate[14-15]. However from experience, we believe that the link between exercise and sleep and heart rate holds true for the converse as well. One of the targets of a good workout is an increased heart rate. On the other hand, high-quality sleep entails a decreasing heart rate.
+
+Our proposed solution is designed to affect people's health by providing limited control to their heart rates. Our Musical Heart Rate Adjuster is targeted to operate in two areas where it can be the most effective - workouts and sleep - which in turn offer the aforementioned health benefits. We do not plan on adjusting heart rate with the intent of skipping the rigors of exercise or the process of falling asleep; on the contrary, we wish to adjust heart rate to induce better quality workouts and sleep.
+
+Our plan is composed of a few steps. First, we intend to increase the effectiveness of workouts by matching heart rate to an appropriate selection and tempo of music. This music can be adjusted accordingly to stimulate heart rates to reach a desired intensity of exercise. The music, which will be discussed later, performs the task of simulating workout difficulty. As an added benefit, studies have shown exercising while listening to music to provide many benefits, such as increased motivation and endurance, distraction from otherwise unbearable stress, and increased heart rate, among others.
+
+Then, we seek to improve the quality of sleep by finding soothing music to gradually slow down a user's heart rate. In this instance, we use music as an instrument to aid users in falling asleep more quickly, and hopefully improve the performance of their rest. Listening to right music can also improve the quality of sleep; for instance, music by classical composer Mozart has been shown to increase health factors such as relaxation and mental stimulation.
+
+\subsection{Music}
+We utilize music to affect heart rate in two ways. In addition to identifying and playing music with speeds in the same vicinity as heartbeat, we also wish to be able to adjust the tempo of the music. A simple compound microscope has both a coarse adjustment knob as well as a fine adjustment knob. Our song library will organize songs into different categories, acting as a coarse adjuster for heart rates. Meanwhile, to add a little fine-tuning to adjust the heart rates, we will either write or find an existing application for an audio tempo changer. Given current heart rate, and subsequently, current music tempo, we will continually adjust the music tempo while measuring for changes in heart rate. This will occur until we hit the specified target heart rate, give or a take a few BPM. Thus, if there is no difference in heart rate, either the targeted heart rate has been reached - otherwise, the music tempo has not been adjusted enough.
+
+We are interested in analyzing the magnitude of the effect of our music application on heart rate and finding a rough correlation based on the data that the Motoactv provides. All parties should remember, however, that correlation is not causation. While we take the assumption that the general public will react to music in similar ways (music with a slower tempo will decrease heart rate while music with a higher tempo will increase heart rate), it is difficult to know how every individual will react to the same music and can never be 100 percent accurate.
+
+This will probably take some experimentation with test subjects in several situations such as rest, running, weight-lifting, and playing basketball. Time-permitting, we will also find the ability of music to slow down heart rate and affect sleep by analyzing sleep monitor graphs. As a side experiment, we could measure the effect of several well-known classical songs on sleep quality.
+
+Finally, we will be able to develop an algorithm for ranking the songs that induce the best performance. Even better, we could potentially toy around with machine learning to have our algorithm improve after more and more data sets. With the application of machine learning, each user's individual MotoActv device may correct itself in the case that a specific user does not follow the general trend as stated previously (a user's heart rate might increase from slow music rather than fast music). This way, our Motoactv will be able to increase both exercise and sleep performance through our own custom music player application, located on and loaded by the device. This application will utilize the user's music library stored locally on the device's memory.
+
+\subsection{Database}
+Users will want to monitor their personal health status, so our project will allow the user to view his workout data directly on his phone. This eliminates the inconvenience of having the user log in to a personal account on a website to view his data, because everything he needs will be on the phone itself. All the data collected from the workout will be stored locally on the phone, and the system will peform the necessary database calls to retrieve that data. That data will be processed and formatted into different graphs that will display the correlation between music and heart rate.
+
+
+\subsection{System Architecture Diagram}
+This diagram highlights our system architecture: Our heart rate monitor senses the
+user's BPM and transmits the data to the Android phone via Bluetooth as requested
+by the app. The phone then uploads the data to the server and database
+which processes the data. The system is then able to select the appropriate
+songs, and then display suitable graphs once the workout is completed.
+
+\begin{figure}[H]
+\centering
+\includegraphics{img/system_architecture.png}\\
+\caption{System design}
+\end{figure}
+
+\subsection{Product Usage}
+\begin{itemize}
+\item The heart rate monitor should only be worn while it is in use - only while the user is rexercising. While it is safe to wear the heart rate monitor during other times, there will be no benefit unless the application is currently running.
+\item Users may choose to use the Musical Heart Rate Adjuster while not sleeping or exercising if they wish to adjust their heart rate for alternate reasons (possibly for playing video games or preparing for an exam).
+\item The user will run the android application, and then input a target heart rate. The software will then choose a song based on your current heart rate and begin to either raise or lower it. Once the target heart rate is obtained within a certain tolerance, the software will work to maintain this heart rate rather than increasing/decreasing it.
+\item Music will be selected from the user's own personal music library (which should be stored on the flash memory of the Android device) to either increase or decrease the user's heart-rate. Music will be played by our software.
+\item The software will select and play music according to the user's current heart rate in real-time as it receives information from the connected heart rate monitor.
+\item Music will be delivered through the headphone jack on the Android device or through any bluetooth device.
+\item Receive information on the songs that are listened to in relation to their usage of the Android device. (What songs were listened to, which songs were the most effective at changing their heart rate, etc.)
+\end{itemize}
+
+\section{Glossary of Terms}
+\begin{description}
+\item[Electrocardiography (ECG)] ECG is an interpretation of the electrical activity of the heart over a period of time as measured across the thorax or chest. This interpretation is produced by attaching electrodes to the surface of the skin. This is generally used to measure the heart's electrical conduction system by picking up electrical impulses generated by the polarization and depolarization of cardiac tissue.
+
+\item[Beats per Minute (BPM)] BPM is the amount of times that the heart beats given one minute of time.
+
+\item[Resting Heart Rate] The resting heart rate is the heart rate measured while the subject is both awake and inactive, not having performed physical activity prior. This resting heart rate, measured in bpm, is the initial value that the user should have before using our device to raise or lower their heart rate.
+
+\item[Database] Databases are a place to store information. In our case, this is where we will store and process important data received from our health devices, allowing our system to simply act as a pleasant interface for the user.
+
+\item[Target Heart Rate] The target heart rate is the heart rate which the user wishes to achieve. This will be lower than the recorded resting heart rate if the user is attempting to sleep, and higher than the recorded resting heart rate if the user is planning to work out. The user's maximum heart rate is based on how old the user is (220 minus the user's age), and the recommended target heart rate while exercising is between 50 and 85 percent, depending on how active the user normally is. While sleeping, people's heart rates generally drop approximately 8 percent from their resting heart rate, so the user's target heart rate should be approximately [(heart rate before sleeping)*0.92]
+
+\item[Smartphone] Smartphones are mobile phones which contain features that are more advanced than basic mobile phones. In our case, any Android device which has the capability to use Bluetooth will suffice to interact with the sensors which will be put on the body.
+
+\item[Heart Rate Monitor] A device which is able to monitor the user's heart rate. In our experiment we will be using a third party heart rate monitor (worn as a chest strap) which has sensors that are connected to the skin along with the MOTOACTV watch. The chest strap will record the heart rate while the watch will display the user's current heart rate in real time.
+\end{description}
+
+\chapter{System Requirements}
+Based upon our consumer needs, we derived a list of requirements for our system to
+possess. For features that must be implemented by the system, we state that "The
+user shall," whereas for features that are preferred, but not "mandatory," we state
+that "The user should." For each requirement, we assign an identifier in the form of
+REQ-x, as well as a priority weight from 1 to 5. A higher priority weight indicates
+that the corresponding requirement is more essential to the success of the project,
+and more critical to fulfilling the customer's needs.
+
+\section{Functional Requirements}
+\begin{center}
+\begin{tabular}{|C{2cm}|C{2cm}|C{8cm}|}
+\hline
+Identifier & Priority & Description\\
+\hline
+REQ-1 & 5 & The system shall log user BPM data using the Heart Rate Monitor sensor during active periods. If the sensor is removed while active, any data collected and the selection of what song to play may be skewed. Time inbetween active periods is irrelevant and will have no effect on the software.\\
+\hline
+REQ-2 & 4 & The system shall allow user to select a target heart rate on the Android application.\\
+\hline
+REQ-3 & 3 & The system shall determine a song to play based on whether the target heart rate is greater than or less than the resting heart rate. Songs will be chosen based on each song's tempo/bpm which will be known to our software.\\
+\hline
+REQ-4 & 5 & The system shall play the designated song through either headphones or Bluetooth speakers to adjust user heart rate. The choice of whether to use headphones or speakers will not have any effect on the performance of the system. The choice is simply the user's preference.\\
+\hline
+REQ-5 & 3 & The system shall store the BPM data of each song in the database. This information will be used to select an appropriate song based on the user's current heart rate and target heart rate.\\
+\hline
+REQ-6 & 2 & The system shall at the very least, output graphs relating BPM versus song speed.\\
+        \hline
+    \end{tabular}
+\end{center}
+\begin{center}
+\begin{tabular}{|C{2cm}|C{2cm}|C{8cm}|}
+\hline
+REQ-7 & 1 & The system should adjust the tempo of the song to attempt to match the user's BPM and stop when within a defined range. If the system it makes an incorrect decision, there will be no negative consequences to the user's health. It will simply re-adjust once it realizes that the song's tempo does not make sense based on the user's current and target heart rates.\\
+\hline
+REQ-8 & 1 & The system should allow the user some control when they use the "Display Stastics" feature. That is, they should be able to customize the details of how the data is displayed (type of graph or specific categories of data).\\
+\hline
+REQ-9 & 1 & The system should rank the songs that induce the best performance and use machine learning to improve the song selection algorithm. This ranking system will be completely local and only relevant to the user of the system. This is just an optional imporvement to our system to enhance the user's experience.\\
+\hline
+                        REQ-10 & 1 & The user should be able to change the current song if he is unsatisfied with it. \\
+                \hline
+                        REQ-11 & 1 & The user should be able to view his current heart rate as long as the chest strap is recording that information. \\
+\hline
+REQ-12 & 1 & The user should be able to pause the current track if he needs to interrupt his activity for some reason \\
+\hline
+\end{tabular}
+\end{center}
+
+Our functional requirements spell out the behavior of our system and reaction to
+user input. Our system is composed of several aspects such as the heart rate
+monitor, android device, server and database. These requirements
+describe some of the interactions between these components and the effects that
+the system as a whole produces. The images in the appearance requirements section
+later on provide more insight on the requirements and functionality of our system.
+
+\section{Non-Functional Requirements}
+\begin{center}
+\begin{tabular}{|C{2cm}|C{2cm}|C{8cm}|}
+\hline
+Requirement & Priority Weight & Description \\
+\hline
+REQ-13 & 5 & The Android interface shall have a minimal number of navigation menus; the user should not need more than three taps to find the information he needs \\
+\hline
+REQ-14 & 5 & The user shall not be able to directly modify any data in the database. All data must be programmatically gathered and processed \\
+\hline
+REQ-15 & 3 & The user should wear the device only when the user wishes to alter their heart-rate; the device will not provide useful information if it is worn when the user does not plan to increase or decrease their heart-rate. \\
+\hline
+REQ-16 & 3 & The Android application should be intuitive and simple to use. \\
+\hline
+\end{tabular}
+\end{center}
+
+Meanwhile, our non-functional requirements are more descriptive than practical,
+listing the qualities of our system. These requirements are based on the term
+FURPS+, which includes functionality, usability, reliability, and performance.
+
+\section{On-Screen Appearance Requirements}
+
+This section contains mockups of the Android application's user interface.
+Although the arrangment and display is subject to change, these images contain all the essential information that needs to be conveyed to the user, as well as all the necessary inputs. \\
+The inputs used while exercising, such as the BPM sliders and the music controls, take up a large amount of screen space to facilitate active use. Information display, such as the current track and BPM, is placed unobstrusively around the input methods. The configuration settings are hidden in a drop-down menu, as per the Android design standard.\\
+
+\begin{figure}[H]
+\centering
+\includegraphics{img/mobile_ui/1.png}\\
+\caption{The main screen of the app provides a menu button, selectors for Target Peak and Resting BPM, a display of the current track, a display of the current BPM, and the option to Play/Pause and Skip the current track.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics{img/mobile_ui/2.png}\\
+\caption{Pressing the ``Raise/Lower'' button toggles between attempting to raise or lower the BPM.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics{img/mobile_ui/3.png}\\
+\caption{Pressing the menu button opens the context menu, providing the option to view statistics, edit settings, and view information about the app.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics{img/mobile_ui/7.png}\\
+\caption{Selecting the Statistics option from the context menu displays a graph of user heart rate and song transitions.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics{img/mobile_ui/4.png}\\
+\caption{The settings page allows the user to open a menu to Log in, to edit the location of the media library (this is done via the OS's directory selection), and configure additional parameters such as music generation (if there is time to implement this feature).}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics{img/mobile_ui/5.png}\\
+\caption{Selecting the Log in option prompts the user for their credentials.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics{img/mobile_ui/6.png}\\
+\caption{Selecting the About option from the context menu provides a description of the application.}
+\end{figure}
+
+
+\section{Organization}
+
+\subsection{Stakeholders}
+Stakeholders include individuals and organizations which are interested in the completion and use of a given product. The amount of stakeholders and different types of stakeholders relies on the versatility and ease-of-use of the product in question. Due to this software's very simple interface and design, stakeholders may include users of all ages and multiple types of organizations who are interested in obtaining easier sleep or a more energetic workout. Examples of potential stakeholders include:
+\begin{enumerate}
+\item Individuals who are interested in maintaining their health personally without outside help. With the many functions of the application, users have the capability of maintaining their health without the need to consult other people. People who are introverts or do not have easy access to another person who is able to easily analyze the individual's personal health would be very interested in this application. After running this application through their workout or sleep, users can easily consult the graphs which are produced rather than consulting a personal trainer or doctor about their health.
+\item Organizations that specialize in helping people fall asleep. Rather than having to prescribe pills to every customer who has trouble sleeping, they will have the option to suggest this product to the customer for minor cases. While prescribing pills may tend to have slightly more dangerous side-effects, our product does not introduce any chemicals to the body which may potentially cause harm to the consumer. Organizations who are interested in a cleaner alternative to help people with their sleeping problems would be stakeholders for this product.
+\item Organizations that specialize in promoting exercise and personal health. Not only does this product help those who are trying to sleep, but also those who wish to be more fit. While personal trainers may know how to help the customers and be great motivators, organizations may be interested in helping a larger pool of customers without having to increase the amount of hands that they have working. With this product organizations may grant customers the option of being self-sufficient, helping to increase self-esteem, as well as a great motivator as the application works to increase the user's heart rate allowing them to push onward and burn calories easily.
+\item Organizations interested in monitoring and researching people's health. While there are many users who are able to use the product's graphs and understand how their health and workout are, there are many users who still prefer the assistance of outside sources. This product may also be used by these outside sources to help them collect extra data on an individual's health. Rather than having the customer come to their location and run a couple tests in a single day, the organization will have the ability to provide this product to the customer and collect more regular data to understand the customer's day-to-day life rather than a couple of tests run at their office.
+\end{enumerate}
+
+More specifically, this product may see stakeholders in:
+\begin{itemize}
+\item Personal Trainers
+\item Athletes
+\item Coaches
+\item Doctors
+\item Researchers
+\item Pharmacies
+\item Therapists
+\item General population
+\end{itemize}
+
+\subsection{Actors and Goals}
+Actors can be defined as are people or devices that will directly interact with the product, and can also be loosely labeled as either "initiators" or "participators". These actors will have a specific goal with the given product, which is what the actors are attempting to achieve by interacting with the system. Actors and their respective goals are:
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+\emph{Actor} & \emph{Actor's Goal} \\\hline
+User(initiator)& To increase heart rate for exercising\\\hline
+User(initiator)& To decrease heart rate for sleeping\\\hline
+User(initiator)& To analyze health information from given graphs\\\hline
+Chest strap (participator)& To monitor the user's heart rate\\\hline
+\end{tabular}
+\end{center}
+This product is one which only requires the interaction of one human actor, the user of the product. While there is the potential for other humans to interact with the user's health information which is produced, only the user himself is considered an actor. The headband and chest strap are participating actors that are worn by the user to monitor information and relay the information via Bluetooth back to the smartphone which is running the application.
+
+\section{Use Cases}
+Use Cases are specific tasks that are created together by the designer and the client to simulate what the client wants out of his software solution. They are meant to describe the main features of the project such that the designer can easily address the needs of the client and create a product around those needs. Below is a casual description of the use cases for the reader to get a general idea of how the software should be used. Later, fully described use cases are shown for additional insight into the different cases.
+
+\subsection{Casual Description of Use Cases}
+\begin{center}
+        \begin{tabular}{|C{2cm}|C{2cm}|C{10cm}|}
+                \hline
+                        Use Case & Action & Description \\
+                \hline
+                        UC-1 & increaseHeartRate & The user should enter a target heart rate and begin the workout \\
+                \hline
+                        UC-2 & decreaseHeartRate & The system will bring the user's heart rate down from an exercise rate to a resting rate \\
+                \hline
+                        UC-3 & getNextSong & The user can elect to change the song if he does not like the current one. The new song will be adjusted to reflect the current heart rate of the user and keep the user on track towards the target heart rate. \\
+                \hline
+                        UC-4 & pausePlayback & The user can pause the playback of the music if he would like. \\
+                \hline
+                        UC-5 & getStatistics & The user can request the statistics about the current workout. This can be performed while the workout is in progress or after the workout has been completed. \\
+                \hline
+                        UC-6 & getHeartRate & The user can view his current heart rate. This can be used when the user does not want to see all of the statistics from the workout and just wants his heart rate. \\
+                \hline
+        \end{tabular}
+\end{center}
+
+\subsection{Traceability Matrix}
+The Traceability Matrix allows the reader to cross the functional and non-functional requirements described earlier with the use cases. This demonstrates which use cases fulfill each requirement, and the total priority weight of each use case will determine which cases are the most important. If an X is present at any point in the the column for a Use Case, then the corresponding requirement's priority weight must be added to the sum. The remaining Xs in the column are similarly considered, and the total priority weight for the Use Case is listed at the bottom of the column.
+
+\renewcommand{\arraystretch}{0.4}
+\begin{center}
+        \begin{tabular}{|C{1cm}|C{1cm}|C{1cm}|C{1cm}|C{1cm}|C{1cm}|C{1cm}|C{1cm}|}
+                \hline
+                         & Priority Weight & UC-1 & UC-2 & UC-3 & UC-4 & UC-5 & UC-6 \\
+                \hline
+                        REQ-1 & 5 & X & X & & X & X & X \\
+                \hline
+                        REQ-2 & 4 & X & X & & & & \\
+                \hline
+                        REQ-3 & 3 & X & X & X & & & \\
+                \hline
+                        REQ-4 & 5 & X & X & X & & & \\
+                \hline
+                        REQ-5 & 3 & X & X & & & X & \\
+                \hline
+                        REQ-6 & 2 & & & & & X & X \\ %something wrong here. Needs to be included in a use case
+                \hline
+                        REQ-7 & 1 & X & X & X & & & \\
+                \hline
+                        REQ-8 & 1 & & & & & X & \\
+                \hline
+                        REQ-9 & 1 & & & & & X & \\
+                \hline
+                        REQ-10 & 1 & & & X & & & \\
+                \hline
+                        REQ-11 & 1 & & & & & & X \\
+\hline	
+REQ-12 & 1 & & & & X & & \\
+                \hline
+                        REQ-13 & 5 & X & X & X & X & X & X \\
+                \hline
+                        REQ-14 & 5 & X & X & & & X & \\
+                \hline
+                        REQ-15 & 3 & X & X & X & X & X & X \\
+                \hline
+                        REQ-16 & 3 & X & X & X & X & X & X \\
+                \hline
+                        Total Weight & & 37 & 37 & 21 & 17 & 25 & 19 \\
+                \hline
+        \end{tabular}
+\end{center}
+
+
+\subsection{Fully-Dressed Description of Use Cases}
+
+\begin{center}
+        \begin{tabular}{|C{15cm}|}
+                \hline
+                        \textbf{Use Case UC-1: increaseHeartRate}\\
+                \hline
+                        \begin{flushleft}
+                                \textbf{Related Requirements: } REQ-1, REQ-2, REQ-3, REQ-4, REQ-5, REQ-7, REQ-13, REQ-14, REQ-15, REQ-16
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Initiating Actor: } User
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Actor's Goal: } To enter a target heart rate and begin the workout
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Preconditions: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The system displays the selection menu for heart rate
+                                        \item The device displays a heart rate lower than the peak heart rate.
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Postconditions: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The system starts recording the heart rate of the user and the data from the workout if not already recording.
+                                        \item The system uses the recorded heart rate to run the music selection algorithm
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Flow of Events for Main Success Scenario: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item $\rightarrow$ User enters the target heart rate into the application.
+                                        \item $\leftarrow$ System initates a five-second countdown until the start of the exercise.
+                                        \item User begins his workout
+                                        \item $\leftarrow$ System uses music algorithm to play appropriate music.
+                                        \item $\leftarrow$ System begins recording data about the workout and stores it in the database.
+                                \end{itemize}
+                \hline
+        \end{tabular}
+\end{center}
+
+This is one of the main use cases for the software. It allows the user to increase his heart rate to the proper level according to the data that he inputs. Specifically, the user will initate the process by entering the target heart rate for his exercise. The system will also pick up the user's current heart rate via the chest strap. Once the system has this data, it will initiate the music selection algorithm to play the correct music based on the inputted data. As the algorithm is running, the system will store data about the workout in a database.
+
+\begin{center}
+        \begin{tabular}{|C{15cm}|}
+                \hline
+                        \textbf{Use Case UC-2: decreaseHeartRate}\\
+                \hline
+                        \begin{flushleft}
+                                \textbf{Related Requirements: } REQ-1, REQ-2, REQ-3, REQ-4, REQ-5, REQ-7, REQ-13, REQ-14, REQ-15, REQ-16
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Initiating Actor: } User
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Actor's Goal: } Reach a resting heart rate
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Preconditions: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The device displays a heart rate which is higher than the resting heart rate.
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Postconditions: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The system starts recording the heart rate of the user and the data from the workout if not already recording.
+                                        \item The system uses the initial resting heart rate as a target for the music selection algorithm
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Flow of Events for Main Success Scenario: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item $\rightarrow$ User selects "Lower" option on main UI.
+                                        \item System feeds previous resting heart rate as a target for the music selection algorithm. Initiates the decline.
+                                        \item $\leftarrow$ System initiates a five-second crossfade as the music algorithm starts playing slower music.
+                                        \item User starts walking to the tempo of the music to cool down.
+                                        \item $\leftarrow$ System uses music algorithm to play appropriate music. Records the current heart rate to manage the decline of the heart rate.
+                                \end{itemize}
+                \hline
+        \end{tabular}
+\end{center}
+
+This is another one of the main use cases for the software. In this case, the system will allow the user to lower his heart rate to a resting level, or the level he was at before the workout began. The user initates the action by selecting the "Lower" option. The system then takes the current heart rate and the initial resting heart rate, passes them to the music selection algorithm, and applies the algorrithm in reverse to lower the user's heart rate. The user must also synchronize his walking to the tempo of the music in order for the algorithm to work properly.
+
+
+\begin{center}
+        \begin{tabular}{|C{15cm}|}
+                \hline
+                        \textbf{Use Case UC-3: getNextSong}\\
+                \hline
+                        \begin{flushleft}
+                                \textbf{Related Requirements: } REQ-3, REQ-4, REQ-7, REQ-10, REQ-13, REQ-16
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Initiating Actor: } User
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Actor's Goal: } To play a different song
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Preconditions: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The device is playing a song which needs to be changed manually.
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Postconditions: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item A different song is being played at the same rate at which the previous song was playing
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Flow of Events for Main Success Scenario: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item $\rightarrow$ User selects the "Next Song" button.
+                                        \item System retrieves next track from recommendation algorithm.
+                                        \item $\leftarrow$ System begins playing next track
+                                \end{itemize}
+                \hline
+        \end{tabular}
+\end{center}
+
+The getNextSong case is one of the conveniences for the user. If the user does not like the song he is currently listening to, he can select a button on the Android device to advance to the next song. The next song will be adjusted to match the path that the algorithm has set out to reach the target heart rate. The songs will be selected from the user's music library which has already been loaded onto the device.
+
+\begin{center}
+        \begin{tabular}{|C{15cm}|}
+                \hline
+                        \textbf{Use Case UC-4: pausePlayback}\\
+                \hline
+                        \begin{flushleft}
+                                \textbf{Related Requirements: } REQ-1, REQ-12, REQ-13, REQ-16
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Initiating Actor: } User
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Actor's Goal: } Pause the playback of music
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Preconditions: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The system is playing music
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Postconditions: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The system stops recording the heart rate of the user and the data from the workout.
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Flow of Events for Main Success Scenario: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item $\rightarrow$ User selects "Pause" option on main UI.
+                                        \item $\leftarrow$ System stops playing music.
+                                \end{itemize}
+                \hline
+        \end{tabular}
+\end{center}
+
+The pausePlayback case is another straightforward, convenience-based use case. If the user needs to interrupt the workout for some reason and needs to stop the music, then all he has to do is press the pause button on the device. To resume the music, he must press the button again.
+
+\begin{center}
+        \begin{tabular}{|C{15cm}|}
+                \hline
+                        \textbf{Use Case UC-5: getStatistics}\\
+                \hline
+                        \begin{flushleft}
+                                \textbf{Related Requirements: } REQ-1, REQ-5, REQ-6, REQ-8, REQ-9, REQ-13, REQ-14, REQ-16
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Initiating Actor: } User
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Actor's Goal: } Return statistics about the user's workout.
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Preconditions: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The workout has been completed and statistics need to be displayed.
+                                        \item The workout is in progress but statistics need to be displayed.
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Postconditions: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The Android application displays the graphs of the user's heart rate versus time, along with other metrics.
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Flow of Events for Main Success Scenario: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item $\rightarrow$ User selects the "Display Statistics" option.
+                                        \item System retrieves data from the current workout and creates graphs of the various metrics.
+                                        \item $\leftarrow$ System displays the graphs to the user.
+                                \end{itemize}
+                \hline
+        \end{tabular}
+\end{center}
+
+The getStatistics use case is important because it allows the user to see the results of his workout once he is done. The user initiates the action by selecting the "Display Statistics" option in the UI, which causes the system to retrieve all the data for the current workout from the database. The system then creates graphs that track different metrics, such as the music track that produced the best results over time, and displays them to the user. Time-permitting, the system can be developed to allow the Display Statistics functionality to be available during the workout.
+
+\begin{center}
+        \begin{tabular}{|C{15cm}|}
+                \hline
+                        \textbf{Use Case UC-6: getHeartRate}\\
+                \hline
+                        \begin{flushleft}
+                                \textbf{Related Requirements: } REQ-1, REQ-6, REQ-11, REQ-13, REQ-16
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Initiating Actor: } User
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Actor's Goal: } View the current heart rate.
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Preconditions: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The device should already be monitoring the user's heart rate.
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Postconditions: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The current heart rate is displayed on the screen of the Android application.
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Flow of Events for Main Success Scenario: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item $\rightarrow$ User selects the "Display Heart Rate" option.
+                                        \item System retrieves current heart rate from chest strap.
+                                        \item $\leftarrow$ System displays the heart rate to the user.
+                                \end{itemize}
+                \hline
+        \end{tabular}
+\end{center}
+
+The getHeartRate case is similar to the getStatistics case, but it allows the user to see only his current heart rate. The full analysis provided by getStatistics may not be necessary at times, and this case allows the user to easily see his heart rate during the exercise. The interaction begins with the user selecting the "Display Heart Rate" option. The system then retrieves the current heart rate from the chest strap and displays it on the screen.
+
+\subsection{Use Case Diagram}
+\begin{figure}[H]
+\centering
+\includegraphics{img/use_case.png}\\
+\end{figure}
+
+\subsection{System Sequence Diagrams}
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{img/ssd/ssd_uc1.png}\\
+\end{figure}
+
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{img/ssd/ssd_uc2.png}\\
+\end{figure}
+
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{img/ssd/ssd_uc3.png}\\
+\end{figure}
+
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{img/ssd/ssd_uc4.png}\\
+\end{figure}
+
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{img/ssd/ssd_uc5.png}\\
+\end{figure}
+
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{img/ssd/ssd_uc6.png}\\
+\end{figure}
+
+
+\subsection{System Operation Contracts}
+{\bf OC-1: Increase the Heart Rate}
+\begin{itemize}
+\item {\bf Precondition: } The system displays the selection menu for heart rate
+\item {\bf Postcondition:}
+\begin{itemize}
+\item The system starts recording the heart rate of the user and the data from the workout if not already recording.
+\item The system uses the recorded heart rate to run the music selection algorithm
+\end{itemize}
+\end{itemize}
+
+{\bf OC-2: Decrease the Heart Rate}
+\begin{itemize}
+\item {\bf Precondition: } The recorded heart rate is above the resting heart rate.
+\item {\bf Postcondition: }
+\begin{itemize}
+\item The system starts recording the heart rate of the user and the data from the workout if not already recording.
+\item The system uses the initial resting heart rate as a target for the music selection algorith.
+\end{itemize}
+
+\end{itemize}
+
+{\bf OC-3: Get the Next Sond}
+\begin{itemize}
+\item {\bf Precondition: } The device is playing a song and the user would like to listen to a different one.
+\item {\bf Postcondition: } A different song is being played at the same rate at which the previous song was playing.
+
+\end{itemize}
+
+{\bf OC-4: Pause Playback}
+\begin{itemize}
+\item {\bf Precondition: } The device is currently playing a song.
+\item {\bf Postcondition: } The system stops recording the heart rate of the user and the data from the workout.
+
+\end{itemize}
+
+{\bf OC-5: Get the Statistics}
+\begin{itemize}
+\item {\bf Precondition: } The user has either finished his workout or is in the middle of his workout and would like to see his statistics.
+\item {\bf Postcondition: } The device retrieves the data from the databases, organizes it, and presents it to the user in the form of charts and tables.
+\end{itemize}
+
+{\bf OC-6: Get the Heart Rate}
+\begin{itemize}
+\item {\bf Precondition: } The device should already be monitoring the user's heart rate.
+\item {\bf Postcondition: } The current heart rate is displayed on the screen of the Android application.
+\end{itemize}
+
+\subsection{Mathematical Model}
+The selection of which track to play requires a mathematical model. At its simplest, this consists of selecting the track with the closest BPM, that is to say minimizing the difference in BPM:
+\begin{equation}
+  min(\mid target_{BPM} - track_{BPM} \mid)
+\end{equation}
+If time permits, this simple model can be replaced with a more complex model incorporating Machine Learning to learn which tracks are more effective than others at changing pulse.
+
+\chapter{User Interface Specification}
+\section{Preliminary Design}
+
+\subsection{Use Case UC-2: decreaseHeartRate}
+
+\begin{figure}[H]
+\centering
+\includegraphics{img/Prelim_Design/PrelimDesign_1.png}\\
+\caption{System design}
+\end{figure}
+
+For the first two use cases, the user's goal is to select a target heart rate for his workout. Because they are essentially two versions of the same task, we only include a single preliminary design of this use case. As seen from the screenshots of our "home" screen above, we seek to minimize user effort in accomplishing his desired goal. 1) To decrease heart rate, a user simply needs to press the "Raise" button to toggle the setting to "Lower." This means that he is now in the correct mode to lower his heart rate. 2) Next, the user must select his target BPM. There are two options: Peak BPM and Resting BPM. The user needs to swipe upwards or downwards to scroll and select his desired Peak BPM, for the workout, and then choose a more relaxed, Resting BPM.
+
+When finished, the system does the remainder of the work, helping the user to increase or decrease his heart rate, and then indicating the continuous effect in the bottom left corner, allowing the user to monitor his condition. This feedback is also furthered discussed in the getStatistics use case later on. (Again, fulfilling use case 1 and increasing heart rate is self-explanatory. The user merely needs to toggle the button back to "Raise" and select his BPM.)
+
+\subsection{Use Case UC-3: getNextSong}
+
+\begin{figure}[H]
+\centering
+\includegraphics{img/Prelim_Design/PrelimDesign_2.png}\\
+\caption{System design}
+\end{figure}
+
+To switch tracks is also very simple. It takes the user one simple tap to achieve his desired outcome. On the provided image of our concept interface, our application appears very similar to a mainstream music player. In the bottom right corner is the double-arrowed fast forward button. The user taps this button to advance to another song, and then the system fulfills that request by running its algorithm and picking out another track from the user's music library. The "Current Track:" label will also be updated accordingly, and possibly even the cover art of the album.
+
+\subsection{Use Case UC-4: pausePlayback}
+
+\begin{figure}[H]
+\centering
+\includegraphics{img/Prelim_Design/PrelimDesign_3.png}\\
+\caption{System design}
+\end{figure}
+
+Use Case 4, pausePlayback also proves to be extremely intuitive. Just like most music players, our application has a button located on the bottom center of the screen designed for the purpose of pausing the current song, or playing it, depending on the current state. The user just needs a single tap on the universal play/pause button to achieve his goal of pausing the song. When this is done, the system responds by stopping its collection of heart rate data, and freezing the screen in its current state. (This would be readily updated upon playback.)
+
+\subsection{Use Case UC-5: getStatistics}
+
+\begin{figure}[H]
+\centering
+\includegraphics{img/Prelim_Design/PrelimDesign_4.png}\\
+\caption{System design}
+\end{figure}
+
+For use case 5, the user desires to view the statistics of his workout. To simplify the process for the user down to two clicks, we added a menu button in the top right corner of the screen. After pressing that menu button, a scroll-down menu with three options appears. The user needs to tap "Selections" to bring up his workout information. The system is constantly logging the user data, and compiles a few useful graphs such as heart rate versus time. Other different metrics may also be selected, allowing the user instant access to data that can help him improve his workout.
+
+We omit use case 6 in our preliminary design because we feel that it is self-explanatory. The user may tap the BPM square in the lower left corner to update his BPM, but most likely, the BPM will be updated in real time. In that case, the user simply needs to look at the screen to view his current BPM.
+
+\section{Effort Estimation}
+
+First we need to calculate the Use Case Points (UCP).
+
+\begin{equation}
+UCP = UUCP* TCF *ECF
+\end{equation}
+
+Where Unadjusted Use Case Points (UUCPs) are computed as a sum of these two components:
+
+\begin{enumerate}
+\item The Unadjusted Actor Weight (UAW), based on the combined complexity of all the actors in all the use cases.
+\item The Unadjusted use Case Weight (UUCW), based on the total number of activities (or steps) contained in all the use case scenarios.
+\end{enumerate}
+
+
+\subsubsection{Unadjusted Actor Weight (UAW) and Unadjusted Use Case Weight (UUCW)}
+\begin{center}
+        \begin{tabular}{|C{3cm}|C{3cm}|C{3cm}|}
+                \hline
+                        Actor & Complexity & Weight \\
+                \hline
+                       Users & Complex & 3 \\
+                \hline
+                       Mobile App & Average & 2 \\
+                \hline
+        \end{tabular}
+\end{center}
+
+\begin{equation}
+UAW = 3 + 2 = 5
+\end{equation}
+
+Now we reference the Use Case table from 2.5.1 to calculate the UUCW.
+
+\begin{equation}
+UUCW = 15 + 15 + 8 + 10 + 12 + 18 = 78
+\end{equation}
+
+There the UUCP is:
+
+\begin{equation}
+UUCP = 5 + 78 = 83
+\end{equation}
+
+\subsubsection{Technical Complexity Factor (TCF)-Nonfunctional Requirements}
+
+Below is a table of Technical complexity factors and their weghts.
+
+\begin{center}
+        \begin{tabular}{|C{2cm}|C{5cm}|C{1.5cm}|C{2cm}|C{2cm}|}
+                \hline
+                        Technical Factor & Description & Weight & Perceived Complexity & Caculated Factor \\
+                \hline
+                        T1 & Friendly interface that the user understands & 2 & 1 & 2 \\
+                \hline
+                        T2 & Internal processing of heart beat data to music and adjusting BPM shouldn't be too complex & 2 & 3 & 6\\
+                \hline
+                        T3 & Good Performance & 1 & 2 & 2 \\
+                \hline
+                        T4 & Security is a minor concern & 1 & 2 & 2 \\
+                \hline
+                        T5 & No direct access to third parties & 2 & 3 & 6 \\
+                \hline
+                        T6 & Ease of use is very important & 3 & 3 & 9\\
+                \hline
+                        & Technical Factor Total (TFT) & & & 27 \\
+                \hline
+        \end{tabular}
+\end{center}
+
+And $TCF = C1 + C2 \times TFT$, and $C1 = 0.6, C2 = 0.01$, so
+
+\begin{equation}
+TCF = 0.6 + 0.01*27 = 0.87
+\end{equation}
+
+\subsubsection{Environment Complexity Factor (ECF)}
+
+The environmental factors measure the experience level of the people on the project and the stability of the project.
+
+\begin{center}
+        \begin{tabular}{|C{3cm}|C{5cm}|C{1.5cm}|C{2cm}|C{2cm}|}
+                \hline
+                        Environmental Factor & Description & Weight & Perceived Impact & Caculated Factor \\
+                \hline
+                        E1 & Mostly beginners at UML based development & 1.5 & 1 & 1.5 \\
+                \hline
+                        E2 & Decent familiarity with application problem& 0.5 & 3 & 1.5\\
+                \hline
+                        E3 & Quite knowledgable about the Object-Oriented approach & 1.5 & 3 & 4.5 \\
+                \hline
+                        E4 & Somewhat motivated about the problem & 1 & 2 & 2 \\
+                \hline
+                        E5 & Progamming language proficiency & 2 & 3 & 6 \\
+                \hline
+                           & Environmental Factor Total (EFT) & & & 15.5 \\
+                \hline
+        \end{tabular}
+\end{center}
+
+Here is the formula to calculate ECF
+
+\begin{equation}
+ECF = C1 + C2 * EFT
+\end{equation}
+
+Where $C1 = 1.4, C2 = 0.03$. Therefore we calculate the ECF.
+
+\begin{equation}
+ECF = 1.4 + (-0.03*15)=0.965
+\end{equation}
+
+So we calculate the final UCP:
+
+\begin{equation}
+UCP = 83*0.87*0.965 = 69.68
+\end{equation}
+
+If we assume that productivity factor is 30 hours per user case point. The effort estimation would be 2,090.
+
+\chapter{Plan of Work}
+Looking ahead at some of the due dates in the near future, our group will probably be mixing documentation with development during the course of March. Up until now, we have been primarily working on laying the foundations of our project. We have been examining customer and system requirements and extracting specifications from them. We have been envisioning preliminary design as well as analyzing user estimation. We have derived our domain and mathematical models.
+In the upcoming weeks, we will be working on some UML diagrams to make our lives a lot easier when we begin to code. We will complete the sequence and class diagrams to help us understand exactly which attributes and classes we need to account for. We will also design our system architecture to further our understanding on how each of the components of our system interface and communicate with each other. We will identify any data algorithms or structures needed to store the information generated by the phone and the heart rate monitor. Finally, we will continue to revise our designs and implementations from our previous iteration and construct tests to ensure that our system works as planned.
+By doing this preliminary design and analysis in conjunction with the upcoming deliverables, we will develop a solid understanding of what pieces of software actually need to be written. We will have a snapshot of our system and hopefully foresee some of the problems that might have occurred had we rushed straight into coding.
+The included Gantt chart serves as a visual roadmap of our project plan.
+
+\section{\centerline{Gantt Chart}}
+\begin{figure}[H]
+\centering
+\includegraphics{img/Gantt_Chart.png}\\
+\caption{Pressing the menu button opens the context menu, providing the option to view statistics, edit settings, and view information about the app.}
+\end{figure}
+
+
+\section{Product Ownership}
+Our team will be divided into three smaller sub-teams of two individuals each, the pairings listed below. Each sub-team will be responsible for developing a specific sub-product during the bulk of their time. Upon completion of a significant portion of work, they will provide a brief description of their activity before they push it to our Github repository. In addition to documentation, they will also include the necessary UML diagrams, charts, algorithms, and source code. Every week, or at least once before each deliverable, we will meet together for 1-3 hours during a timeframe determined by a combination of GroupMe and When2meet. During the meeting, we will have a specific agenda that primarily involves the week's progress and upcoming deliverable. Our discussion will probably be centered along the following questions: 1) What did you work on this past week? 2) What do you plan on working on next week? 3) Are there any revisions that need to be made to the project? Every week, a team member will take the lead for the next deliverable to ensure that everything is on time.
+\begin{itemize}
+\item Revan and Tae-Min will work on the general user interface of the mobile application. They will design the layout and basic functionality of the Android app, and set up the communication protocol between the heart rate monitor and the phone.
+\item Kenny and Samani will work on the music aspect of the mobile application. They will study music playback features such as track selection and queuing to provide customers with a seamless music player experience. They will also be responsible for the nuances of audio playback such as crossfading transitions and tempo adjustments.
+\item Jon and Nikhil will work on the data logging faculties that are necessary to provide the user with feedback about his/her workout. They will work with a server that captures heart rate and music data from the phone and possibly directly from the heart rate monitor. They will determine how to process this information on the server and create customizable graphical displays for user's to view.
+\end{itemize}
+
+
+\section{\centerline{Breakdown of Responsibilities}}
+
+\begin{center}
+        \begin{tabular}{|C{2cm}|C{6cm}|C{3cm}|C{3cm}|}
+                \hline
+                         & \textbf{Past} & \textbf{Presen}t & \textbf{Future} \\
+                \hline
+                        \textbf{Jonathan} & Problem Statement, Enumerated Functional Requirements, Preliminary Design, References & Plan of Work & Project Management, Interaction Diagrams, Class Diagrams \\
+                \hline
+                        \textbf{Kenny} & User Effort Estimation & Domain Analysis & System Architecture and System Design \\
+                \hline
+                        \textbf{Nikhil} & Enumerated Nonfunctional Requirements, Use Cases (Casual Description, Traceability Matrix, Fully-Dressed Description) & System Operation Contracts & Project Management, Interaction Diagrams, Class Diagrams \\
+                \hline
+                        \textbf{Revan} & On-Screen Appearance Requirements, Use Case Diagrams & Mathematical Model & Class Diagrams, System Architecture and System Design \\
+                \hline
+                        \textbf{Samani} & System Sequence Diagarms & Domain Analysis & System Architecture and System Design \\
+                \hline
+                        \textbf{Tae-min} & Glossary of Terms, Stakeholders, Actors, Goals & System Operation Contracts & Algorithms and Data Structures \\
+                \hline
+                       
+        \end{tabular}
+\end{center}
+
+\chapter*{Individual Contributions Breakdown}
+\begin{center}
+\begin{tabular}{|l|C{2cm}|C{1.5cm}|C{1.5cm}|C{1.5cm}|C{1.5cm}|C{1.5cm}|}
+\hline
+&	Kenny Bambridge &	Jonathan Chang &	Samani Gikandi &	Tae-Min Kim &	Nikhil Shenoy &	Revan Sopher\\ \hline
+Problem Statement &	X &	X &	X &	X &	X &	X \\ \hline
+Glossary of Terms &	&	&	&	X &	& \\ \hline
+System Requirements &	&	X &	&	&	X &	\\ \hline
+Func. Requirements &	&	X &	&	X &	&	\\ \hline
+Non-Func. Req. &	&	&	&	&	X &	\\ \hline
+Appearance Req. &	&	&	&	&	&	X\\ \hline
+Stakeholders &	&	&	&	X &	&	\\ \hline
+Actors and Goals &	&	&	&	X &	&	\\ \hline
+System Sequence Diagram &	&	&	X &	&	&	\\ \hline
+Preliminary Design &	&	X &	&	&	&	X \\ \hline
+User Effort Estimation &	X &	&	&	&	&	\\ \hline
+Use Cases &	&	&	&	&	X &	X \\ \hline
+System Sequence Diagrams&	&	&	X &	&	&	\\ \hline
+Preliminary Design &	&	&	&	&	&	\\ \hline
+User Effor Estimation &	&	&	&	&	&	\\ \hline
+Domain Model &	&	&	&	&	&	\\ \hline
+Operation Contracts &	&	&	&	X &	X &	\\ \hline
+Mathematical Model &	&	&	&	&	&	\\ \hline
+Plan of Work &	&	&	&	&	&	\\ \hline
+Project Management &	&	X &	X &	&	X &	X\\ \hline
+LaTeX Maintenance &	&	&	&	&	X &	X\\ \hline
+\end{tabular}
+\end{center}
+
+\chapter*{References}
+
+References 1-5 are the final project reports of the previous groups who worked on the Personal Health Monitoring projects. They were consulted in conjunction with Professor Marsic's Software Engineering textbook as a guide for formatting guidelines, content ideas, and inspiration.
+\begin{verbatim}
+[0] http://www.ece.rutgers.edu/~marsic/books/SE/book-SE_marsic.pdf
+[1] http://www.ece.rutgers.edu/~marsic/books/SE/projects/HealthMonitor/2013-g7-report3.pdf
+[2] http://www.ece.rutgers.edu/~marsic/books/SE/projects/HealthMonitor/2013-g8-report3.pdf
+[3] http://www.ece.rutgers.edu/~marsic/books/SE/projects/HealthMonitor/2012-g1-report3.pdf
+[4] http://www.ece.rutgers.edu/~marsic/books/SE/projects/HealthMonitor/2012-g2-report3.pdf
+[5] http://www.ece.rutgers.edu/~marsic/books/SE/projects/HealthMonitor/2012-g3-report3.pdf
+\end{verbatim}
+Reference 6 is a review of the Motorola Motoactv device. They provided us with the specifications and usage details to help us develop our project proposal.
+\begin{verbatim}
+[7] http://reviews.cnet.com/specialized-electronics/motorola-motoactv-gps-fitness/4505-3505_7-35163040.html
+\end{verbatim}
+
+References 7-8 are Wikipedia articles that helped educate us on electroencephalography and electroencephalogram define the terms for our glossary.
+\begin{verbatim}
+[7] http://en.wikipedia.org/wiki/Electroencephalography
+[8] http://www.scholarpedia.org/article/Electroencephalogram
+\end{verbatim}
+
+Reference 9 provided us with an opening statistic to highlight the industry demand for fitness.
+\begin{verbatim}
+[9] http://www.statista.com/statistics/242190/us-fitness-industry-revenue-by-sector/
+\end{verbatim}
+
+References 10-11 are pictures that we used for our cover.
+\begin{verbatim}
+[10] https://yt4.ggpht.com/-knZVRWVniHU/AAAAAAAAAAI/AAAAAAAAAAA/QN5_n28x_R0/s900-c-k-no/photo.jpg
+[11] http://www2.hu-berlin.de/fpm/graphics/logo_heartbeat-note.png
+\end{verbatim}
+
+
+References 12-13 are information about target heart rates.
+\begin{verbatim}
+[12] http://www.webmd.com/fitness-exercise/healthtool-target-heart-rate-calculator
+[13] http://www.livestrong.com/article/105256-normal-heart-rate-sleeping/
+\end{verbatim}
+
+References 14-15 explain how exercise and sleep affect heart rate.
+\begin{verbatim}
+[14] http://www.active.com/fitness/articles/how-does-exercise-affect-your-heart
+[15] http://www.webmd.com/sleep-disorders/features/how-sleep-affects-your-heart
+\end{verbatim}
+
+\end{document}
