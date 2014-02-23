@@ -5,7 +5,7 @@
 \contentsline {subsection}{\numberline {1.1.3}Devices and Specifications}{6}
 \contentsline {section}{\numberline {1.2}Solution}{6}
 \contentsline {subsection}{\numberline {1.2.1}Music}{7}
-\contentsline {subsection}{\numberline {1.2.2}Database}{8}
+\contentsline {subsection}{\numberline {1.2.2}Database}{7}
 \contentsline {subsection}{\numberline {1.2.3}System Architecture Diagram}{8}
 \contentsline {subsection}{\numberline {1.2.4}Product Usage}{9}
 \contentsline {subsection}{\numberline {1.2.5}Product Ownership (tentative)}{10}
@@ -36,6 +36,6 @@
 \contentsline {subsubsection}{\nonumberline Technical Complexity Factor (TCF)-Nonfunctional Requirements}{41}
 \contentsline {subsubsection}{\nonumberline Environment Complexity Factor (ECF)}{42}
 \contentsline {chapter}{\numberline {4}Plan of Work}{43}
-\contentsline {section}{\numberline {4.1}\hbox to\hsize {\hss Gantt Chart\hss }}{44}
+\contentsline {section}{\numberline {4.1}Gantt Chart}{44}
 \contentsline {section}{\numberline {4.2}Product Ownership}{44}
-\contentsline {section}{\numberline {4.3}\hbox to\hsize {\hss Breakdown of Responsibilities\hss }}{45}
+\contentsline {section}{\numberline {4.3}Breakdown of Responsibilities}{45}
