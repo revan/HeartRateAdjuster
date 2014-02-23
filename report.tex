@@ -3,7 +3,7 @@
 \usepackage{array}
 \usepackage{graphicx}
 \usepackage{float}
-\usepackage{titlepic}
+%\usepackage{titlepic}
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
 \title{Musical Heart Rate Adjuster}
@@ -11,7 +11,7 @@
 \author{Group \#12}
 
 \begin{document}
-\titlepic{\includegraphics{img/title.png}}
+%\titlepic{\includegraphics{img/title.png}}
 \maketitle
 
 \tableofcontents
@@ -577,7 +577,8 @@ The system will make sure that this function is working properly. If no music is
         \end{tabular}
 \end{center}
 
-The getStatistics use case is important because it allows the user to see the results of his workout once he is done. The user initiates the action by selecting the "Display Statistics" option in the UI, which causes the system to retrieve all the data for the current workout from the database. The system then creates graphs that track different metrics, such as the music track that produced the best results over time, and displays them to the user. Time-permitting, the system can be developed to allow the Display Statistics functionality to be available during the workout.
+The getStatistics use case is important because it allows the user to see the results of his workout once he is done. The user initiates the action by selecting the "Display Statistics" option in the UI, which causes the system to retrieve all the data for the current workout from the database. The system then creates graphs that track different metrics, such as the music track that produced the best results over time, and displays them to the user. Time-permitting, the system can be developed to allow the Display Statistics functionality to be available during the workout. The getStatistics function is relatively simple; the user will be presented with a button that he can press to retrieve the statistics. He will then be presented with a menu that asks him which statistics he would like to see. The system will check for invalid values that the user might enter and are not directly related to the statistics options that are presented. If an invalid option is selected, the system will reset the display and ask the user to enter correct values. Possible statistics that could be displayed are the frequency with which a certain song is played, which indicates a song that makes the user especially productive.A graph might show the user how fast his heart rate approaches the target heart rate over the duration of his workout.
+
 
 \begin{center}
         \begin{tabular}{|C{15cm}|}
@@ -617,7 +618,8 @@ The getStatistics use case is important because it allows the user to see the re
         \end{tabular}
 \end{center}
 
-The getHeartRate case is similar to the getStatistics case, but it allows the user to see only his current heart rate. The full analysis provided by getStatistics may not be necessary at times, and this case allows the user to easily see his heart rate during the exercise. The interaction begins with the user selecting the "Display Heart Rate" option. The system then retrieves the current heart rate from the chest strap and displays it on the screen.
+The getHeartRate case is similar to the getStatistics case, but it allows the user to see only his current heart rate. The full analysis provided by getStatistics may not be necessary at times, and this case allows the user to easily see his heart rate during the exercise. The interaction begins with the user selecting the "Display Heart Rate" option. The system then retrieves the current heart rate from the chest strap and displays it on the screen. For this function to work, the chest strap must be strapped firmly to the chest in the region of the heart. If not, the system will be unable to record the current heart rate correctly. Also, the chest strap should not be moved or tampered with in any way while the device is recording the current heart rate. Once the chest strap is properly secured, the Android device will listen to the chest strap for a period of 10 seconds. If no data is received from the chest strap within that time period, the system will present the user with a message saying that the ches strap is not properly fastened. If this message shows up three times, the system will declare that the chest strap is not functioning properly and will suggest that the user buy a new one.
+
 
 \subsection{Use Case Diagram}
 \begin{figure}[H]
