@@ -314,17 +314,19 @@ Use Cases are specific tasks that are created together by the designer and the c
                 \hline
                         Use Case & Action & Description \\
                 \hline
-                        UC-1 & increaseHeartRate & The user should enter a target heart rate and begin the workout \\
+                        UC-1 & logData & The system will log heart rate and music metadata.\\
                 \hline
-                        UC-2 & decreaseHeartRate & The system will bring the user's heart rate down from an exercise rate to a resting rate \\
+                        UC-2 & setTargetHeartRate & The user can change the heart rate that the system is targeting.\\
                 \hline
-                        UC-3 & getNextSong & The user can elect to change the song if he does not like the current one. The new song will be adjusted to reflect the current heart rate of the user and keep the user on track towards the target heart rate. \\
+                        UC-3 & skipSong & The user can elect to skip the current song. The system will begin playing a different song.\\
                 \hline
-                        UC-4 & pausePlayback & The user can pause the playback of the music if he would like. \\
+                        UC-4 & togglePlayback & The user can toggle the system between playing and not playing music.\\
                 \hline
-                        UC-5 & getStatistics & The user can request the statistics about the current workout. This can be performed while the workout is in progress or after the workout has been completed. \\
+                        UC-5 & displayStatistics& The user can request the statistics about the current workout. This can be performed while the workout is in progress or after the workout has been completed. \\
                 \hline
                         UC-6 & getHeartRate & The user can view his current heart rate. This can be used when the user does not want to see all of the statistics from the workout and just wants his heart rate. \\
+                \hline
+                        UC-7 & provideMusicData & \\
                 \hline
         \end{tabular}
 \end{center}
