@@ -13,4 +13,5 @@ Date | Members | Subject
 2-19| Kenny, Jonathan, Samani, Tae-Min, Nikhil, Revan | Review feedback, divide work for graded report, divide work for development
 2-23| Kenny, Jonathan, Samani, Tae-Min, Nikhil, Revan | Entire team collaborated to finish first and work on revisions
 2-27| Kenny, Jonathan, Samani, Tae-Min, Nikhil, Revan | Created breakdown of assignments for second report
+3-7 | Kenny, Samani, Nikhil, Revan | Restructured project organization and Use Cases
 
