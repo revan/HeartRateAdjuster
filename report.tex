@@ -430,16 +430,16 @@ This is one of the main use cases for the software. It allows the user to increa
 \begin{center}
         \begin{tabular}{|C{15cm}|}
                 \hline
-                        \textbf{Use Case UC-2: decreaseHeartRate}\\
+                        \textbf{Use Case UC-2: setTargetHeartRate}\\
                 \hline
                         \begin{flushleft}
-                                \textbf{Related Requirements: } REQ-1, REQ-2, REQ-3, REQ-4, REQ-5, REQ-7, REQ-13, REQ-14, REQ-15, REQ-16
+                                \textbf{Related Requirements: } REQ-2, REQ-3, REQ-7, REQ-13, REQ-14, REQ-15, REQ-16
                         \end{flushleft}
                         \begin{flushleft}
                                 \textbf{Initiating Actor: } User
                         \end{flushleft}
                         \begin{flushleft}
-                                \textbf{Actor's Goal: } Reach a resting heart rate
+                                \textbf{Actor's Goal: } To change the heart rate that the system is targeting
                         \end{flushleft}
                         \begin{flushleft}
                                 \textbf{Preconditions: }
@@ -451,26 +451,31 @@ This is one of the main use cases for the software. It allows the user to increa
                                 \textbf{Postconditions: }
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item The system starts recording the heart rate of the user and the data from the workout if not already recording.
-                                        \item The system uses the initial resting heart rate as a target for the music selection algorithm
-                                        \item The user is returned to the resting heart rate he was at before the workout.
+                                        \item The system updates the target heart rate used for music selection
                                 \end{itemize}
                         \begin{flushleft}
                                 \textbf{Flow of Events for Main Success Scenario: }
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item $\rightarrow$ User selects "Lower" option on main UI.
-                                        \item $\rightarrow$ Database feeds previous resting heart rate to the Music Selector as a target for the music selection algorithm. Initiates the decline.
-                                        \item $\leftarrow$ Timer initiates a five-second crossfade as the music algorithm starts playing slower music.
-                                        \item $\rightarrow$ User starts walking to the tempo of the music to cool down.
-                                        \item $\leftarrow$ Music Selector uses music algorithm to play appropriate music. Database records the current heart rate to manage the decline of the heart rate.
+                                        \item[] $\rightarrow$ User selects ``Raise'' option on main UI
+                                        \item[] $\rightarrow$ System sets current value of ``Raise'' selector as current target
                                 \end{itemize}
+                                OR
+                                \begin{itemize}
+                                        \item[] $\rightarrow$ User selects ``Lower'' option on main UI
+                                        \item[] $\rightarrow$ System sets current value of ``Lower'' selector as current target
+                                \end{itemize}
+                                OR
+                                \begin{itemize}
+                                        \item[] $\rightarrow$ User modifies current selector value on main UI
+                                        \item[] $\rightarrow$ System sets new value of selector as current target
+                                \end{itemize}
+                                
 				\\
                 \hline
         \end{tabular}
 \end{center}
-
-This is another one of the main use cases for the software. In this case, the system will allow the user to lower his heart rate to a resting level, or the level he was at before the workout began. The user initiates the action by selecting the "Lower" option. The system then takes the current heart rate and the initial resting heart rate, passes them to the Music Selector, and applies the algorithm in reverse to lower the user's heart rate. The user must also synchronize his walking to the tempo of the music in order for the algorithm to work properly. If the user is exercising at a heart rate below the target, the system will attempt to maintain this heart rate. Incorrect number entry is impossible due to the slider selector UI element.
+In this use case, the user can modify the heart rate targeted by the music selection algorithm. This can be achieved by modifying one of the UI selectors, or by toggling the direction (raise or lower). For this reason, this could be split into several use cases, but since the functionality is the same we consolidate into one.
 
 \begin{center}
         \begin{tabular}{|C{15cm}|}
@@ -607,7 +612,7 @@ The getStatistics use case is important because it allows the user to see the re
                         \textbf{Use Case UC-6: getHeartRate}\\
                 \hline
                         \begin{flushleft}
-                                \textbf{Related Requirements: } REQ-1, REQ-6, REQ-11, REQ-13, REQ-16
+                                \textbf{Related Requirements: } REQ-1, REQ-11, REQ-13, REQ-15, REQ-16
                         \end{flushleft}
                         \begin{flushleft}
                                 \textbf{Initiating Actor: } User
@@ -631,17 +636,20 @@ The getStatistics use case is important because it allows the user to see the re
                                 \textbf{Flow of Events for Main Success Scenario: }
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item $\rightarrow$ User selects the "Display Heart Rate" option.
-                                        \item $\rightarrow$ Mobile Interface requests current heart rate from chest strap.
-					\item $\leftarrow$ Chest Strap returns the current value of the heart rate. 
-                                        \item $\leftarrow$ Mobile Interface displays the heart rate to the user.
+                                        \item[] $\rightarrow$ Mobile Interface requests current heart rate from chest strap.
+                                        \item[] $\leftarrow$ Chest Strap returns the current value of the heart rate. 
+                                        \item[] $\leftarrow$ Mobile Interface displays the heart rate to the user.
                                 \end{itemize}
 				\\
                 \hline
         \end{tabular}
 \end{center}
 
-The getHeartRate case is similar to the getStatistics case, but it allows the user to see only his current heart rate. The full analysis provided by getStatistics may not be necessary at times, and this case allows the user to easily see his heart rate during the exercise. The interaction begins with the user selecting the "Display Heart Rate" option. The Mobile Interface then requests the current heart rate from the chest strap. The chest strap then returns the heart rate, and the Mobile Interface displays to the screen.  For this function to work, the chest strap must be strapped firmly to the chest in the region of the heart. If not, the Chest Strap will be unable to record the current heart rate correctly. Also, the chest strap should not be moved or tampered with in any way while the device is recording the current heart rate. Once the chest strap is properly secured, the Android device will listen to the chest strap for a period of 10 seconds. If no data is received from the chest strap within that time period, the Mobile Interface will present the user with a message saying that the chest strap is not properly fastened. If this message shows up three times, the Mobile Interface will declare that the chest strap is not functioning properly and will suggest that the user buy a new one.
+The getHeartRate case is similar to the getStatistics case, but it allows the user to see only his current heart rate. The full analysis provided by getStatistics may not be necessary at times, and this case allows the user to easily see his heart rate during the exercise.
+Once a second, the system requests the current heart rate from the chest strap. The chest strap then returns the heart rate, and the User Interface displays to the screen.
+For this function to work, the chest strap must be strapped firmly to the chest in the region of the heart. If not, the Chest Strap will be unable to record the current heart rate correctly. Also, the chest strap should not be moved or tampered with in any way while the device is recording the current heart rate.
+If no data is received from the chest strap, the system will present the user with a message saying that the chest strap is not properly fastened.
+
 
 
 \subsection{Use Case Diagram}
