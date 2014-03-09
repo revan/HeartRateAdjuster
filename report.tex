@@ -1081,7 +1081,7 @@ Our team will be divided into three smaller sub-teams of two individuals each, t
         \end{tabular}
 \end{center}
 
-\section{Interaction Diagrams}
+\chapter{Interaction Diagrams}
 	
 \begin{figure}[H]
 	\centering
@@ -1152,6 +1152,29 @@ This project was developed through a mainly object-oriented approach. We were ab
 A prime example can be found in UC-4, pausePlayback. Each object submits a request to the next object in line before reaching the Music Player, which is supposed to fulfill the ``pause'' function. At this point, the interactions start coming back. It is clearly seen that each object in this example transmits at most two messages, and no object performs more than a single computation. A similar theme exists in UC-6, getHeartRate. Each object essentially sends one message and receives one message. Furthermore, each object does not need to fulfill more than two active responsibilities. We believed that by distributing the workload for each object through the High Cohesion Principle and the Low Coupling Principle, we would be reaching the best balance.
 The Expert Doer Principle was not followed as closely because the communication links of the objects we used are a bit longer. In our design, the ``one who knows'' often passes on the knowledge to another object that ``needs to know'' before the task is actually fulfilled. For instance, the Database Manager often causes the Controller to update the display and show the user rather than directly communicating with the user. Basically, our Controller and Database Manager are both extremely important, so oftentimes, they both end up with most of the implementation details.
 
+\chapter{Class Diagram and Interface Specification}
+
+\section{Class Diagram}
+
+\section{Data Types and Operation Signatures}
+
+\section{Traceability Matrix}
+
+\chapter{System Architecture and System Design}
+
+\section{Architectural Styles}
+
+\section{Identifying Subsystems}
+
+\section{Mapping Subsystems to Hardware}
+
+\section{Persistent Data Storage}
+
+\section{Network Protocol}
+
+\section{Global Control Flow}
+
+\section{Hardware Requirements}
 
 \chapter*{Individual Contributions Breakdown}
 \begin{center}
