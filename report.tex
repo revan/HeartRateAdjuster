@@ -1155,8 +1155,126 @@ The Expert Doer Principle was not followed as closely because the communication 
 \chapter{Class Diagram and Interface Specification}
 
 \section{Class Diagram}
+\subsection{Class Diagram for Data Management}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=.55]{img/Class_Diagrams/dataManagement.png}\\
+	\caption {Class relationship for managing data}
+\end{figure}
 
 \section{Data Types and Operation Signatures}
+\begin{center}
+	\begin{tabular}{|C{15cm}|}
+		\hline
+			\textbf{Data Manager}\\
+		\hline
+			\begin{flushleft}
+				\textbf{Variables:} \\
+			\end{flushleft}
+				\begin{itemize}
+					\item workoutData: Data Assembler. This is a Data Assembler object which stores the data points retrieved from storage. It also stores the songs and their metadata.
+					\item workoutGraphs : Graph Container. This is a Graph Container object which stores the different graphs that were requested by the User Interface.
+				\end{itemize} \\
+			\hline
+			\begin{flushleft}
+				\textbf{Functions:} \\
+			\end{flushleft}
+				\begin{itemize}
+					\item storeInitialState(double initialRate, double targetRate) : bool. This function stores the initial state of the system, which is captured in the form of the user's initial heart rate and the target heart rate.
+					\item storeCurrentTrack(string song) : bool. This function is used by the Music Module to store the current track being played. This information is later used for the playlist.
+					\item storeCurrentHR(double heartRate) : bool. This function is used to store the current heart rate into the data storage. It is used by the User Interface while the user is working out with the system.
+					\item getArtistVsBPM() : graph. This function will access the data stored in the Data Assembler and create a histogram displaying the artist who's songs were played most often at different BPMs. The Data Manager will select the appropriate graph from the Graph Container and return it to the UI.
+					\item getGenreVsBPM() : graph. This function will create a histogram of the most frequent genres at different BPMs. The data will be accessed from the Data Assembler and plotted by the Graph Container. The final graph will be selected by the Data Manager from the Graph Container
+					\item getTempoVsBPM() : graph. This function will return a graph of the music's tempo versus the user's BPM.
+					\item getHRvsTime() : graph. This function will return a graph of the user's heart rate over time.
+					\item getPlaylist(): string array. This function will return an array of the music that was played during the workout.
+					\item storeCurrentTime() : bool. This is an auxiliary function which stores the current system time in the data storage every time storeCurrentHR() is called. It will associate the time with the current heart rate.
+				\end{itemize}
+			\hline
+	\end{tabular}
+\end{center}
+
+
+\begin{center}
+	\begin{tabular}{|C{15cm}|}
+		\hline
+			\textbf{Data Assembler} \\
+		\hline
+			\begin{flushleft}
+				\textbf{Variables:} \\
+			\end{flushleft}
+				\begin{itemize}
+					\item playlist: string array. This variable will store the names of the songs that were played during the workout.
+					\item heartRates: Ordered Pair array. This variable will store the retrieved data points in ascending order.
+				\end{itemize} \\
+			\hline
+			\begin{flushleft}
+				\textbf{Functions: } \\
+			\end{flushleft}
+				\begin{itemize}
+					\item createPlaylist() : string array. This function will fetch the songs played during the workout from the data storage and arrange them in the playlist array and return it.
+					\item calcHRchange() : orderedPair. This function will retrieve all the heart rates and system times from the data storage and organize them into ordered pairs. The ordered pairs are stored in an array and returned to the caller.
+					\item retrieveHR() : double. This function retrieves a heart rate from the data storage.
+					\item retrieveTime() : double. This function retrieves a time from the data storage.
+					\item retrieveSong() : string. This function retrieves a song name from data storage.
+				\end{itemize}
+			\hline
+	\end{tabular}
+\end{center}
+
+\begin{center}
+	\begin{tabular}{|C{15cm}|}
+		\hline
+			\textbf{Graph Container} \\
+		\hline
+			\begin{flushleft}
+				\textbf{Variables:} \\
+			\end{flushleft}
+				\begin{itemize}
+					\item graphs : graph array. This variable contains an array of the different graphs that were requested by the User Interface.
+				\end{itemize} \\
+			\hline
+			\begin{flushleft}
+				\textbf{Functions: } \\
+			\end{flushleft}
+				\begin{itemize}
+					\item createArtistVsBPM(Data Assembler workoutData) : bool. This function takes the names of the artists and heart rates stored in the Data Assembler and graphs them against each other.
+					\item createGenreVsBPM(Data Assembler workoutData) : bool. This function graphs the genre of the music versus the user's heart rate using the data from workoutData.
+					\item createTempoVsBPM(Data Assembler workoutData) : bool. This function graphs the tempo of the music versus the user's heart rate using the workoutData object.
+					\item createHRVsTime(Data Assembler workoutData) : bool. This function graphs the user's heart rate versus time using the workoutData object.
+				\end{itemize}
+			\hline
+	\end{tabular}
+\end{center}
+
+\begin{center}
+	\begin{tabular}{|C{15cm}|}
+		\hline
+			\textbf{Ordered Pair} \\
+		\hline
+			\begin{flushleft}
+				\textbf{Variables: }\\
+			\end{flushleft}
+				\begin{itemize}
+					\item x : double. This variable stores the x-coordinate of the data point.
+					\item y : double. This variable stores the y-coordinate of the data point.
+				\end{itemize} \\
+			\hline
+			\begin{flushleft}
+				\textbf{Functions: } \\
+			\end{flushleft}
+				\begin{itemize}
+					\item setX(double newX) : bool. This function sets the value of the variable x.
+					\item getX() : double. This function returns the current value of the variable x.
+					\item setY(double newY) : bool. This function sets the value of the variable y.
+					\item getY() : double. This function returns the current value of the variable y.
+				\end{itemize}
+			\hline
+	\end{tabular}
+\end{center}
+
+
 
 \section{Traceability Matrix}
 
@@ -1169,7 +1287,8 @@ The Expert Doer Principle was not followed as closely because the communication 
 \section{Mapping Subsystems to Hardware}
 
 \section{Persistent Data Storage}
-
+Since Android provides full support for SQLite databases, it is the type of storage that we have chosen for the application. The wide variety of fully-developed features allows us to focus more on the actual organization and management of the data in relation to the other modules. All that is needed is a simple call to the data base to retrieve the raw data, and the custom designed objects illustrated in the Class Diagram then do their own processing on the data. SQLite allows us to store all the data specific to application on the device itself, which is advantageous for a mobile application such as ours. The goal is for the user to be able to record and view his workout data without having to use any external devices other than his phone and the chest strap, and internal data storage via the SQLite database allows our application this benefit.
+	The database will be accessible only to the Data Manager and the Data Assembler. In regards to the Data Manager, the only interactions with the database will be to store the initial state of the system, store the current music track, and store the current heart rate. It will not retrieve anything from the database, because that is the purpose of the Data Assembler. The Data Assembler is the other object that will interact with the database. It will issue requests for the various data that the UI would like to graph, which include the heart rate, the current times, and the songs. Thus, the Data Manager and Data Assembler are the only objects that have direct access to the database.
 \section{Network Protocol}
 
 \section{Global Control Flow}
