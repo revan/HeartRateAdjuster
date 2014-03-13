@@ -1,0 +1,68 @@
+\begin{center}
+	\begin{tabular}{|C{15cm}|}
+		\hline
+			\textbf{Heart Rate Adjuster GUI} \\
+		\hline
+			\begin{flushleft}
+				\textbf{Variables:} \\
+			\end{flushleft}
+				\begin{itemize}
+					\item targetHeartRate: int. This variable will store the target heart rate for the user's workout. This variable is private but can be accessed and changed from other methods.
+					\item restingHeartRate: int. This variable will store the user's initial resting heart rate before the workout begins. This variable is private but can be accessed and changed from other methods.
+					\item isWorkingOut: boolean. This variable will store data on whether the application detects that the user is currently working out or not.
+					\item isRecording: boolean. This variable will store data on whether the application is recording the user's heart rate or not.
+					\item currBPM: int. This variable will store the BPM of the current track that is playing.
+					\item isReady: boolean. This variable will store data on whether the system is ready to begin or not.
+				\end{itemize} \\
+			\hline
+			\begin{flushleft}
+				\textbf{Functions: } \\
+			\end{flushleft}
+				\begin{itemize}
+					\item login(): void. This function will log the user in to a new session, keeping session persistence.
+					\item getRestingHeartRate(): int. This function will return the data stored in variable targetHeartRate.
+					\item getTargetHeartrate(): int. This function will return the data stored in variable currentHeartRate.
+					\item setTargetHeartRate(): void. This function will set the data stored in variable targetHeartRate to equal the given parameter.
+					\item setRestingHeartRate(): void. This function will set the data stored in variable restingHeartRate to equal the given parameter.
+					\item displayBPM(): int. This function will return the data stored in variable currBPM.
+					\item setBPM(): void. This function will set the data stored in variable currBPM to the passed parameter.
+					\item displayReady(): boolean. This function will return the data stored in variable isReady.
+					\item startWorkout(): void. This function will initiate the workout and attempt to adjust the currentHeartRate toward the targetHeartRate.
+					\item stopWorkout(): void. This function will stop the workout from continuing its functions.
+					\item nextSong(): void. This function will skip the current track which is being played, and use the algorithm to play the next appropriate song.
+					\item displayTitle(): String. This function will display the title of the currently playing track.
+					\item displayCoverArt(): object. This function will display the cover art of the currently playing track.
+					\item checkRecording(): boolean. This function will return the data stored in the variable isReady.
+					\item checkPlaying(): boolean. This function will return the data stored in the variable isREady.
+					\item menu(): void. This function will display the menu for the application.
+					\item getStatistics(): graph. This function will return graphs which contain statistics from the data manager.
+					\item getSettings(): void. This function will display the settings for the application.
+					\item logout(): This function will log the current user out of their current session.
+					\item setMediaLibraryLocation(): void. This function will set the library location of the media which is to be  used for the application.
+					\item about(): This function will display the "about" information for the application.
+				\end{itemize}
+			\hline
+	\end{tabular}
+\end{center}
+
+\begin{center}
+	\begin{tabular}{|C{15cm}|}
+		\hline
+			\textbf{Heart Rate Adjuster Hardware} \\
+		\hline
+			\begin{flushleft}
+				\textbf{Variables:} \\
+			\end{flushleft}
+				\begin{itemize}
+					\item currentHeartRate: int. This variable will store data on the user's current heart rate, as measured by the hardware device.
+				\end{itemize} \\
+			\hline
+			\begin{flushleft}
+				\textbf{Functions: } \\
+			\end{flushleft}
+				\begin{itemize}
+					\item recordCurrentHeartRate(): int. This function will retrieve the current heart rate of the user as measured by the hardware device and update the variable currentHeartRate.
+				\end{itemize}
+			\hline
+	\end{tabular}
+\end{center}

@@ -1,0 +1,26 @@
+\begin{center}
+    \begin{tabular}{|l|C{3cm}|C{2.5cm}|C{2.5cm}|C{2.5cm}|C{2.5cm}|}
+        \hline
+            &  \multicolumn{4}{|c|}{\textit{Class}} \\  \hline
+            \textit{Domain Concepts}    &   \textbf{Data Manager}   &   \textbf{Data Assembler} &   \textbf{Graph Container}    & \textbf{Ordered Pair} \\ \hline
+
+\textbf{HRM Manager}        &   X   &       &       &       \\ \hline
+\textbf{Log Retriever}      &   X   &       &       &       \\ \hline
+\textbf{Track Logger}       &   X   &       &       &       \\ \hline
+\textbf{Music Playerbacker} &   X   &       &       &       \\ \hline
+\textbf{Track Queuer}       &   X   &   X   &       &       \\ \hline
+\textbf{General UI}         &   X   &   X   &       &       \\ \hline
+\textbf{Playback View}      &   X   &   X   &   X   &       \\ \hline
+\textbf{Heart Beat View}    &   X   &   X   &   X   &       \\ \hline
+\textbf{Workout View}       &   X   &   X   &   X   &       \\ \hline
+\textbf{History View}       &   X   &   X   &   X   &       \\ \hline
+\textbf{Workout Store}      &   X   &   X   &       &   X   \\ \hline
+\textbf{Metadata Store}     &   X   &   X   &       &   X   \\ \hline
+\textbf{Music Store}        &   X   &   X   &       &   X   \\ \hline
+
+    \end{tabular}
+\end{center}
+
+    From our domain concepts, we derived four classes: data manager, data assembler, graph container, and ordered pair. Our data manager is essentially involved with every domain. Its purpose is to log and manage various types of data, and store the packaged data other objects to retrieve. Essentially, the data manger acts as an intermediary in most steps, but only providing a minimal interface for modules so that data cannot be tampered with or seen, just used. \\
+
+    Next, our data assembler is charged with retrieving the appropriate data from the database and packaging it in a convenient form for usage. For instance, we can take songs and metadata from their storage locations and return playlists. We can also take our data and create ordered pairs for our graph container. Then, our graph container contains an array of the requested graphs, and it is involved with the domain concepts that require various views. Using our data assembler allows us to have a nice container of data to graph. Finally, our ordered pair class was derived from the storage concepts. We use it to store data points, so that we will be able to access them.

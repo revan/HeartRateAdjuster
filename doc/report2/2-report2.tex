@@ -1,0 +1,184 @@
+\documentclass[letterpaper,english, 12pt]{scrreprt}
+\usepackage[T1]{fontenc}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{titlepic}
+\usepackage{multirow}
+\usepackage{verbatim}
+\usepackage[bookmarks=true]{hyperref}
+
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\title{Musical Heart Rate Adjuster}
+\author{Group \#12 \\ https://github.com/revan/HeartRateAdjuster \\ 
+\\Kenny Bambridge, Jonathan Chang, Samani Gikandi,
+\\Tae-Min Kim, Nikhil Shenoy, Revan Sopher}
+
+%\textsc{Software Engineering 14:332:452}
+
+\begin{document}
+\titlepic{\includegraphics{img/title.png}}
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Product Ownership}
+Our team will be divided into three smaller sub-teams of two individuals. Each sub-team will be responsible for developing a specific sub-product during the bulk of their time. Upon completion of a significant portion of work, they will provide a brief description of their activity before they push it to our Github repository. In addition to documentation, they will also include the necessary UML diagrams, charts, algorithms, and source code. Every week, or at least once before each deliverable, we will meet together for 1-3 hours during a timeframe determined by a combination of GroupMe and When2meet. During the meeting, we will have a specific agenda that primarily involves the week's progress and upcoming deliverable. Our discussion will probably be centered along the following questions: 1) What did you work on this past week? 2) What do you plan on working on next week? 3) Are there any revisions that need to be made to the project? Every week, a team member will take the lead for the next deliverable to ensure that everything is on time.
+corollary
+\begin{itemize}
+    \item Revan and Tae-Min will work on the general user interface of the mobile application. They will design the layout and basic functionality of the Android app, and set up the communication protocol between the heart rate monitor and the phone. 
+    \item Kenny and Samani will work on the music aspect of the mobile application. They will study music playback features such as track selection and queuing to provide customers with a seamless music player experience. They will also be responsible for the nuances of audio playback such as crossfading transitions and tempo adjustments.
+    \item Jon and Nikhil will work on the data logging faculties that are necessary to provide the user with feedback about his/her workout. They will work with a server that captures heart rate and music data from the phone and possibly directly from the heart rate monitor. They will determine how to process this information on the server and create customizable graphical displays for user's to view.
+\end{itemize}
+
+\begin{comment}
+\section{Breakdown of Responsibilities}
+\begin{center}
+        \begin{tabular}{|C{2cm}|C{6cm}|C{3cm}|C{3cm}|}
+                \hline
+                         & \textbf{Past} & \textbf{Present} & \textbf{Future}  \\
+                \hline
+                        \textbf{Jonathan} & Problem Statement, Enumerated Functional Requirements, Preliminary Design, References & Plan of Work & Project Management, Interaction Diagrams, Class Diagrams \\
+                \hline
+                        \textbf{Kenny} & User Effort Estimation & Domain Analysis & System Architecture and System Design \\
+                \hline
+                        \textbf{Nikhil} & Enumerated Nonfunctional Requirements, Use Cases (Casual Description, Traceability Matrix, Fully-Dressed Description) & System Operation Contracts & Project Management, Interaction Diagrams, Class Diagrams  \\
+                \hline
+                        \textbf{Revan} & On-Screen Appearance Requirements, Use Case Diagrams & Mathematical Model & Class Diagrams, System Architecture and System Design \\
+                \hline
+                        \textbf{Samani} & System Sequence Diagrams & Domain Analysis & System Architecture and System Design \\
+                \hline
+                        \textbf{Tae-min} & Glossary of Terms, Stakeholders, Actors, Goals & System Operation Contracts & Algorithms and Data Structures \\
+                \hline   
+                       
+        \end{tabular}
+\end{center}
+\end{comment}
+\begin{comment}
+\chapter{Interaction Diagrams}
+    %These need to be redone
+    %\input{2.1.1-interaction_diagrams}
+\end{comment}
+\chapter{Class Diagrams and Interface Specification}
+
+\section{Class Diagrams}
+    \input{2.2.a-class_diagram}
+
+\section{Data Types and Operation Signatures}
+    \input{2.2.b-data_types}
+
+\section{Traceability Matrix}
+    \input{2.2.c-tracability_matrix}
+
+
+\chapter{System Architecture and System Design}
+
+\section{Architectural Styles}
+    \input{2.3.a-architectural_styles}
+    
+\section{Identifying Subsystems}
+    \input{2.3.b-identifying_subsystems}
+
+\section{Mapping Subsystems to Hardware}
+    \input{2.3.c-mapping_subsystems}
+    
+\section{Persistent Data Storage}
+    \input{2.3.d-persistant_data-storage}
+\section{Network Protocol}
+    \input{2.3.e-network_protocol}
+    
+\section{Global Control Flow}
+    \input{2.3.f-global_control_flow}
+
+
+\section{Hardware Requirements}
+    \input{2.3.g-hardware_requirements}
+    
+
+
+\chapter*{Individual Contributions Breakdown}
+\begin{center}
+    \begin{tabular}{|l|C{2cm}|C{1.5cm}|C{1.5cm}|C{1.5cm}|C{1.5cm}|C{1.5cm}|}
+        \hline
+            &   Kenny Bambridge     &   Jonathan Chang      &   Samani Gikandi      &   Tae-Min Kim &     Nikhil Shenoy     &   Revan Sopher\\ \hline
+Problem Statement   &       X       &       X       &       X       &       X   &       X       &   X       \\ \hline
+Glossary of Terms   &               &               &               &       X   &               &           \\ \hline
+System Requirements &               &       X       &               &           &       X       &   X   \\ \hline
+Func. Requirements  &               &       X       &               &       X   &               &       \\ \hline
+Non-Func. Req.      &               &               &               &           &       X       &       \\ \hline
+Appearance Req.     &               &       X       &               &           &               &       X\\ \hline
+Stakeholders        &               &               &               &       X   &               &        \\ \hline
+Actors and Goals    &               &               &               &       X   &               &        \\ \hline
+System Sequence Diagram &               &               &       X       &           &               &        \\ \hline
+Preliminary Design  &               &       X       &               &           &               &   X    \\ \hline
+User Effort Estimation  &       X       &               &               &           &               &        \\ \hline
+Use Cases       &               &               &               &       X   &       X       &   X    \\ \hline
+System Sequence Diagrams&               &               &       X       &           &               &        \\ \hline
+User Effort Estimation  &       X       &               &               &           &               &        \\ \hline
+Domain Model        &       X       &               &       X       &           &               &        \\ \hline
+Operation Contracts &               &               &               &       X   &       X       &        \\ \hline
+Mathematical Model  &               &               &               &           &               &   X    \\ \hline
+Plan of Work        &               &       X       &               &           &               &        \\ \hline
+Interaction Diagrams    &               &       X       &               &           &       X       &        \\ \hline
+Project Management  &       X       &       X       &       X       &       X   &       X       &       X\\ \hline
+LaTeX Maintenance   &       X       &       X       &       X       &       X   &       X       &       X\\ \hline
+    \end{tabular}
+\end{center}
+
+\chapter*{References}
+
+References 1-5 are the final project reports of the previous groups who worked on the Personal Health Monitoring projects. They were consulted in conjunction with Professor Marsic's Software Engineering textbook as a guide for formatting guidelines, content ideas, and inspiration. 
+\begin{verbatim}
+[0] http://www.ece.rutgers.edu/~marsic/books/SE/book-SE_marsic.pdf
+[1] http://www.ece.rutgers.edu/~marsic/books/SE/projects/HealthMonitor/2013-g7-report3.pdf
+[2] http://www.ece.rutgers.edu/~marsic/books/SE/projects/HealthMonitor/2013-g8-report3.pdf
+[3] http://www.ece.rutgers.edu/~marsic/books/SE/projects/HealthMonitor/2012-g1-report3.pdf
+[4] http://www.ece.rutgers.edu/~marsic/books/SE/projects/HealthMonitor/2012-g2-report3.pdf
+[5] http://www.ece.rutgers.edu/~marsic/books/SE/projects/HealthMonitor/2012-g3-report3.pdf
+\end{verbatim}
+Reference 6 is a review of the Motorola MOTOACTV device. They provided us with the specifications and usage details to help us develop our project proposal.
+\begin{verbatim}
+[7] http://reviews.cnet.com/specialized-electronics/motorola-MOTOACTV-gps-fitness/4505-3505_7-35163040.html
+\end{verbatim}
+
+References 7-8 are Wikipedia articles that helped educate us on electroencephalography and electroencephalogram define the terms for our glossary.
+\begin{verbatim}
+[7] http://en.wikipedia.org/wiki/Electroencephalography
+[8] http://www.scholarpedia.org/article/Electroencephalogram
+\end{verbatim}
+
+Reference 9 provided us with an opening statistic to highlight the industry demand for fitness.
+\begin{verbatim}
+[9] http://www.statista.com/statistics/242190/us-fitness-industry-revenue-by-sector/
+\end{verbatim}
+
+References 10-11 are pictures that we used for our cover.
+\begin{verbatim}
+[10] https://yt4.ggpht.com/-knZVRWVniHU/AAAAAAAAAAI/AAAAAAAAAAA/QN5_n28x_R0/s900-c-k-no/photo.jpg
+[11] http://www2.hu-berlin.de/fpm/graphics/logo_heartbeat-note.png
+\end{verbatim}
+
+
+References 12-13 are information about target heart rates.
+\begin{verbatim}
+[12] http://www.webmd.com/fitness-exercise/healthtool-target-heart-rate-calculator
+[13] http://www.livestrong.com/article/105256-normal-heart-rate-sleeping/
+\end{verbatim}
+
+References 14-15 explain how exercise and sleep affect heart rate.
+\begin{verbatim}
+[14] http://www.active.com/fitness/articles/how-does-exercise-affect-your-heart
+[15] http://www.webmd.com/sleep-disorders/features/how-sleep-affects-your-heart
+\end{verbatim}
+
+Reference 16 was consulted in describing the Architectural style of our system.
+\begin{verbatim}
+[16] http://en.wikipedia.org/wiki/Multitier_architecture
+\end{verbatim}
+
+\end{document}
+
+
+%%  LocalWords:  Traceability

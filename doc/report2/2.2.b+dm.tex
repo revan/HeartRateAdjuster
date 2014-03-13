@@ -1,0 +1,112 @@
+\begin{center}
+    \begin{tabular}{|C{15cm}|}
+        \hline
+            \textbf{Data Manager}\\
+        \hline
+            \begin{flushleft}
+                \textbf{Variables:} \\
+            \end{flushleft}
+                \begin{itemize}
+                    \item workoutData: Data Assembler. This is a Data Assembler object which stores the data points retrieved from storage. It also stores the songs and their metadata.
+                    \item workoutGraphs : Graph Container. This is a Graph Container object which stores the different graphs that were requested by the User Interface.
+                \end{itemize} \\
+            \hline
+            \begin{flushleft}
+                \textbf{Functions:} \\
+            \end{flushleft}
+                \begin{itemize}
+                    \item storeInitialState(double initialRate, double targetRate) : bool. This function stores the initial state of the system, which is captured in the form of the user's initial heart rate and the target heart rate.
+                    \item storeCurrentTrack(string song) : bool. This function is used by the Music Module to store the current track being played. This information is later used for the playlist.
+                    \item storeCurrentHR(double heartRate) : bool. This function is used to store the current heart rate into the data storage. It is used by the User Interface while the user is working out with the system.
+                    \item getArtistVsBPM() : graph. This function will access the data stored in the Data Assembler and create a histogram displaying the artist who's songs were played most often at different BPMs. The Data Manager will select the appropriate graph from the Graph Container and return it to the UI.
+                    \item getGenreVsBPM() : graph. This function will create a histogram of the most frequent genres at different BPMs. The data will be accessed from the Data Assembler and plotted by the Graph Container. The final graph will be selected by the Data Manager from the Graph Container
+                    \item getTempoVsBPM() : graph. This function will return a graph of the music's tempo versus the user's BPM.
+                    \item getHRvsTime() : graph. This function will return a graph of the user's heart rate over time.
+                    \item getPlaylist(): string array. This function will return an array of the music that was played during the workout.
+                    \item storeCurrentTime() : bool. This is an auxiliary function which stores the current system time in the data storage every time storeCurrentHR() is called. It will associate the time with the current heart rate.
+                \end{itemize}
+                \\
+            \hline
+    \end{tabular}
+\end{center}
+
+\begin{center}
+    \begin{tabular}{|C{15cm}|}
+        \hline
+            \textbf{Data Assembler} \\
+        \hline
+            \begin{flushleft}
+                \textbf{Variables:} \\
+            \end{flushleft}
+                \begin{itemize}
+                    \item playlist: string array. This variable will store the names of the songs that were played during the workout.
+                    \item heartRates: Ordered Pair array. This variable will store the retrieved data points in ascending order.
+                \end{itemize} \\
+            \hline
+            \begin{flushleft}
+                \textbf{Functions: } \\
+            \end{flushleft}
+                \begin{itemize}
+                    \item createPlaylist() : string array. This function will fetch the songs played during the workout from the data storage and arrange them in the playlist array and return it.
+                    \item calcHRchange() : orderedPair. This function will retrieve all the heart rates and system times from the data storage and organize them into ordered pairs. The ordered pairs are stored in an array and returned to the caller.
+                    \item retrieveHR() : double. This function retrieves a heart rate from the data storage.
+                    \item retrieveTime() : double. This function retrieves a time from the data storage.
+                    \item retrieveSong() : string. This function retrieves a song name from data storage.
+                \end{itemize}
+                \\
+            \hline
+    \end{tabular}
+\end{center}
+
+\begin{center}
+    \begin{tabular}{|C{15cm}|}
+        \hline
+            \textbf{Graph Container} \\
+        \hline
+            \begin{flushleft}
+                \textbf{Variables:} \\
+            \end{flushleft}
+                \begin{itemize}
+                    \item graphs : graph array. This variable contains an array of the different graphs that were requested by the User Interface.
+                \end{itemize} \\
+            \hline
+            \begin{flushleft}
+                \textbf{Functions: } \\
+            \end{flushleft}
+                \begin{itemize}
+                    \item createArtistVsBPM(Data Assembler workoutData) : bool. This function takes the names of the artists and heart rates stored in the Data Assembler and graphs them against each other.
+                    \item createGenreVsBPM(Data Assembler workoutData) : bool. This function graphs the genre of the music versus the user's heart rate using the data from workoutData.
+                    \item createTempoVsBPM(Data Assembler workoutData) : bool. This function graphs the tempo of the music versus the user's heart rate using the workoutData object.
+                    \item createHRVsTime(Data Assembler workoutData) : bool. This function graphs the user's heart rate versus time using the workoutData object.
+                \end{itemize}
+                \\
+            \hline
+    \end{tabular}
+\end{center}
+
+\begin{center}
+    \begin{tabular}{|C{15cm}|}
+        \hline
+            \textbf{Ordered Pair} \\
+        \hline
+            \begin{flushleft}
+                \textbf{Variables: }\\
+            \end{flushleft}
+                \begin{itemize}
+                    \item x : double. This variable stores the x-coordinate of the data point.
+                    \item y : double. This variable stores the y-coordinate of the data point.
+                \end{itemize} \\
+            \hline
+            \begin{flushleft}
+                \textbf{Functions: } \\
+            \end{flushleft}
+                \begin{itemize}
+                    \item setX(double newX) : bool. This function sets the value of the variable x.
+                    \item getX() : double. This function returns the current value of the variable x.
+                    \item setY(double newY) : bool. This function sets the value of the variable y.
+                    \item getY() : double. This function returns the current value of the variable y.
+                \end{itemize}
+                \\
+            \hline
+    \end{tabular}
+\end{center}

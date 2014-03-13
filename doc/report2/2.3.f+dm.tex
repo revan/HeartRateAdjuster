@@ -1,0 +1,11 @@
+\subsubsection{Execution Orderness}
+The execution order is a mix of procedure-driven and event-driven. From a broad view, the use of the program follows the same steps: the user starts the music, the system runs, then the user stops the music. However, the system provides a variety of interface options to activate events during the execution: a user may pause or skip playback, and view their statistics, at any time.
+
+\subsubsection{Time Dependency}
+The system is real-time, with a timer firing once a second.
+This timer triggers the fetching of the heart rate from the monitor, and triggers the logging of this data.
+
+\subsubsection{Concurrency}
+The Android standard concurrency model is that the main thread handles UI, so lengthy tasks must be performed on a background thread else the UI becomes unresponsive.
+As such, the network IO of the music selection system must certainly be in a different thread.
+Synchronization is unnecessary as there is no shared resource.
