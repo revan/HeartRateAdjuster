@@ -1418,6 +1418,29 @@ These three tiers are separated from each other to allow for encapsulation and d
 
 
 \section{Identifying Subsystems}
+Our software is designed around three primary subsystems.
+The core subsystem is the UI Subsystem, responsible for interfacing with the user and other subsystems.
+The Audio BlackBox Subsystem handles audio playback, and the selection of track.
+The Data Logging Subsystem saves heartrate and music playback information, and produces graphs of this data.
+\\
+
+\begin{center}
+	\begin{figure}[H]
+		\includegraphics{img/subsystems.png}\\
+        %title Identifying Subsystems
+        %Data->Data:logData
+        %UI->Audio:setTargetHeartrate
+        %UI->Audio:skipTrack
+        %UI->Data:togglePlayback
+        %UI->Audio:togglePlayback
+        %UI->+Data: displayStatistics
+        %Data->-UI: 
+        %Data->UI: getHeartRate
+        %Audio->UI: provideMusicData
+        %Audio->Data: provideMusicData
+		\caption{Subsystems}
+	\end{figure}
+\end{center}
 
 \section{Mapping Subsystems to Hardware}
 
