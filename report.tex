@@ -1454,6 +1454,17 @@ All of these requirements are met by most Android phones on the market.
 
 
 \chapter{User Interface Design and Implementation}
+Since we spent the time to make high quality mockups early on in this project, the UI was already well thought out and designed with standard Android UI elements such that it does not have to change much in implementation.\\
+\\
+One significant difference with regards to our initial design was the removal of a few features.
+In the original mockup, there is a settings page with the options to change Music library location, Login, and enable music generation.
+These features are nonessential, not documented in our Use Cases, and therefore will be removed from the design until essential features are delivered.
+The Music library location shall be the default Android Music library location, the app shall be single-user (reasonable, since phones are personal items), and music generation is of secondary interest to music playback.\\
+We also removed the About page, reasoning that the simple UI should be intuitive to the user and it would not be worth cluttering the UI with help.\\
+\\
+Since we now only have one element to display on the dropdown menu, we will instead have a fixed button to access the Statistics screen in place of the menu.
+This halves the user effort to access the Statistics screen, now only requiring one click, therefore friendlier to the exercising user.
+Otherwise, User Interface interactions remain as planned.
 
 \chapter{Design of Tests}
 
