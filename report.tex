@@ -480,7 +480,7 @@ In this use case, the user can modify the heart rate targeted by the music selec
 \begin{center}
         \begin{tabular}{|C{15cm}|}
                 \hline
-                        \textbf{Use Case UC-3: getNextSong}\\
+                        \textbf{Use Case UC-3: skipTrack}\\
                 \hline
                         \begin{flushleft}
                                 \textbf{Related Requirements: } REQ-3, REQ-4, REQ-7, REQ-10, REQ-13, REQ-16
@@ -489,7 +489,7 @@ In this use case, the user can modify the heart rate targeted by the music selec
                                 \textbf{Initiating Actor: } User
                         \end{flushleft}
                         \begin{flushleft}
-                                \textbf{Actor's Goal: } To play a different song
+                                \textbf{Actor's Goal: } To play a different song.
                         \end{flushleft}
                         \begin{flushleft}
                                 \textbf{Preconditions: }
@@ -507,24 +507,25 @@ In this use case, the user can modify the heart rate targeted by the music selec
                                 \textbf{Flow of Events for Main Success Scenario: }
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item $\rightarrow$ User selects the "Next Song" button.
-					\item $\rightarrow$ Mobile interface requests the next song form the Music Selector
+                                        \item $\rightarrow$ User selects the "Skip Track" button.
+					\item $\rightarrow$ Mobile interface requests a new song from the Music Selector
 					
-                                        \item Music Selector retrieves next track from file system while maintaining the current rate of workout.
+                                        \item Music Selector retrieves new track from file system while maintaining the current rate of workout.
 					\item $\rightarrow$ Music Selector passes the new song to the Music Player
-                                        \item $\leftarrow$ Music Player begins playing next track
+                                        \item $\leftarrow$ Music Player begins playing the new track
                                 \end{itemize}
+
 				\\
                 \hline
         \end{tabular}
 \end{center}
 
-The getNextSong case is one of the conveniences for the user. If the user does not like the song he is currently listening to, he can select a button on the Android device to advance to the next song. The Mobile Interface will request a different song from the Music Selector. The Music Selector will choose a song that will be adjusted to match the path that the algorithm has set out to reach the target heart rate. The songs will be selected from the user's music library which has already been loaded onto the device. In the case that the device does not contain another song which matches the current song's bpm/tempo to switch to, the device will select a song from the next highest/lowest level to reach the target heart rate (a faster song if heart rate is to be increased, a slower song if heart rate is to be decreased). Although the song may be out of range for the user's current heart rate, there will be no negative effects of using a song which is only slightly lower or slightly higher. The device will not choose a song that is very far out of the current range. 
+The skipTrack case is one of the conveniences for the user. If the user does not like the song he is currently listening to, he can select a button on the Android device to advance to a new song. The Mobile Interface will request a different song from the Music Selector. The Music Selector will choose a song that will be adjusted to match the path that the algorithm has set out to reach the target heart rate. The songs will be selected from the user's music library which has already been loaded onto the device. In the case that the device does not contain another song which matches the current song's bpm/tempo to switch to, the device will select a song from the next highest/lowest level to reach the target heart rate (a faster song if heart rate is to be increased, a slower song if heart rate is to be decreased). Although the song may be out of range for the user's current heart rate, there will be no negative effects of using a song which is only slightly lower or slightly higher. The device will not choose a song that is very far out of the current range. 
 
 \begin{center}
         \begin{tabular}{|C{15cm}|}
                 \hline
-                        \textbf{Use Case UC-4: pausePlayback}\\
+                        \textbf{Use Case UC-4: togglePlayback}\\
                 \hline
                         \begin{flushleft}
                                 \textbf{Related Requirements: } REQ-1, REQ-12, REQ-13, REQ-16
@@ -533,19 +534,19 @@ The getNextSong case is one of the conveniences for the user. If the user does n
                                 \textbf{Initiating Actor: } User
                         \end{flushleft}
                         \begin{flushleft}
-                                \textbf{Actor's Goal: } Pause the playback of music
+                                \textbf{Actor's Goal: } Toggle the playback of music (pause or play).
                         \end{flushleft}
                         \begin{flushleft}
                                 \textbf{Preconditions: }
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item The system is playing music
+                                        \item The system is currently working.
                                 \end{itemize}
                         \begin{flushleft}
                                 \textbf{Postconditions: }
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item The system stops recording the heart rate of the user and the data from the workout.
+                                        \item If the system was already playing a track, the track will stop. If the system was not already playing a track, it will play the current one.
                                 \end{itemize}
                         \begin{flushleft}
                                 \textbf{Flow of Events for Main Success Scenario: }
@@ -553,14 +554,20 @@ The getNextSong case is one of the conveniences for the user. If the user does n
                                 \begin{itemize}
                                         \item $\rightarrow$ User selects "Pause" option on mobile interface.
 					\item $\rightarrow$ Mobile interface tells the Music Selector to hold its current state and the Music Player to stop playing music.
-                                        \item $\leftarrow$ Mobile interface displays a play button for so that the user can resume the workout.
+                                        \item $\leftarrow$ Mobile interface displays a play button so that the user can resume the workout.
                                 \end{itemize}
+				OR
+				\begin{itemize}
+					\item $\rightarrow$ User selects "Play" option on mobile interface.
+					\item $\rightarrow$ Mobile interface tells the Music Selector to continue its paused state and the Music Player to continue playing music.
+					\item $\leftarrow$ Mobile interface displays a pause button so that the user can pause the workout.
+				\end{itemize}
                 \\
 				\hline
         \end{tabular}
 \end{center}
 
-The pausePlayback case is another straightforward, convenience-based use case. If the user needs to interrupt the workout for some reason and needs to stop the music, then all he has to do is press the pause button on the device. To resume the music, he must press the button again. The system will make sure that this function is working properly. If no music is currently being played, it is considered to be paused and may be resumed. If music is being played, it is considered to be resumed and may be paused. The system will know whether music is playing or not. The heart rate shall also be paused/resumed as the music is. If it is not already recording, and should be, it will start recording (refer to postconditions for UC1, UC2).
+The togglePlayback case is another straightforward, convenience-based use case. If the user needs to interrupt the workout for some reason and needs to stop the music, then all the user has to do is press the pause button on the device. To resume the music, he must press the button again, which will now be a play button. The system will make sure that this function is working properly. If no music is currently being played, it is considered to be paused and may be resumed. If music is being played, it is considered to be resumed and may be paused. The system will know whether music is playing or not. The heart rate monitor shall also be paused/resumed as the music is. If it is not already recording, and should be, it will start recording (refer to postconditions for UC1, UC2).
 
 \begin{center}
         \begin{tabular}{|C{15cm}|}
@@ -677,11 +684,25 @@ If no data is received from the chest strap, the system will present the user wi
         \centering
         \includegraphics[width=\textwidth]{img/ssd/ssd_uc3.png}\\
 \end{figure}
+	%title UC-3: Skip the Current Song
+	%User->UI: Presses a UI button
+	%UI->Audio Subsystem: Notify of necessary skip
+	%Audio Subsystem->User: Plays new track
 
 \begin{figure}[H]
         \centering
         \includegraphics[width=\textwidth]{img/ssd/ssd_uc4.png}\\
 \end{figure}
+	%title UC-4: Toggle Playback
+	%alt Pause
+	%    User->UI: Presses "Pause" button
+	%    UI->Audio Subsystem: Notify of necessary pause
+	%    Audio Subsystem->User: Pauses current track
+	%else Play
+	%    User->UI: Presses "Play" button
+	%    UI-> Audio Subsystem: Notify of necessary play
+	%    Audio Subsystem->User: Plays current track
+	%end
 
 \begin{figure}[H]
         \centering
