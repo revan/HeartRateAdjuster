@@ -1190,7 +1190,7 @@ The Expert Doer Principle was not followed as closely because the communication 
 					\item getHRvsTime() : graph. This function will return a graph of the user's heart rate over time.
 					\item getPlaylist(): string array. This function will return an array of the music that was played during the workout.
 					\item storeCurrentTime() : bool. This is an auxiliary function which stores the current system time in the data storage every time storeCurrentHR() is called. It will associate the time with the current heart rate.
-				\end{itemize}
+				\end{itemize}\\
 			\hline
 	\end{tabular}
 \end{center}
@@ -1218,7 +1218,7 @@ The Expert Doer Principle was not followed as closely because the communication 
 					\item retrieveHR() : double. This function retrieves a heart rate from the data storage.
 					\item retrieveTime() : double. This function retrieves a time from the data storage.
 					\item retrieveSong() : string. This function retrieves a song name from data storage.
-				\end{itemize}
+				\end{itemize} \\
 			\hline
 	\end{tabular}
 \end{center}
@@ -1243,7 +1243,7 @@ The Expert Doer Principle was not followed as closely because the communication 
 					\item createGenreVsBPM(Data Assembler workoutData) : bool. This function graphs the genre of the music versus the user's heart rate using the data from workoutData.
 					\item createTempoVsBPM(Data Assembler workoutData) : bool. This function graphs the tempo of the music versus the user's heart rate using the workoutData object.
 					\item createHRVsTime(Data Assembler workoutData) : bool. This function graphs the user's heart rate versus time using the workoutData object.
-				\end{itemize}
+				\end{itemize} \\
 			\hline
 	\end{tabular}
 \end{center}
@@ -1269,7 +1269,7 @@ The Expert Doer Principle was not followed as closely because the communication 
 					\item getX() : double. This function returns the current value of the variable x.
 					\item setY(double newY) : bool. This function sets the value of the variable y.
 					\item getY() : double. This function returns the current value of the variable y.
-				\end{itemize}
+				\end{itemize} \\
 			\hline
 	\end{tabular}
 \end{center}
@@ -1302,7 +1302,7 @@ The Expert Doer Principle was not followed as closely because the communication 
 	\end{tabular}
 \end{center}
 
-	\\ From our domain concepts, we derived four classes: data manager, data assembler, graph container, and ordered pair. Our data manager is essentially involved with every domain. Its purpose is to log and manage various types of data, and store the packaged data other objects to retrieve. Essentially, the data manger acts as an intermediary in most steps, but only providing a minimal interface for modules so that data cannot be tampered with or seen, just used. \\
+	From our domain concepts, we derived four classes: data manager, data assembler, graph container, and ordered pair. Our data manager is essentially involved with every domain. Its purpose is to log and manage various types of data, and store the packaged data other objects to retrieve. Essentially, the data manger acts as an intermediary in most steps, but only providing a minimal interface for modules so that data cannot be tampered with or seen, just used. \\
 
 	Next, our data assembler is charged with retrieving the appropriate data from the database and packaging it in a convenient form for usage. For instance, we can take songs and metadata from their storage locations and return playlists. We can also take our data and create ordered pairs for our graph container. Then, our graph container contains an array of the requested graphs, and it is involved with the domain concepts that require various views. Using our data assembler allows us to have a nice container of data to graph. Finally, our ordered pair class was derived from the storage concepts. We use it to store data points, so that we will be able to access them.
 
