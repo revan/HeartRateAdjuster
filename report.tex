@@ -318,7 +318,7 @@ Use Cases are specific tasks that are created together by the designer and the c
                 \hline
                         UC-2 & setTargetHeartRate & The user can change the heart rate that the system is targeting.\\
                 \hline
-                        UC-3 & skipSong & The user can elect to skip the current song. The system will begin playing a different song.\\
+                        UC-3 & skipTrack & The user can elect to skip the current song. The system will begin playing a different song.\\
                 \hline
                         UC-4 & togglePlayback & The user can toggle the system between playing and not playing music.\\
                 \hline
@@ -738,14 +738,14 @@ If no data is received from the chest strap, the system will present the user wi
 
 \end{itemize}
 
-{\bf OC-3: Select Function("Next Song")}
+{\bf OC-3: Select Function("Skip Song")}
 \begin{itemize}
 	\item {\bf Precondition: } The device is playing a song which needs to be changed.
 	\item {\bf Postcondition: } A different song is being played at the same rate at which the previous song was playing.
 
 \end{itemize}
 
-{\bf OC-4: Select Function("Pause")}
+{\bf OC-4: Select Function("Toggle Playback")}
 \begin{itemize}
 	\item {\bf Precondition: } The device is currently playing a song.
 	\item {\bf Postcondition: } The system stops recording the heart rate of the user and the data from the workout.
@@ -793,7 +793,7 @@ The existence of this button means that, once a user has set their target prefer
 
 Once the user has selected a number, the system uses it in playback.
 
-\subsection{Use Case UC-3: Skip Song}
+\subsection{Use Case UC-3: Skip Track}
 
 \begin{figure}[H]
 	\centering
@@ -809,7 +809,7 @@ To switch tracks is also very simple. It takes the user one simple tap to achiev
 	\includegraphics{img/Prelim_Design/PrelimDesign_3.png}\\
 \end{figure}
 
-Use Case 4, pausePlayback also proves to be intuitive. Just like most music players, our application has a button located on the bottom center of the screen designed for the purpose of pausing the current song, or playing it, depending on the current state. The user just needs a single tap on the universal play/pause button to achieve his goal of playing or pausing the song.\\
+Use Case 4, togglePlayback also proves to be intuitive. Just like most music players, our application has a button located on the bottom center of the screen designed for the purpose of pausing the current song, or playing it, depending on the current state. The user just needs a single tap on the universal play/pause button to achieve his goal of playing or pausing the song.\\
 
 When this is done, if the system was previously playing, the system responds by stopping its collection of heart rate data, and freezing the screen in its current state. 
 If the system were not previously playing, the system responds by beginning its collection of heart rate data, and beginning playback.
@@ -1160,10 +1160,10 @@ For our third use case, the user's goal is to listen to another song. Similar to
 
 \begin{figure}[H]
 	\includegraphics[scale=.40]{img/Interaction_Diagrams/newUC4.png}\\
-	\caption {Interaction diagram for pausePlayback()} 
+	\caption {Interaction diagram for togglePlayback()} 
 \end{figure}
 
-Our pausePlayback sequence is fairly simple. The user initiates the request by tapping the play/pause button. Then the controller informs the database manager to store the current state settings for future use, and the database manager proceeds to stop recording data and allows the music player to stop the song. The mobile display also updates accordingly.
+Our togglePlayback sequence is fairly simple. The user initiates the request by tapping the play/pause button. Then the controller informs the database manager to store the current state settings for future use, and the database manager proceeds to stop recording data and allows the music player to stop the song. The mobile display also updates accordingly.
 
 \begin{figure}[H]
 	\includegraphics[scale=.40]{img/Interaction_Diagrams/newUC5.png}\\
@@ -1207,7 +1207,7 @@ This project was developed through a mainly object-oriented approach. We were ab
 
 \section{Assignment of Responsibilities}
 
-A prime example can be found in UC-4, pausePlayback. Each object submits a request to the next object in line before reaching the Music Player, which is supposed to fulfill the ``pause'' function. At this point, the interactions start coming back. It is clearly seen that each object in this example transmits at most two messages, and no object performs more than a single computation. A similar theme exists in UC-6, getHeartRate. Each object essentially sends one message and receives one message. Furthermore, each object does not need to fulfill more than two active responsibilities. We believed that by distributing the workload for each object through the High Cohesion Principle and the Low Coupling Principle, we would be reaching the best balance.
+A prime example can be found in UC-4, togglePlayback. Each object submits a request to the next object in line before reaching the Music Player, which is supposed to fulfill the ``pause'' function. At this point, the interactions start coming back. It is clearly seen that each object in this example transmits at most two messages, and no object performs more than a single computation. A similar theme exists in UC-6, getHeartRate. Each object essentially sends one message and receives one message. Furthermore, each object does not need to fulfill more than two active responsibilities. We believed that by distributing the workload for each object through the High Cohesion Principle and the Low Coupling Principle, we would be reaching the best balance.
 The Expert Doer Principle was not followed as closely because the communication links of the objects we used are a bit longer. In our design, the ``one who knows'' often passes on the knowledge to another object that ``needs to know'' before the task is actually fulfilled. For instance, the Database Manager often causes the Controller to update the display and show the user rather than directly communicating with the user. Basically, our Controller and Database Manager are both extremely important, so oftentimes, they both end up with most of the implementation details.
 
 \chapter{Class Diagram and Interface Specification}
