@@ -668,6 +668,9 @@ If no data is received from the chest strap, the system will present the user wi
 \begin{figure}[H]
         \centering
         \includegraphics[width=\textwidth]{img/ssd/ssd_uc2.png}\\
+        %title UC-2: Set Target Heart Rate
+        %User->UI: Changes a UI value
+        %UI->Audio Subsystem: Notify of new target
 \end{figure}
 
 \begin{figure}[H]
@@ -687,6 +690,12 @@ If no data is received from the chest strap, the system will present the user wi
 \begin{figure}[H]
 	    \centering
         \includegraphics[width=\textwidth]{img/ssd/ssd_uc6.png}\\
+        %title UC-6: Get Heart Rate
+        %loop 1 sec
+        %    Data Subsystem->+Chest Strap: Gets Heart Rate
+        %    Chest Strap-->-Data Subsystem:
+        %    Data Subsystem->UI: Display Heart Rate
+        %end
 \end{figure}
 
 
