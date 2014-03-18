@@ -5,6 +5,7 @@
 \usepackage{float}
 \usepackage{titlepic}
 \usepackage{multirow}
+\usepackage{longtable}
 \usepackage[bookmarks=true]{hyperref}
 
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
@@ -381,51 +382,70 @@ The Traceability Matrix allows the reader to cross the functional and non-functi
 \subsection{Fully-Dressed Description of Use Cases}
 
 \begin{center}
-        \begin{tabular}{|C{15cm}|}
+        \begin{longtable}{|C{15cm}|}
                 \hline
-                        \textbf{Use Case UC-1: increaseHeartRate}\\
+                        \textbf{Use Case UC-1: logData}\\
                 \hline
                         \begin{flushleft}
                                 \textbf{Related Requirements: } REQ-1, REQ-2, REQ-3, REQ-4, REQ-5, REQ-7, REQ-13, REQ-14, REQ-15, REQ-16
                         \end{flushleft}
                         \begin{flushleft}
-                                \textbf{Initiating Actor: } User
+                                \textbf{Initiating Actor: } User Interface
                         \end{flushleft}
                         \begin{flushleft}
-                                \textbf{Actor's Goal: } To enter a target heart rate and begin the workout
+                                \textbf{Participating Actor: } Data Manager
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Actor's Goal: } Begin logging data about the user's heart rate and about the song currently being played.
                         \end{flushleft}
                         \begin{flushleft}
                                 \textbf{Preconditions: }
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item The system displays the selection menu for heart rate
+                                        \item The user has not begun his workout
+                                        \item The user is wearing the device correctly; the chest strap is securely fastened to the user's chest near the solar plexus, and the musical heart rate application is open to the main screen on the Android device.
                                 \end{itemize}
                         \begin{flushleft}
                                 \textbf{Postconditions: }
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item The system starts recording the heart rate of the user and the data from the workout if not already recording.
-                                        \item The system uses the recorded heart rate to run the music selection algorithm
+                                        \item The system starts recording the initial heart rate, initial time stamp, and music data from the workout, if not already recording.
+                                        \item The data is stored internally on the Android device in an SQLite database.
                                 \end{itemize}
                         \begin{flushleft}
                                 \textbf{Flow of Events for Main Success Scenario: }
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item $\rightarrow$ User enters the target heart rate into the application.
-					\item $\leftarrow$ Chest strap retrieves current heart rate and stores it in the database
-					\item $\rightarrow$ User presses the start button
-                                        \item $\leftarrow$ Timer initiates a five-second countdown until the start of the exercise.
-					\item $\leftarrow$ Timer initiates another 20 second countdown to detect whether the user has started exercising. If the heart rate has not significantly changed within that time, an error will be displayed and the system will display the home screen. 
-                                        \item $\leftarrow$ If the heart rate does change significantly, then the user should continue exercising.
-                                        \item $\leftarrow$ Music selector uses music algorithm to play appropriate music.
-                                        \item $\leftarrow$ Database begins recording data about the workout and stores it in the database.
+                                        \item $\rightarrow$ User Interface calls the storeInitialState() function in the Data Manager to record the initial heart rate and time stamp of the user.
+                                        \item The Data Manager calls the storeCurrentHeartRate() while there is no stop signal from the User Interface. This retrieves the current heart rate from the chest strap, combines it with the time stamp, and stores it in the database.
+                                        \item $\rightarrow$ UI sends the stop signal, and the Data Manager stops recording data in the database.
+                                        \item $\leftarrow$ Data Manager sends signal back to the User Interface to indicate that the recording has stopped successfully.
+                               \end{itemize}
+{{\bfseries}} \\
+                        \begin{flushleft}
+                                \textbf{Flow of Events for Alternate Success Scenario (Start Error): }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item $\rightarrow$ User Interface calls the storeInitialState() function in the Data Manager to record the initial heart rate and time stamp of the user
+                                        \item Chest strap reports an error in measurement. Sends signal to Data Manager about invalid data.
+                                        \item $\leftarrow$ Data Manager returns signal to the User Interface that the data was unable to be retrieved and that the data logging has not begun.
                                 \end{itemize}
-				\\
-               	\hline
-        \end{tabular}
+                        \begin{flushleft}
+                                \textbf{Flow of Events for Alternate Success Scenario (Error During Data Logging): }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item $\rightarrow$ User Interface calls the storeInitialState() function in the Data Manager to record the initial heart rate and time stamp of the user.
+                                        \item $\rightarrow$ Data Manager starts recording data in the database.
+                                        \item $\leftarrow$ Chest strap reports at least 10 successive errors in measurement. Sends signal to Data Manager about invalid data.
+                                        \item $\leftarrow$ Data Manager stops recording data. Sends signal that invalid data was received from the chest strap, but some data was recorded.
+                                \end{itemize}
+                                \\
+                \hline
+        \end{longtable}
 \end{center}
 
-This is one of the main use cases for the software. It allows the user to increase his heart rate to the proper level according to the data that he inputs. Specifically, the user will initiate the process by entering the target heart rate for his exercise. The Mobile Interface will request the current heart rate from the Chest Strap, then store that number in the Database. Once the Database has this data, it will signal the Music Selector to initiate the music selection algorithm. As the algorithm is running, the Chest Strap will store data about the workout, notably heart rate over time and song playing records, in the Database. If the user is exercising at a heart rate above the target, the Music Selector will attempt to maintain this heart rate. Incorrect number entry is impossible due to the slider selector UI element.\\
+This use case describes how the system will begin storing data. The User Interface, via the commands entered by the user, will initiate the data storage by calling the storeInitialState() function in the Data Manager. The Data Manager will then retrieve the initial state of the system and current time stamp of the system and then store it in the database. Then the Data Manager will loop into the storeCurrentHeartRate() call until it receives a stop signal from the User Interface. Once this signal is received, the Data Manager will stop the loop and send a signal back saying that the data logging has stopped successfully. Two error scenarios could occur during this use case; the initial retrieval of the user's state could be unsuccessful, or a particular retrieval during the data logging could be invalid. To address the first case, the Data Manager will check for a signal from the chest strap to make sure that it is ready to transmit data and that the reading the strap picks up is correct. If the Data Manager receives a low signal, then it will send a signal to the User Interface that the storage of the initial state did not succeed. If the chest strap records some invalid data during the data storage, then it will send a signal to the Data Manager that an invalid value was recorded. The Data Manager will keep a counter of how many successive invalid entries were received. If the number of consecutive invalid entries crosses 10, then the Data Manager will send a signal to the User Interface that the chest strap is recording invalid values. Thus, this use case accounts for the success of the main scenario and reactions to the two error scenarios. \\
+
 
 \begin{center}
         \begin{tabular}{|C{15cm}|}
@@ -570,47 +590,51 @@ The skipTrack case is one of the conveniences for the user. If the user does not
 The togglePlayback case is another straightforward, convenience-based use case. If the user needs to interrupt the workout for some reason and needs to stop the music, then all the user has to do is press the pause button on the device. To resume the music, he must press the button again, which will now be a play button. The system will make sure that this function is working properly. If no music is currently being played, it is considered to be paused and may be resumed. If music is being played, it is considered to be resumed and may be paused. The system will know whether music is playing or not. The heart rate monitor shall also be paused/resumed as the music is. If it is not already recording, and should be, it will start recording (refer to postconditions for UC1, UC2).
 
 \begin{center}
-        \begin{tabular}{|C{15cm}|}
+        \begin{longtable}{|C{15cm}|}
                 \hline
-                        \textbf{Use Case UC-5: getStatistics}\\
+                        \textbf{Use Case UC-5: displayStatistics}\\
+
                 \hline
                         \begin{flushleft}
                                 \textbf{Related Requirements: } REQ-1, REQ-5, REQ-6, REQ-8, REQ-9, REQ-13, REQ-14, REQ-16
                         \end{flushleft}
                         \begin{flushleft}
-                                \textbf{Initiating Actor: } User
+                                \textbf{Initiating Actor: } User Interface
                         \end{flushleft}
                         \begin{flushleft}
-                                \textbf{Actor's Goal: } Return statistics about the user's workout.
+                                \textbf{Participating Actors: } Data Manager, Data Assembler, Graph Container
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Actor's Goal: } Return graphs about the user's workout.
                         \end{flushleft}
                         \begin{flushleft}
                                 \textbf{Preconditions: }
                         \end{flushleft}
                                 \begin{itemize}
                                         \item The system is no longer playing music.
+                                        \item The system is no longer loggin data.
+                                        \item The user is no longer working out.
+                                        \item The User Interface has completed error checking on the user's request for graphs.
                                 \end{itemize}
                         \begin{flushleft}
                                 \textbf{Postconditions: }
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item The application displays the graphs of the user's heart rate versus time, along with other metrics.
+                                        \item The User Interface will receive graphs of workout data that it requested through the Data Manager
                                 \end{itemize}
                         \begin{flushleft}
                                 \textbf{Flow of Events for Main Success Scenario: }
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item $\rightarrow$ User selects the "Display Statistics" option.
-					\item $\rightarrow$ Mobile interface requests the appropriate data from the Database.
-					\item $\rightarrow$ Database then passes the data to the Statistics Generator, which organizes the data for presentation.
-                                        \item $\leftarrow$ The Statistics Generator passes the organized data back to the Mobile Interface.
-                                        \item $\leftarrow$ Mobile Interface displays the graphs to the user.
+                                        \item $\rightarrow$ User Interface makes call(s) to any or all of the following functions: getArtistVsBPM(), getGenreVsBPM(), getTempoVsBPM(), getHRVsTime(), or getPlaylist().
+                                        \item $\rightarrow$ The Data Manager will then make calls to the appropriate “assemble” function.
+                                        \item The assemble function will retrieve the data from the database, package it as either an ordered pair of doubles or an ordered pair of a string and a double (for the music sections).
+                                        \item $\rightarrow$ The Data Assembler will then be passed to the Graph Container, which will extract the data from the Data Assembler and graph the data that it contains. These graphs will be stored as an array in the Graph Container.
                                 \end{itemize}
-				\\
+                       \\
                 \hline
-        \end{tabular}
+        \end{longtable}
 \end{center}
-
-The getStatistics use case is important because it allows the user to see the results of his workout once he is done. The user initiates the action by selecting the "Display Statistics" option in the UI, which causes the system to retrieve all the data for the current workout from the database. The database retrieves the data that the user selected on the main screen and passes that data to the Statistics Generator. The Statistics Generator creates graphs that track different metrics, such as the music track that produced the best results over time, and passes the graphs and tables back to the Mobile Interface. Finally, the Mobile Interface displays the requested graphs and tables to the user. Time-permitting, the system can be developed to allow the Display Statistics functionality to be available during the workout. The getStatistics function is relatively simple; the user will be presented with a button that he can press to retrieve the statistics. He will then be presented with a menu that asks him which statistics he would like to see. The Mobile Interface will check for invalid values that the user might enter and are not directly related to the statistics options that are presented. If an invalid option is selected, the Mobile Interface will reset the display and ask the user to enter correct values. Possible statistics that could be displayed are the frequency with which a certain song is played, which indicates a song that makes the user especially productive.A graph might show the user how fast his heart rate approaches the target heart rate over the duration of his workout.
 
 
 \begin{center}
@@ -1223,88 +1247,91 @@ The Expert Doer Principle was not followed as closely because the communication 
 
 \section{Data Types and Operation Signatures}
 \begin{center}
-	\begin{tabular}{|C{15cm}|}
-		\hline
-			\textbf{Data Manager}\\
-		\hline
-			\begin{flushleft}
-				\textbf{Variables:} \\
-			\end{flushleft}
-				\begin{itemize}
-					\item workoutData: Data Assembler. This is a Data Assembler object which stores the data points retrieved from storage. It also stores the songs and their metadata.
-					\item workoutGraphs : Graph Container. This is a Graph Container object which stores the different graphs that were requested by the User Interface.
-				\end{itemize} \\
-			\hline
-			\begin{flushleft}
-				\textbf{Functions:} \\
-			\end{flushleft}
-				\begin{itemize}
-					\item storeInitialState(double initialRate, double targetRate) : bool. This function stores the initial state of the system, which is captured in the form of the user's initial heart rate and the target heart rate.
-					\item storeCurrentTrack(string song) : bool. This function is used by the Music Module to store the current track being played. This information is later used for the playlist.
-					\item storeCurrentHR(double heartRate) : bool. This function is used to store the current heart rate into the data storage. It is used by the User Interface while the user is working out with the system.
-					\item getArtistVsBPM() : graph. This function will access the data stored in the Data Assembler and create a histogram displaying the artist who's songs were played most often at different BPMs. The Data Manager will select the appropriate graph from the Graph Container and return it to the UI.
-					\item getGenreVsBPM() : graph. This function will create a histogram of the most frequent genres at different BPMs. The data will be accessed from the Data Assembler and plotted by the Graph Container. The final graph will be selected by the Data Manager from the Graph Container
-					\item getTempoVsBPM() : graph. This function will return a graph of the music's tempo versus the user's BPM.
-					\item getHRvsTime() : graph. This function will return a graph of the user's heart rate over time.
-					\item getPlaylist(): string array. This function will return an array of the music that was played during the workout.
-					\item storeCurrentTime() : bool. This is an auxiliary function which stores the current system time in the data storage every time storeCurrentHR() is called. It will associate the time with the current heart rate.
-				\end{itemize}\\
-			\hline
-	\end{tabular}
-\end{center}
-
-
-\begin{center}
-	\begin{tabular}{|C{15cm}|}
-		\hline
-			\textbf{Data Assembler} \\
-		\hline
-			\begin{flushleft}
-				\textbf{Variables:} \\
-			\end{flushleft}
-				\begin{itemize}
-					\item playlist: string array. This variable will store the names of the songs that were played during the workout.
-					\item heartRates: Ordered Pair array. This variable will store the retrieved data points in ascending order.
-				\end{itemize} \\
-			\hline
-			\begin{flushleft}
-				\textbf{Functions: } \\
-			\end{flushleft}
-				\begin{itemize}
-					\item createPlaylist() : string array. This function will fetch the songs played during the workout from the data storage and arrange them in the playlist array and return it.
-					\item calcHRchange() : orderedPair. This function will retrieve all the heart rates and system times from the data storage and organize them into ordered pairs. The ordered pairs are stored in an array and returned to the caller.
-					\item retrieveHR() : double. This function retrieves a heart rate from the data storage.
-					\item retrieveTime() : double. This function retrieves a time from the data storage.
-					\item retrieveSong() : string. This function retrieves a song name from data storage.
-				\end{itemize} \\
-			\hline
-	\end{tabular}
+        \begin{tabular}{|C{15cm}|}
+                \hline
+                        \textbf{Data Manager}\\
+                \hline
+                        \begin{flushleft}
+                                \textbf{Variables:} \\
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item workoutData: Data Assembler. This is a Data Assembler object which stores the data points retrieved from storage. It also stores the songs and their metadata.
+                                        \item workoutGraphs : Graph Container. This is a Graph Container object which stores the different graphs that were requested by the User Interface.
+                                \end{itemize} \\
+                        \hline
+                        \begin{flushleft}
+                                \textbf{Functions:} \\
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item storeInitialState(double initialRate, double targetRate) : bool. This function stores the initial state of the system, which is captured in the form of the user's initial heart rate and the target heart rate.
+                                        \item storeCurrentTrack(string song) : bool. This function is used by the Music Module to store the current track being played. This information is later used for the playlist.
+                                        \item storeCurrentHR(double heartRate) : bool. This function is used to store the current heart rate into the data storage. It is used by the User Interface while the user is working out with the system.
+                                        \item getArtistVsBPM() : graph. This function will access the data stored in the Data Assembler and create a histogram displaying the artist who's songs were played most often at different BPMs. The Data Manager will select the appropriate graph from the Graph Container and return it to the UI.
+                                        \item getGenreVsBPM() : graph. This function will create a histogram of the most frequent genres at different BPMs. The data will be accessed from the Data Assembler and plotted by the Graph Container. The final graph will be selected by the Data Manager from the Graph Container
+                                        \item getTempoVsBPM() : graph. This function will return a graph of the music's tempo versus the user's BPM.
+                                        \item getHRvsTime() : graph. This function will return a graph of the user's heart rate over time.
+                                        \item getPlaylist(): string array. This function will return an array of the music that was played during the workout.
+                                        \item storeCurrentTime() : bool. This is an auxiliary function which stores the current system time in the data storage every time storeCurrentHR() is called. It will associate the time with the current heart rate.
+                                \end{itemize}\\
+                        \hline
+        \end{tabular}
 \end{center}
 
 \begin{center}
-	\begin{tabular}{|C{15cm}|}
-		\hline
-			\textbf{Graph Container} \\
-		\hline
-			\begin{flushleft}
-				\textbf{Variables:} \\
-			\end{flushleft}
-				\begin{itemize}
-					\item graphs : graph array. This variable contains an array of the different graphs that were requested by the User Interface.
-				\end{itemize} \\
-			\hline
-			\begin{flushleft}
-				\textbf{Functions: } \\
-			\end{flushleft}
-				\begin{itemize}
-					\item createArtistVsBPM(Data Assembler workoutData) : bool. This function takes the names of the artists and heart rates stored in the Data Assembler and graphs them against each other.
-					\item createGenreVsBPM(Data Assembler workoutData) : bool. This function graphs the genre of the music versus the user's heart rate using the data from workoutData.
-					\item createTempoVsBPM(Data Assembler workoutData) : bool. This function graphs the tempo of the music versus the user's heart rate using the workoutData object.
-					\item createHRVsTime(Data Assembler workoutData) : bool. This function graphs the user's heart rate versus time using the workoutData object.
-				\end{itemize} \\
-			\hline
-	\end{tabular}
+        \begin{tabular}{|C{15cm}|}
+                \hline
+                        \textbf{Data Assembler} \\
+                \hline
+                        \begin{flushleft}
+                                \textbf{Variables:} \\
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item playlist: string array. This variable will store the names of the songs that were played during the workout.
+                                        \item heartRates: Ordered Pair array. This variable will store the retrieved data points in ascending order.
+                                \end{itemize} \\
+                        \hline
+                        \begin{flushleft}
+                                \textbf{Functions: } \\
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item assembleHRVsTime() : ordered pair array. This function assembles the data for an HR vs Time graph.
+                                        \item assembleArtistVsBPM() : string pair array. This function assembles the data for an Artist vs BPM table.
+                                        \item assembleGenreVsBPM() : string pair array. This function assembles the data for a Genre vs BPM table.
+                                        \item assembleTempoVsBPM() : string pair array. This function assembles the data for a Tempo vs BPM table.
+                                        \item assemblePlaylist() : string array. This function assembles the music playlist.
+                                        \item retrieveHR() : double. This function retrieves a heart rate from the data storage.
+                                        \item retrieveTime() : double. This function retrieves a time from the data storage.
+                                        \item retrieveSong() : string. This function retrieves a song name from data storage.
+                                \end{itemize} \\
+                        \hline
+        \end{tabular}
 \end{center}
+
+\begin{center}
+        \begin{tabular}{|C{15cm}|}
+                \hline
+                        \textbf{Graph Container} \\
+                \hline
+                        \begin{flushleft}
+                                \textbf{Variables:} \\
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item graphs : graph array. This variable contains an array of the different graphs that were requested by the User Interface.
+                                \end{itemize} \\
+                        \hline
+                        \begin{flushleft}
+                                \textbf{Functions: } \\
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item ArtistVsBPM(Data Assembler workoutData) : graph. This function takes the names of the artists and heart rates stored in the Data Assembler and graphs them against each other.
+                                        \item GenreVsBPM(Data Assembler workoutData) : graph. This function graphs the genre of the music versus the user's heart rate using the data from workoutData.
+                                        \item TempoVsBPM(Data Assembler workoutData) : graph. This function graphs the tempo of the music versus the user's heart rate using the workoutData object.
+                                        \item HRVsTime(Data Assembler workoutData) : graph. This function graphs the user's heart rate versus time using the workoutData object.
+                                \end{itemize} \\
+                        \hline
+        \end{tabular}
+\end{center}
+
 
 \begin{center}
 	\begin{tabular}{|C{15cm}|}
@@ -1330,6 +1357,32 @@ The Expert Doer Principle was not followed as closely because the communication 
 				\end{itemize} \\
 			\hline
 	\end{tabular}
+\end{center}
+
+\begin{center}
+        \begin{tabular}{|C{15cm}|}
+                \hline
+                        \textbf{String Pair} \\
+                \hline
+                        \begin{flushleft}
+                                \textbf{Variables: }\\
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item doubleValue : double. This stores the double value of the pair
+                                        \item stringValue : string. This stores the string value of the pair.
+                                \end{itemize} \\
+                        \hline
+                        \begin{flushleft}
+                                \textbf{Functions: } \\
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item setDouble(double newDouble) : bool. This sets the double value of the pair
+                                        \item getDouble() : double. This returns the double value of the piar
+                                        \item setString() : double. This sets the string value of the pair.
+                                        \item getString() : string. This returns the string value of the pair
+                                \end{itemize} \\
+                        \hline
+        \end{tabular}
 \end{center}
 
 
