@@ -747,42 +747,32 @@ If no data is received from the chest strap, the system will present the user wi
 \subsection{System Operation Contracts}
 {\bf OC-1: Enter Target Heart-rate}
 \begin{itemize}
-	\item {\bf Precondition: } No target heart-rate has been entered into the system
-	\item {\bf Postcondition: } The system begins to work its algorithm and plays appropriate music.
+	\item {\bf Precondition: } 
+	\item {\bf Postcondition: } The system saves this heart rate and will use it in selecting a song.
 \end{itemize}
 
-{\bf OC-2: Select Function("lower")}
-\begin{itemize}
-	\item {\bf Precondition: } The recorded heart rate is above the resting heart rate.
-	\item {\bf Postcondition: } 
-		\begin{itemize}
-			\item The system starts recording the heart rate of the user and the data from the workout if not already recording.
-			\item The system uses the lower target heart rate as a target for the music selection algorithm.
-		\end{itemize}
-
-\end{itemize}
-
-{\bf OC-3: Select Function("Skip Song")}
+{\bf OC-2: Select Function("Skip Song")}
 \begin{itemize}
 	\item {\bf Precondition: } The device is playing a song which needs to be changed.
 	\item {\bf Postcondition: } A different song is being played at the same rate at which the previous song was playing.
 
 \end{itemize}
 
-{\bf OC-4: Select Function("Toggle Playback")}
+{\bf OC-3: Select Function("Toggle Playback")}
 \begin{itemize}
-	\item {\bf Precondition: } The device is currently playing a song.
-	\item {\bf Postcondition: } The system stops recording the heart rate of the user and the data from the workout.
+	\item {\bf Precondition: }
+	\item {\bf Postcondition: } If the system was playing a song, it stops playing the song and recording the data from the workout.\\
+      Otherwise the system starts playing a song and recording data from the workout.
 
 \end{itemize}
 
-{\bf OC-5: Select Function("Display Statistics")}
+{\bf OC-4: Select Function("Display Statistics")}
 \begin{itemize}
 	\item {\bf Precondition: } The user has either finished his workout or is in the middle of his workout and would like to see his statistics.
 	\item {\bf Postcondition: } The device retrieves the data from the databases, organizes it, and presents it to the user in the form of charts and tables.
 \end{itemize}
 
-{\bf OC-6: Select Function("Display Heart Rate")}
+{\bf OC-5: Select Function("Display Heart Rate")}
 \begin{itemize}
 	\item {\bf Precondition: } The device should already be monitoring the user's heart rate.
 	\item {\bf Postcondition: } The current heart rate is displayed on the screen of the Android application.
