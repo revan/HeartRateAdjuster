@@ -743,40 +743,39 @@ If no data is received from the chest strap, the system will present the user wi
         %end
 \end{figure}
 
-
 \subsection{System Operation Contracts}
 {\bf OC-1: Enter Target Heart-rate}
 \begin{itemize}
-	\item {\bf Precondition: } 
-	\item {\bf Postcondition: } The system saves this heart rate and will use it in selecting a song.
+        \item {\bf Precondition: } The application is open to the main screen and prompts the user for input.
+        \item {\bf Postcondition: } The system saves the input heart rate and will use it in selecting a song.
 \end{itemize}
 
 {\bf OC-2: Select Function("Skip Song")}
 \begin{itemize}
-	\item {\bf Precondition: } The device is playing a song which needs to be changed.
-	\item {\bf Postcondition: } A different song is being played at the same rate at which the previous song was playing.
+        \item {\bf Precondition: } The device is playing a song which needs to be changed.
+        \item {\bf Postcondition: } A different song is being played at the same rate at which the previous song was playing.
 
 \end{itemize}
 
 {\bf OC-3: Select Function("Toggle Playback")}
 \begin{itemize}
-	\item {\bf Precondition: }
-	\item {\bf Postcondition: } If the system was playing a song, it stops playing the song and recording the data from the workout.\\
-      Otherwise the system starts playing a song and recording data from the workout.
+        \item {\bf Precondition: } The system is currently playing a song
+        \item {\bf Postcondition: } If the system was playing a song, it stops playing the song and recording the data from the workout. If the system is paused, toggling the playback will cause the system to start playing a song and recording data from the workout.
 
 \end{itemize}
 
 {\bf OC-4: Select Function("Display Statistics")}
 \begin{itemize}
-	\item {\bf Precondition: } The user has either finished his workout or is in the middle of his workout and would like to see his statistics.
-	\item {\bf Postcondition: } The device retrieves the data from the databases, organizes it, and presents it to the user in the form of charts and tables.
+        \item {\bf Precondition: } The user has either finished his workout or is in the middle of his workout and would like to see his statistics.
+        \item {\bf Postcondition: } The device retrieves the data from the databases, organizes it, and presents it to the user in the form of charts and tables.
 \end{itemize}
 
 {\bf OC-5: Select Function("Display Heart Rate")}
 \begin{itemize}
-	\item {\bf Precondition: } The device should already be monitoring the user's heart rate.
-	\item {\bf Postcondition: } The current heart rate is displayed on the screen of the Android application.
+        \item {\bf Precondition: } The device should already be monitoring the user's heart rate.
+        \item {\bf Postcondition: } The current heart rate is displayed on the screen of the Android application.
 \end{itemize}
+
 
 \subsection{Mathematical Model}
 The selection of which track to play requires a mathematical model. At its simplest, this consists of selecting the track with the closest BPM, that is to say minimizing the difference in BPM:
