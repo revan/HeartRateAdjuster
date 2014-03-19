@@ -678,14 +678,15 @@ The togglePlayback case is another straightforward, convenience-based use case. 
 The getHeartRate case is similar to the displayStatistics case, but it allows the user to see only his current heart rate. The full analysis provided by getStatistics may not be necessary at times, and this case allows the user to easily see his heart rate during the exercise.
 Once a second, the system requests the current heart rate from the chest strap. The chest strap then returns the heart rate, and the User Interface displays to the screen.
 For this function to work, the chest strap must be strapped firmly to the chest in the region of the heart. If not, the Chest Strap will be unable to record the current heart rate correctly. Also, the chest strap should not be moved or tampered with in any way while the device is recording the current heart rate.
-If no data is received from the chest strap, the system will present the user with a message saying that the chest strap is not properly fastened. 
+If no data is received from the chest strap, the system will present the user with a message saying that the chest strap is not properly fastened. \pagebreak
 
-\pagebreak
 \begin{center}
         \begin{longtable}{|C{15cm}|}
                 \hline
                         \textbf{Use Case UC-7: alertUser}\\
-                \hline
+                
+			\hline
+	\nopagebreak
                         \begin{flushleft}
                                 \textbf{Related Requirements: } REQ-1, REQ-5, REQ-11, REQ-12, REQ-13, REQ-15, REQ-16
                         \end{flushleft}
@@ -723,7 +724,6 @@ If no data is received from the chest strap, the system will present the user wi
                                         \item $\rightarrow$ The UI displays a warning notification to the user and advises the user to end his workout session.
 										\item $\leftarrow$ The user responds by stopping the workout session on the UI. (The UI sends a stop signal to the Data Manager which then discontinues logging data from the Chest Strap.)
                                \end{itemize}
-{{\bfseries}} \\
                         \begin{flushleft}
                                 \textbf{Flow of Events for Alternate Success Scenario (Ignore Warning): }
                         \end{flushleft}
@@ -799,6 +799,11 @@ This use case describes the unfortunate scenario where, during the course of a u
         %    Chest Strap-->-Data Subsystem:
         %    Data Subsystem->UI: Display Heart Rate
         %end
+\end{figure}
+
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{img/ssd/ssd_uc7.png}\\
 \end{figure}
 
 \subsection{System Operation Contracts}
