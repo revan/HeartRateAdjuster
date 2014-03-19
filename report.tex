@@ -11,11 +11,9 @@
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
 \title{Musical Heart Rate Adjuster}
-\author{Group \#12 \\ https://github.com/revan/HeartRateAdjuster \\ 
+\author{Software Engineering 14:332:452 -- Group \#12 \\ https://github.com/revan/HeartRateAdjuster \\ 
 \\Kenny Bambridge, Jonathan Chang, Samani Gikandi,
 \\Tae-Min Kim, Nikhil Shenoy, Revan Sopher}
-
-%\textsc{Software Engineering 14:332:452}
 
 
 \begin{document}
@@ -1156,12 +1154,11 @@ Our team will be divided into three smaller sub-teams of two individuals each, t
 	
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=.35]{img/Interaction_Diagrams/newUC1.png}\\
-	\caption {Interaction diagram for the increaseHeartRate case} 
+	\includegraphics[scale=.78]{img/Interaction_Diagrams/UC1_logData.png}\\
+	\caption {Interaction diagram for the logData() use case.} 
 \end{figure}
 
-
-Since our first two use cases are very similar, we only include the interaction diagram for UC-1, increaseHeartRate. Again, the user toggles the ``raise'' button from the home screen and scrolls to the desired BPM. The database manager coordinates with the heart rate monitor and uses its own algorithm to determine the appropriate song for the music player to play for the user. Then, it waits five seconds for the user to begin his workout. Upon playback, the database manager continuously receives the user's current BPM and makes adjustments to the song's tempo accordingly.
+For our first use case, we wish to record information about the user's heart rate as well as some additional information. This includes a time stamp of when the heart rate data was recorded, and could also include some of the song metadata such as artist, album, or genre. For our main success scenario, the user interacts with the UI which communicates with the Database Manager. As long as user does not tell the UI to stop recording, the Database Manager will continually ask the Chest Strap for BPM Data and a time stamp for every piece of data received. When the user tells the UI to stop, we break out of our loop, and the Database Manager returns to the UI and displays updated information. Alternate scenarios could occur when the Chest Strap is not functioning correctly and reports an error in measurement, and when this occurs up to 10 times, the Database Manager stops recording. Another alternate scenario would be if the system detects an abnormal heart rate in the user, and alerts the user to stop his workout. This process is described more thoroughly in the Algorithms section.
 
 \begin{figure}[H]
 	\centering
@@ -1696,7 +1693,13 @@ As such, certain parts of this report pertaining to the Audio subsystem are not 
 \\
 No Use Cases have yet been implemented, but for the first demo we will have a fully functional user interface and a working data logger.
 Since application of the Chest Strap is a complicated process requiring the user to moisten the electrodes and strip down, for purposes of the demo the Chest Strap's output will be faked by a UI element allowing real-time modification of the reported value.
+
 \section{Plan of Work}
+\begin{figure}[H]
+	\centering
+	\includegraphics{img/Gantt_Chart2.png}\\
+	\caption{Our new Gantt Chart describes our plan of action until Demo \#1, and it also highlights some of our projected milestones for the second iteration.} 
+\end{figure}
 
 \section{Breakdown of Responsibilities}
 The breakdown of responsibilities follows the initial division.
