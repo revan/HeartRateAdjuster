@@ -1474,6 +1474,75 @@ The system requires:
 \end{itemize}
 All of these requirements are met by most Android phones on the market.
 
+\chapter{Algorithms and Data Structures}
+\section{Algorithms}
+
+As mentioned throughout this document, music has an undeniable effect on heart rate and exercise. The goal of this project is to both induce and measure that effect. Our system requires good algorithms to ensure functionality, the most important of which, are discussed here. \newline
+
+\subsection{Pattern Recognition}
+We wish to recognize a trend in user heart rate data to determine the state of exercise a user is in for a given range. For simplicity, we break down bpm ranges into three categories of intensity: \newline
+
+\textit{Light (x<50\%)}
+\begin{itemize}
+	\item sitting
+	\item walking
+	\item golfing
+	\item shopping
+	\item fishing
+\end {itemize}
+
+\textit{Moderate (50$\leq{x}$< 70\%)}
+\begin{itemize}
+	\item lifting weights
+	\item riding the bike
+	\item playing doubles tennis
+	\item mowing the lawn
+\end {itemize}
+
+\textit{Vigorous (70$\leq{x}$<85\%)}
+\begin{itemize}
+	\item running
+	\item skiing
+	\item playing basketball
+	\item hiking
+	\item playing soccer
+	\item shoveling snow
+\end {itemize}
+
+
+Now to determine which of these categories a user"s workout falls under, we need to determine the user"s maximum heart rate by subtracting user age from 220. A light workout is defined as less than 50\% of a user"s maximum heart rate. A workout of moderate intensity falls in between 50-70\% of a user"s maximum heart rate. Finally, a vigorous workout occurs at 70-85\% of a user"s maximum heart rate. These numbers allow us to calculate the minimum and maximum bounds for each category given a specific user. \newline
+
+Thus, classification is extremely simple. We can just find the average bpm for a time period and determine which of the following category ranges it falls under. If for some reason, a user does not offer his age, then we will assume the maximum heart rate to be 180. \newline
+
+\subsection{Danger Detection \newline}
+
+It is important to determine when the user"s bpm is abnormal. If the user"s heart rate is abnormally high or abnormally low, we need to alert the user of their condition and advise them to discontinue their workout and seek medical help if necessary. Our data logging subsystem continually receives bpm data from the chest strap, and for every heart rate received, it does a periodic check to ensure that the user"s workout doesn"t cause an unhealthy stress on his heart. \newline
+
+For our comparison purposes, we use the following conditions. Any normal adult (older than 18) should not have a resting heart rate below 60 bpm, and any normal child (aged 6-17) should not have a resting heart rate of lower than 70 bpm. This means that children younger than 6 years old should not be using our heart rate adjuster. There can be some exceptional cases where people in excellent physical conditions can sustain even lower heart rates than the cutoff conditions we used, but it is safer to send a warning anyway. \newline
+
+As for our upper bound, we use the formula from our previous algorithm, maximum heart rate = 220 \textendash age. That is, if a user"s bpm is above their maximum heart rate, we will send an alert message as a warning. The actual comparison implementation is trivial, but it is important to recognize how we are determining our thresholds. Again, if the user does not provide his age, we will assume a minimum heart rate of 60 bpm and a maximum of 180 bpm. \newline
+
+
+
+ \section{Data Structures}
+
+The overarching data structure that our system uses is the database. More specifically, we will use the SQLite relational database management system to store the information pertinent to our system. Our database will use the following data types in conducting logging sessions. \newline
+
+Name: string \textendash The name or ID will be the unique identifier to differentiate between users. \newline
+
+Age: int \textendash The age of a user will be necessary for the algorithmic purposes of determining the maximum heart rate described in the previous section. \newline
+
+Session: int \textendash The session number is incremented and stored every time the user conducts a new workout. This is necessary if a user wishes to view information about a particular workout. \newline
+
+TimeStamp: int \textendash The time stamp is available in conjunction with BPM. Every time our data logger retrieves BPM from the chest strap, it will also take note of the time the information was received. \newline
+
+BPM : int \textendash Last but not least, we have the most critical piece of data, the beats per minute measure of a user"s heart rate which will probably be used in every graph. \newline
+
+As introduced earlier on, we will also need to introduce two classes, GraphContainer and OrderedPair. GraphContainer is essentially an array of possible graphs that the user requests. For instance, our most common graph will probably be the graph of Heart Rate vs. Time. We could also introduce BPM vs. Tempo or BPM vs. Song. However the data type that allows us to create this data structure in the first place is the Ordered Pair. Java does not contain such a class, so we implement our own as described in our class section. Our y variable will almost definitely include BPM as an int or double because we are interested in seeing change in heart rate. Meanwhile, our x value will usually be the time stamp, but could also include Tempo, Song Title, or other music metadata that will be retrieved from the audio subsystem. \newline
+
+Obviously, GraphContainer and OrderedPair are utilized to ensure that when a user requests a graph, it will be readily available. Our graphs will be stored under session number, which is the intuitive choice for a user to request a graph. If a user can request a graph during a session, it will be done using the current session number. 
+
+
 
 \chapter{User Interface Design and Implementation}
 Since we spent the time to make high quality mockups early on in this project, the UI was already well thought out and designed with standard Android UI elements such that it does not have to change much in implementation.\\
