@@ -1179,17 +1179,17 @@ For our third use case, the user's goal is to listen to another song. Similar to
 Our togglePlayback sequence is fairly simple. The user initiates the request by tapping the play/pause button. Then the controller informs the database manager to store the current state settings for future use, and the database manager proceeds to stop recording data and allows the music player to stop the song. The mobile display also updates accordingly.
 
 \begin{figure}[H]
-	\includegraphics[scale=.40]{img/Interaction_Diagrams/displayStatistics.png}\\
+	\includegraphics[scale=.35]{img/Interaction_Diagrams/displayStatistics.png}\\
 	\caption {Interaction diagram for displayStatistics()} 
 \end{figure}
-In UC-5, getStatistics, the user begins with two button presses to achieve their goal. First, they bring up the menu button in the top right hand corner and then press ``Statistics'' from the dropdown. The controller passes this request to the database manager, which quickly retrieves and updates the data. Then, it calculates statistics, creates some graphs, and then returns the output to the controller to display. (Note that the user must select from the options available in order to view his workout history.)
+In UC-5, displayStatistics, the user begins with two button presses to achieve their goal. First, they bring up the menu button in the top right hand corner and then press ``Statistics'' from the dropdown. The controller passes this request to the database manager, which quickly retrieves and updates the data. Then, it calculates statistics, creates some graphs, and then returns the output to the controller to display. (Note that the user must select from the options available in order to view his workout history.)
 
 \begin{figure}[H]
-	\includegraphics[scale=.40]{img/Interaction_Diagrams/newUC6.png}\\
+	\includegraphics[scale=.40]{img/Interaction_Diagrams/getHeartRate.png}\\
 	\caption {Interaction diagram for getHeartRate()} 
 \end{figure}
 
-UC-6, getHeartRate is very similar to UC-5. This use case is also applicable for UC-1, because the Heart Rate is important, needing to be determined continuously. The controller takes the request from the user and passes it to the database manager to handle. The database manager then takes the current BPM value from the Heart Rate Monitor and updates the value for the mobile interface to display to the user. 
+UC-6, getHeartRate is very similar to UC-5. This use case is also applicable for UC-1, because the Heart Rate is important, needing to be determined continuously. The controller takes the request from the user and passes it to the Data Manager to handle. The database manager then takes the current BPM value from the Heart Rate Monitor and updates the value for the mobile interface to display to the user. 
 
 
 \section{Alternate Scenarios}
