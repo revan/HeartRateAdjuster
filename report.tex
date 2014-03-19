@@ -676,7 +676,7 @@ The togglePlayback case is another straightforward, convenience-based use case. 
         \end{tabular}
 \end{center}
 
-The getHeartRate case is similar to the getStatistics case, but it allows the user to see only his current heart rate. The full analysis provided by getStatistics may not be necessary at times, and this case allows the user to easily see his heart rate during the exercise.
+The getHeartRate case is similar to the displayStatistics case, but it allows the user to see only his current heart rate. The full analysis provided by getStatistics may not be necessary at times, and this case allows the user to easily see his heart rate during the exercise.
 Once a second, the system requests the current heart rate from the chest strap. The chest strap then returns the heart rate, and the User Interface displays to the screen.
 For this function to work, the chest strap must be strapped firmly to the chest in the region of the heart. If not, the Chest Strap will be unable to record the current heart rate correctly. Also, the chest strap should not be moved or tampered with in any way while the device is recording the current heart rate.
 If no data is received from the chest strap, the system will present the user with a message saying that the chest strap is not properly fastened.
@@ -1179,8 +1179,8 @@ For our third use case, the user's goal is to listen to another song. Similar to
 Our togglePlayback sequence is fairly simple. The user initiates the request by tapping the play/pause button. Then the controller informs the database manager to store the current state settings for future use, and the database manager proceeds to stop recording data and allows the music player to stop the song. The mobile display also updates accordingly.
 
 \begin{figure}[H]
-	\includegraphics[scale=.40]{img/Interaction_Diagrams/newUC5.png}\\
-	\caption {Interaction diagram for getStatistics()} 
+	\includegraphics[scale=.40]{img/Interaction_Diagrams/displayStatistics.png}\\
+	\caption {Interaction diagram for displayStatistics()} 
 \end{figure}
 In UC-5, getStatistics, the user begins with two button presses to achieve their goal. First, they bring up the menu button in the top right hand corner and then press ``Statistics'' from the dropdown. The controller passes this request to the database manager, which quickly retrieves and updates the data. Then, it calculates statistics, creates some graphs, and then returns the output to the controller to display. (Note that the user must select from the options available in order to view his workout history.)
 
