@@ -299,10 +299,11 @@ Actors can be defined as are people or devices that will directly interact with 
 		User(initiator)& To increase heart rate for exercising\\\hline
 		User(initiator)& To decrease heart rate for sleeping\\\hline
 		User(initiator)& To analyze health information from given graphs\\\hline
+		Chest Strap (initiator) & To alert the user of an abnormal heart rate\\\hline
 		Chest strap (participator)& To monitor the user's heart rate\\\hline
 	\end{tabular}
 \end{center}
-This product is one which only requires the interaction of one human actor, the user of the product. While there is the potential for other humans to interact with the user's health information which is produced, only the user himself is considered an actor. The headband and chest strap are participating actors that are worn by the user to monitor information and relay the information via Bluetooth back to the smartphone which is running the application.
+This product is one which only requires the interaction of one human actor, the user of the product. While there is the potential for other humans to interact with the user's health information which is produced, only the user himself is considered an actor. The headband and chest strap are participating actors that are worn by the user to monitor information and relay the information via Bluetooth back to the smartphone which is running the application. The one exception is that our chest strap (used interchangeably with heart-rate sensor) may be an initiating actor and notify the user if his/her heart rate is abnormally high or low. In this case, the user would be the participating actor.
 
 \section{Use Cases}
 Use Cases are specific tasks that are created together by the designer and the client to simulate what the client wants out of his software solution. They are meant to describe the main features of the project such that the designer can easily address the needs of the client and create a product around those needs. Below is a casual description of the use cases for the reader to get a general idea of how the software should be used. Later, fully described use cases are shown for additional insight into the different cases.
@@ -325,7 +326,7 @@ Use Cases are specific tasks that are created together by the designer and the c
                 \hline
                         UC-6 & getHeartRate & The user can view his current heart rate. This can be used when the user does not want to see all of the statistics from the workout and just wants his heart rate. \\
                 \hline
-                        UC-7 & provideMusicData & \\
+                        UC-7 & alertUser & The heart-rate sensor detects an abnormally high or low heart rate and notifies the user at once.\\
                 \hline
         \end{tabular}
 \end{center}
@@ -339,39 +340,39 @@ The Traceability Matrix allows the reader to cross the functional and non-functi
                 \hline
                          & Priority Weight & UC-1 & UC-2 & UC-3 & UC-4 & UC-5 & UC-6 & UC-7\\
                 \hline
-                        REQ-1  & 5 & X &   &   & X & X & X & \\
+                        REQ-1  & 5 & X &   &   & X & X & X & X \\
                 \hline
-                        REQ-2  & 4 & X & X &   &   &   &   & \\
+                        REQ-2  & 4 & X & X &   &   &   &   &   \\
                 \hline
-                        REQ-3  & 3 & X & X & X &   &   &   & \\
+                        REQ-3  & 3 & X & X & X &   &   &   &   \\
                 \hline
-                        REQ-4  & 5 & X &   & X &   &   &   & \\
+                        REQ-4  & 5 & X &   & X &   &   &   &   \\
                 \hline
-                        REQ-5  & 3 & X &   &   &   & X &   & \\
+                        REQ-5  & 3 & X &   &   &   & X &   & X \\
                 \hline
-                        REQ-6  & 2 &   &   &   &   & X &   & \\
+                        REQ-6  & 2 &   &   &   &   & X &   &   \\
                 \hline
-                        REQ-7  & 1 & X & X & X &   &   &   & \\
+                        REQ-7  & 1 & X & X & X &   &   &   &   \\
                 \hline
-                        REQ-8  & 1 &   &   &   &   & X &   & \\
+                        REQ-8  & 1 &   &   &   &   & X &   &   \\
                 \hline
-                        REQ-9  & 1 &   &   &   &   & X &   & \\
+                        REQ-9  & 1 &   &   &   &   & X &   &   \\
                 \hline
-                        REQ-10 & 1 &   &   & X &   &   &   & \\
+                        REQ-10 & 1 &   &   & X &   &   &   &   \\
                 \hline
-                        REQ-11 & 1 &   &   &   &   &   & X & \\
+                        REQ-11 & 1 &   &   &   &   &   & X & X \\
 		        \hline
-			            REQ-12 & 1 &   &   &   & X &   &   & \\
+			            REQ-12 & 1 &   &   &   & X &   &   & X \\
                 \hline
-                        REQ-13 & 5 & X & X & X & X & X & X & \\
+                        REQ-13 & 5 & X & X & X & X & X & X & X \\
                 \hline
-                        REQ-14 & 5 & X & X &   &   & X &   & \\
+                        REQ-14 & 5 & X & X &   &   & X &   &   \\
                 \hline
-                        REQ-15 & 3 & X & X & X & X & X & X & \\
+                        REQ-15 & 3 & X & X & X & X & X & X & X \\
                 \hline
-                        REQ-16 & 3 & X & X & X & X & X & X & \\
+                        REQ-16 & 3 & X & X & X & X & X & X & X \\
                 \hline
-                  Total Weight &   & 37& 37& 21& 17& 25& 19& \\
+                  Total Weight &   & 37& 37& 21& 17& 25& 19& 21\\
                 \hline
         \end{tabular}
 \end{center}
