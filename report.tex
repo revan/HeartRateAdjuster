@@ -1415,6 +1415,8 @@ Our system utilizes a three-tier architecture system and consists of 3 layers. T
 
 These three tiers are separated from each other to allow for encapsulation and data abstraction. We want each tier to hide its usage from implementation and to preserve the integrity of our data. We also want to reduce the overall complexity of our system. However, each tier must maintain a sufficient level of communication and be able to retrieve needed data from each other. In a common scenario for our system, our application layer may request information from the data tier. It then processes this information and returns it to the presentation tier in response to the user request. A visual diagram was provided in our earlier stage of planning in the section titled System Architecture Diagram.
 
+The Data Management section in specific implements a two-tiered layered architecture. The first tier consists of the Data Manager, which serves as an interface between the Data Managment module and the other two modules. It provides functions which the other modules can use to store and access data from the database. In the second tier of the architecture, we have the Graph Container and the Data Assembler components. These components handle the actual manipulation and graphing of the data. The main reason for this architecture is to implement data hiding and abstraction; the Data Manager in the first tier serves as an intermediary which commands the Graph Container and Data Assembler to perform certain actions. Thus, the management of the data is done internally, and all the other modules get to see is the interface provided by the Data Manager.
+
 
 \section{Identifying Subsystems}
 Our software is designed around three primary subsystems.
