@@ -1726,6 +1726,40 @@ Otherwise, User Interface interactions remain as planned.
 \begin{center}
         \begin{tabular}{|C{15cm}|}
                 \hline
+                        \textbf{Initiate Data Logging} \\
+                \hline
+                        \begin{flushleft}
+                                \textbf{Tests: } Data Manager
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Assumption: } The User Interface has received an input from the user which indicates a desire to start the system.
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Steps: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The User Interface calls the storeInitialState() function form the Data Manager
+                                        \item $\rightarrow$ Data Manager retrieves the current heart rate from the chest strap and time stamp from the device, and stores it in the database.
+                                        \item $\leftarrow$ If the storage occurs successfully, a confirmation is sent to the Data Manager
+                                        \item $\rightarrow$ Once confirmation is received, Data Manager begins calling storeCurrentHR() repeatedly.
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Expected: } The Data Manager is constantly listening for heart rate values, time stamp values, and music data and is logging that information to the database.
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Fails is: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The chest strap does not return a valid heart rate for storage
+                                        \item The Android device does not return a valid system time.
+                                \end{itemize}
+                \hline
+        \end{tabular}
+\end{center}
+
+\begin{center}
+        \begin{tabular}{|C{15cm}|}
+                \hline
                         \textbf{Set Media Library Location}\\
                 \hline
                         \begin{flushleft}
