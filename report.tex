@@ -586,7 +586,7 @@ The skipTrack case is one of the conveniences for the user. If the user does not
         \end{tabular}
 \end{center}
 
-The togglePlayback case is another straightforward, convenience-based use case. If the user needs to interrupt the workout for some reason and needs to stop the music, then all the user has to do is press the pause button on the device. To resume the music, he must press the button again, which will now be a play button. The system will make sure that this function is working properly. If no music is currently being played, it is considered to be paused and may be resumed. If music is being played, it is considered to be resumed and may be paused. The system will know whether music is playing or not. The heart rate monitor shall also be paused/resumed as the music is. If it is not already recording, and should be, it will start recording (refer to postconditions for UC1, UC2).
+The togglePlayback case is another straightforward, convenience-based use case. If the user needs to interrupt the workout for some reason and needs to stop the music, then all the user has to do is press the pause button on the device. To resume the music, he must press the button again, which will now be a play button. The system will make sure that this function is working properly. If no music is currently being played, it is considered to be paused and may be resumed. If music is being played, it is considered to be resumed and may be paused. The system will know whether music is playing or not. The heart rate monitor shall also be paused/resumed as the music is. If it is not already recording, and should be, it will start recording (refer to postconditions for UC1, UC2). \pagebreak
 
 \begin{center}
         \begin{longtable}{|C{15cm}|}
@@ -678,9 +678,68 @@ The togglePlayback case is another straightforward, convenience-based use case. 
 The getHeartRate case is similar to the displayStatistics case, but it allows the user to see only his current heart rate. The full analysis provided by getStatistics may not be necessary at times, and this case allows the user to easily see his heart rate during the exercise.
 Once a second, the system requests the current heart rate from the chest strap. The chest strap then returns the heart rate, and the User Interface displays to the screen.
 For this function to work, the chest strap must be strapped firmly to the chest in the region of the heart. If not, the Chest Strap will be unable to record the current heart rate correctly. Also, the chest strap should not be moved or tampered with in any way while the device is recording the current heart rate.
-If no data is received from the chest strap, the system will present the user with a message saying that the chest strap is not properly fastened.
+If no data is received from the chest strap, the system will present the user with a message saying that the chest strap is not properly fastened. 
 
+\pagebreak
+\begin{center}
+        \begin{longtable}{|C{15cm}|}
+                \hline
+                        \textbf{Use Case UC-7: alertUser}\\
+                \hline
+                        \begin{flushleft}
+                                \textbf{Related Requirements: } REQ-1, REQ-5, REQ-11, REQ-12, REQ-13, REQ-15, REQ-16
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Initiating Actor: } Chest Strap
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Participating Actors: } Human User, Data Manager
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Actor's Goal: } Alert the user when an abnormal heart rate is detected.
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Preconditions: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The user is currently in the midst of a workout session.
+                                        \item The user is wearing the device correctly; the chest strap is securely fastened to the user's chest near the solar plexus, and the musical heart rate application is open to the main screen on the Android device.
+										\item The system is functioning properly.
+								\end{itemize}
+                        \begin{flushleft}
+                                \textbf{Postconditions: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The User Interface displays a warning notification to the user.
+                                        \item The User has the option of stopping the workout session or ignoring the notification completely.
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Flow of Events for Main Success Scenario: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item $\rightarrow$ The Chest Strap continally gathers heart rate data and sends it to the Data Manager as long as there is no stop signal given.
+                                        \item For every piece of data received, the Data Manager checks the heart rate using an algorithm described later on in the report to determine if it is in the appropriate range.
+                                        \item $\rightarrow$ If the Data Manager detects that a heart rate is outside of a safe range (above the normal maximum or below the normal minimum), the Data Manager communicates sendAlert() to the UI.
+                                        \item $\rightarrow$ The UI displays a warning notification to the user and advises the user to end his workout session.
+										\item $\leftarrow$ The user responds by stopping the workout session on the UI. (The UI sends a stop signal to the Data Manager which then discontinues logging data from the Chest Strap.)
+                               \end{itemize}
+{{\bfseries}} \\
+                        \begin{flushleft}
+                                \textbf{Flow of Events for Alternate Success Scenario (Ignore Warning): }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item $\rightarrow$ The UI displays the warning notification to the user, advising him to end his workout session.
+                                        \item $\leftarrow$The user chooses to ignore the notification and continues his workout
+                                        \item The Data Manager continues to log data from the Chest Strap.
+										\item $\rightarrow$ If after 15 data points, the user's heart rate has not fallen into the acceptable range, the system automatically pauses.
+										\item $\rightarrow$ The UI informs the user that the system has been paused because it is not safe to use, and advises the user to consult a physician.	
+                                \end{itemize}
+                                \\
+                \hline
+        \end{longtable}
+\end{center}
 
+This use case describes the unfortunate scenario where, during the course of a user's workout, his heart rate has become dangerously high or dangerously low. The system therefore needs to notify the user of his condition. The Data Manager, which records the information from the chest strap makes the detection, and communicates to the UI to display a warning message. Normally, a user would take the advice of the notification and stop his workout. However, the user may choose to ignore the message, and if after 15 seconds, his heart rate has not dropped into the normal range, the system automatically pauses. A second message is sent informing the user of the pause, and the user is advised to see a health care provider. Our device is geared primarily towards the casual workout enthusiast, so prime athletes who can stand extreme heart conditions would not likely use this device. Meanwhile, if the user has a pre-existing heart condition where he might receive this warning, it would be best for him not to use our device. In any case, it is better to be safe and pause the system.
 
 \subsection{Use Case Diagram}
 \begin{figure}[H]
