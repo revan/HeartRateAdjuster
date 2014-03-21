@@ -1424,37 +1424,105 @@ The Expert Doer Principle was not followed as closely because the communication 
         \end{tabular}
 \end{center}
 
+\begin{center}
+	\begin{tabular}{|C{15cm}|}
+		\hline
+			\textbf{Heart Rate Adjuster GUI} \\
+		\hline
+			\begin{flushleft}
+				\textbf{Variables:} \\
+			\end{flushleft}
+				\begin{itemize}
+					\item targetHeartRate: int. This variable will store the target heart rate for the user's workout. This variable is private but can be accessed and changed from other methods.
+					\item restingHeartRate: int. This variable will store the user's initial resting heart rate before the workout begins. This variable is private but can be accessed and changed from other methods.
+					\item isWorkingOut: boolean. This variable will store data on whether the application detects that the user is currently working out or not.
+					\item isRecording: boolean. This variable will store data on whether the application is recording the user's heart rate or not.
+					\item currBPM: int. This variable will store the BPM of the current track that is playing.
+					\item isReady: boolean. This variable will store data on whether the system is ready to begin or not.
+				\end{itemize} \\
+			\hline
+	\end{tabular}
+\end{center}
+\begin{center}
+	\begin{tabular}{|C{15cm}|}
+			\begin{flushleft}
+				\textbf{Functions: } \\
+			\end{flushleft}
+				\begin{itemize}
+					\item getRestingHeartRate(): int. This function will return the data stored in variable targetHeartRate.
+					\item getTargetHeartrate(): int. This function will return the data stored in variable currentHeartRate.
+					\item setTargetHeartRate(): void. This function will set the data stored in variable targetHeartRate to equal the given parameter.
+					\item setRestingHeartRate(): void. This function will set the data stored in variable restingHeartRate to equal the given parameter.
+					\item displayBPM(): int. This function will return the data stored in variable currBPM.
+					\item setBPM(): void. This function will set the data stored in variable currBPM to the passed parameter.
+					\item displayReady(): boolean. This function will return the data stored in variable isReady.
+					\item startWorkout(): void. This function will initiate the workout and attempt to adjust the currentHeartRate toward the targetHeartRate.
+					\item stopWorkout(): void. This function will stop the workout from continuing its functions.
+					\item nextSong(): void. This function will skip the current track which is being played, and use the algorithm to play the next appropriate song.
+					\item displayTitle(): String. This function will display the title of the currently playing track.
+					\item checkRecording(): boolean. This function will return the data stored in the variable isReady.
+					\item checkPlaying(): boolean. This function will return the data stored in the variable isREady.
+					\item menu(): void. This function will display the menu for the application.
+					\item getStatistics(): graph. This function will return graphs which contain statistics from the data manager.
+				\end{itemize}
+			\cr \hline
+	\end{tabular}
+\end{center}
+
+\begin{center}
+	\begin{tabular}{|C{15cm}|}
+		\hline
+			\textbf{Heart Rate Adjuster Hardware} \\
+		\hline
+			\begin{flushleft}
+				\textbf{Variables:} \\
+			\end{flushleft}
+				\begin{itemize}
+					\item currentHeartRate: int. This variable will store data on the user's current heart rate, as measured by the hardware device.
+				\end{itemize} \\
+			\hline
+			\begin{flushleft}
+				\textbf{Functions: } \\
+			\end{flushleft}
+				\begin{itemize}
+					\item recordCurrentHeartRate(): int. This function will retrieve the current heart rate of the user as measured by the hardware device and update the variable currentHeartRate.
+				\end{itemize}
+			\cr \hline
+	\end{tabular}
+\end{center}
+
 
 
 \section{Traceability Matrix}
 
 \begin{center}
-	\begin{tabular}{|l|C{3cm}|C{2.5cm}|C{2.5cm}|C{2.5cm}|C{2.5cm}|}
-		\hline
-			&  \multicolumn{4}{|c|}{\textit{Class}} \\  \hline
-
-			\textit{Domain Concepts}	&	\textbf{Data Manager}	&	\textbf{Data Assembler}	&	\textbf{Graph Container}	& \textbf{Ordered Pair}	\\ \hline
-
-\textbf{HRM Manager}		&	X	&		&		&		\\ \hline
-\textbf{Log Retriever}		&	X	&		&		&		\\ \hline
-\textbf{Track Logger}		&	X	&		&		&		\\ \hline
-\textbf{Music Playerbacker}	&	X	&		&		&		\\ \hline
-\textbf{Track Queuer}		&	X	&	X	&		&		\\ \hline
-\textbf{General UI}			&	X	&	X	&		&		\\ \hline
-\textbf{Playback View}		&	X	&	X	&	X	&		\\ \hline
-\textbf{Heart Beat View}		&	X	&	X	&	X	&		\\ \hline
-\textbf{Workout View}		&	X	&	X	&	X	&		\\ \hline
-\textbf{History View}		&	X	&	X	&	X	&		\\ \hline
-\textbf{Workout Store}		&	X	&	X	&		&	X	\\ \hline
-\textbf{Metadata Store}		&	X	&	X	&		&	X	\\ \hline
-\textbf{Music Store}		&	X	&	X	&		&	X	\\ \hline
-
+\begin{tabular}{|l|C{1.75cm}|C{1.75cm}|C{1.75cm}|C{1.75cm}|C{1.75cm}|C{1.75cm}|C{1.75cm}|}
+ 		\hline
+ 			&  \multicolumn{6}{|c|}{\textit{Class}} \\  \hline
+ 
+ 			\textit{Domain Concepts}	&	\textbf{Data Manager}	&	\textbf{Data Assembler}	&	\textbf{Graph Container}	& \textbf{Ordered Pair} & \textbf{Heart Rate Monitor GUI} &\textbf{Heart Rate Monitor Hardware}	\\ \hline
+ 
+ \textbf{HRM Manager}		&	X	&		&		&		&		&	X	\\ \hline
+ \textbf{Log Retriever}		&	X	&		&		&		&		&		\\ \hline
+ \textbf{Track Logger}		&	X	&		&		&		&		&		\\ \hline
+ \textbf{Music Playerbacker}	&	X	&		&		&		&	X	&		\\ \hline
+ \textbf{Track Queuer}		&	X	&	X	&		&		&		&		\\ \hline
+ \textbf{General UI}			&	X	&	X	&		&		&	X	&		\\ \hline
+ \textbf{Playback View}		&	X	&	X	&	X	&		&	X	&		\\ \hline
+ \textbf{Heart Beat View}		&	X	&	X	&	X	&		&	X	&		\\ \hline
+ \textbf{Workout View}		&	X	&	X	&	X	&		&	X	&		\\ \hline
+ \textbf{History View}		&	X	&	X	&	X	&		&	X	&		\\ \hline
+ \textbf{Workout Store}		&	X	&	X	&		&	X	&		&	\\ \hline
+ \textbf{Metadata Store}		&	X	&	X	&		&	X	&		&	\\ \hline
+ \textbf{Music Store}		&	X	&	X	&		&	X	&		&	\\ \hline
 	\end{tabular}
 \end{center}
 
 	From our domain concepts, we derived four classes: data manager, data assembler, graph container, and ordered pair. Our data manager is essentially involved with every domain. Its purpose is to log and manage various types of data, and store the packaged data other objects to retrieve. Essentially, the data manger acts as an intermediary in most steps, but only providing a minimal interface for modules so that data cannot be tampered with or seen, just used. \\
 
 	Next, our data assembler is charged with retrieving the appropriate data from the database and packaging it in a convenient form for usage. For instance, we can take songs and metadata from their storage locations and return playlists. We can also take our data and create ordered pairs for our graph container. Then, our graph container contains an array of the requested graphs, and it is involved with the domain concepts that require various views. Using our data assembler allows us to have a nice container of data to graph. Finally, our ordered pair class was derived from the storage concepts. We use it to store data points, so that we will be able to access them.
+
+    For the user interface and hardware communication, two other classes were derived rather clearly: the Graphical User Interface class, and the Hardware communication class. The graphical user interface is involved with many domains, save the few domains relating to data storage - that is taken care of by the data manager portion. The purpose of the graphical user interface is for users to be able to easily interact with the application. This includes being able to easily view different portions of the application such as information on their current workout, their history, etc. The next class, Hardware, was derived as a modularized way to communicate with the Heart Rate Monitor which is required to retrieve information about the user's heart rate. This class is simple - its only function is to receive information from the HRM being used, and to update the user's current heart rate in real time.
 
 
 \chapter{System Architecture and System Design}
