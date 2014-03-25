@@ -18,8 +18,11 @@ import java.util.TimerTask;
 
 public class MainActivity extends Activity {
 
-    public IHeartRateDevice chestStrap = new ChestStrapFake(); //Chest Strap
+    public IHeartRateDevice chestStrap = new ChestStrapFake(); //Chest Strap Fake
+    public IAudioSystem audioSystem = new AudioSystemFake(); //Audio System Fake
     private Timer timer = new Timer();
+
+    //constants
     private static int PERIOD = 1000;
     private static String up = "Raising";
     private static String down = "Lowering";
@@ -108,7 +111,7 @@ public class MainActivity extends Activity {
         }, 200, PERIOD);
 
         //initialize play button. Calls togglePlayback()
-        ImageButton togglePlay = (ImageButton)findViewById(R.id.imageButton1);
+        final ImageButton togglePlay = (ImageButton)findViewById(R.id.imageButton1);
         togglePlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,7 +120,7 @@ public class MainActivity extends Activity {
         });
 
         //initialize skip button. Calls skipTrack()
-        ImageButton skipTrack = (ImageButton)findViewById(R.id.imageButton2);
+        final ImageButton skipTrack = (ImageButton)findViewById(R.id.imageButton2);
         skipTrack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,6 +128,16 @@ public class MainActivity extends Activity {
             }
         });
 
+        //initialize fake now playing button. Calls updateNowPlaying with current time.
+        final ImageButton fakeNowPlaying = (ImageButton)findViewById(R.id.imageButton);
+        fakeNowPlaying.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateNowPlaying();
+            }
+        });
+
+        updateNowPlaying();
 
     }
 
@@ -145,6 +158,7 @@ public class MainActivity extends Activity {
         int id = item.getItemId();
         if (id == R.id.action_statistics) {
             //TODO start statistics activity
+            Toast.makeText(this, "Start Statistics Activity", Toast.LENGTH_SHORT).show();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -153,17 +167,21 @@ public class MainActivity extends Activity {
     //methods interfacing with other classes
     void updateTargetHeartrate(int val){
         Toast.makeText(this, "updateTargetHeartrate("+val+")", Toast.LENGTH_SHORT).show();
+        audioSystem.setTargetHeartRate(val);
     }
 
     void togglePlayback(){
         Toast.makeText(this, "togglePlayback()", Toast.LENGTH_SHORT).show();
+        audioSystem.togglePlayback();
     }
 
     void skipTrack(){
         Toast.makeText(this, "skipTrack()", Toast.LENGTH_SHORT).show();
+        audioSystem.skipTrack();
     }
 
-    void updateNowPlaying(String nowPlaying){
-        //TODO
+    void updateNowPlaying(){
+        TextView textView = (TextView)findViewById(R.id.textView3);
+        textView.setText("Now Playing: "+audioSystem.getNowPlaying());
     }
 }

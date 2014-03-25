@@ -7,5 +7,7 @@ public class ChestStrapFake implements IHeartRateDevice{
     public int getCurrentHeartRate(){
         return heartrate;
     }
-    public void setCurrentHeartRate(int heartrate) {this.heartrate = heartrate;}
+    public void setCurrentHeartRate(int heartrate){
+        this.heartrate = heartrate;
+    }
 }
