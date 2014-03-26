@@ -1,6 +1,6 @@
 package com.example.heartrateadjuster;
-/*For use with a UI element for faking Audio System
- *Implements interface, so dependent systems don't have to know
+/**
+ * Implementation of {@link com.example.heartrateadjuster.IAudioSystem} for faking Audio System with UI element.
  */
 public class AudioSystemFake implements IAudioSystem{
     public void setTargetHeartRate(int target){
@@ -13,7 +13,10 @@ public class AudioSystemFake implements IAudioSystem{
         return;
     }
 
-    //Return current time as title
+    /**
+     * Returns system time for a unique String.
+     * @return Current system time as String.
+     */
     public String getNowPlaying(){
         return ""+System.currentTimeMillis();
     }

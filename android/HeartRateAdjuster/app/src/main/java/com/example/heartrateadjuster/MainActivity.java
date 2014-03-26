@@ -15,11 +15,26 @@ import android.widget.Toast;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * The main screen of the application.
+ * Initializes chestStrap and audioSystem objects and sets up the UI with callbacks.
+ */
 
 public class MainActivity extends Activity {
 
-    public IHeartRateDevice chestStrap = new ChestStrapFake(); //Chest Strap Fake
-    public IAudioSystem audioSystem = new AudioSystemFake(); //Audio System Fake
+    /**
+     * Chest strap object, instantiated as a {@link com.example.heartrateadjuster.ChestStrapFake}
+     */
+    public IHeartRateDevice chestStrap = new ChestStrapFake();
+
+    /**
+     * Audio system object, instantiated as a {@link com.example.heartrateadjuster.AudioSystemFake}
+     */
+    public IAudioSystem audioSystem = new AudioSystemFake();
+
+    /**
+     * Timer used to update heart rate display once a second.
+     */
     private Timer timer = new Timer();
 
     //constants
@@ -27,6 +42,10 @@ public class MainActivity extends Activity {
     private static String up = "Raising";
     private static String down = "Lowering";
 
+    /**
+     * Android fundamental method, used to instantiate all UI elements with callbacks.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -164,22 +183,34 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    //methods interfacing with other classes
+    /**
+     * Passes on new heart rate value to audioSystem.
+     * @param val Heart Rate value from UI.
+     */
     void updateTargetHeartrate(int val){
         Toast.makeText(this, "updateTargetHeartrate("+val+")", Toast.LENGTH_SHORT).show();
         audioSystem.setTargetHeartRate(val);
     }
 
+    /**
+     * Passes on togglePlayback command to audioSystem.
+     */
     void togglePlayback(){
         Toast.makeText(this, "togglePlayback()", Toast.LENGTH_SHORT).show();
         audioSystem.togglePlayback();
     }
 
+    /**
+     * Passes on skipTrack command to audioSystem.
+     */
     void skipTrack(){
         Toast.makeText(this, "skipTrack()", Toast.LENGTH_SHORT).show();
         audioSystem.skipTrack();
     }
 
+    /**
+     * Updates UI with now playing information from audioSystem.
+     */
     void updateNowPlaying(){
         TextView textView = (TextView)findViewById(R.id.textView3);
         textView.setText("Now Playing: "+audioSystem.getNowPlaying());
