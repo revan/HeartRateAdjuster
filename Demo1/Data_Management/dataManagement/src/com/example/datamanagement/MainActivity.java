@@ -52,7 +52,7 @@ public class MainActivity extends Activity {
 	
 	/**
 	 * The graphData function is called when the Graph button is pressed; it initiates the activity which graphs the data
-	 * @param view
+	 * @param view The function takes the current view as a parameter since the initiator is a button press.
 	 */
 	public void graphData(View view) {
 		Intent graphIntent = new Intent(this,GraphDataActivity.class);

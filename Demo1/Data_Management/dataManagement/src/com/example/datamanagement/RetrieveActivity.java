@@ -11,8 +11,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 
+/**
+ * This RetrieveActivity is a script that runs to extract all the Record objects from the database.
+ */
 public class RetrieveActivity extends Activity {
-
+	/**
+	 * This RetrieveActivity is a script that runs to extract all the Record objects from the database.
+	 */
+	
+	
 	/**
 	 * The onCreate function is called when the user presses the Retrieve button; it begins the retrieval of the records
 	 * @param savedInstanceState 

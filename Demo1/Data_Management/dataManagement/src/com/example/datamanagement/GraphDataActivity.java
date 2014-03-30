@@ -18,7 +18,7 @@ import android.content.Intent;
 import android.view.Menu;
 
 /**
- * The GraphDataActivity is called when the Graph button is pressed.
+ * The GraphDataActivity runs the script to test the graphing when the Graph button is pressed.
  * @author nikhil
  *
  */
@@ -82,6 +82,9 @@ public class GraphDataActivity extends Activity {
 	}
 
 	@Override
+	/**
+	 * The onCreate function is used to extract all the relevant data from the Records in the database and graph them.
+	 */
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.graph_data, menu);

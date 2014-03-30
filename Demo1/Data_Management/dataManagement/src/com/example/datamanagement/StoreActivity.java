@@ -1,7 +1,7 @@
 package com.example.datamanagement;
 
 /** 
- * This is the testing script for storing the records.
+ * The StoreActivity runs the testing script for storing the records.
  */
 
 import android.os.Bundle;

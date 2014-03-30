@@ -1,9 +1,17 @@
 import java.io.*;
+
+
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.chart.ChartFactory; 
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.JFreeChart; 
-import org.jfree.chart.ChartUtilities; 
+import org.jfree.chart.ChartUtilities;
+
+/**
+ * This is a sample script to test out graphing randomized heart rates vs time. See the comments in code for more descriptions.
+ * @author nikhil
+ *
+ */
 public class LinePlot {  
       public static void main(String[] args){
          try {

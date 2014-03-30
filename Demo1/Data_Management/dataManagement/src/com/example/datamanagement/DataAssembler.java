@@ -12,7 +12,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
+/**
+ * This Data Assembler class is responsible for creating the SQLite structure, as as providing functions to modify, add, or remove Records from the database.
+*/
 
 public class DataAssembler extends SQLiteOpenHelper {
 
