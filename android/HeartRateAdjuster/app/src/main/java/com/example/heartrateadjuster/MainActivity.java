@@ -136,6 +136,7 @@ public class MainActivity extends Activity implements CalculateTargetFragment.Ca
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        //Update heart rate
                         TextView textView = (TextView)findViewById(R.id.textView4);
                         textView.setText(chestStrap.getCurrentHeartRate() + " BPM");
 
@@ -143,6 +144,11 @@ public class MainActivity extends Activity implements CalculateTargetFragment.Ca
                         Record nowPlaying = audioSystem.getNowPlaying();
                         nowPlaying.setHeartRate(chestStrap.getCurrentHeartRate());
                         db.addRecord(nowPlaying);
+
+                        //If heart rate critical, pause
+                        if(chestStrap.getCurrentHeartRate() > np2.getValue()+30){
+                            criticalStop();
+                        }
                     }
                 });
             }
@@ -240,6 +246,14 @@ public class MainActivity extends Activity implements CalculateTargetFragment.Ca
     void togglePlayback(){
         Toast.makeText(this, "togglePlayback()", Toast.LENGTH_SHORT).show();
         audioSystem.togglePlayback();
+    }
+
+    /**
+     * Passes on criticalStop command to audioSystem.
+     */
+    void criticalStop(){
+        Toast.makeText(this, "criticalStop()", Toast.LENGTH_SHORT).show();
+        audioSystem.criticalStop();
     }
 
     /**

@@ -16,6 +16,9 @@ public class AudioSystemFake implements IAudioSystem{
     public void togglePlayback(){
         return;
     }
+    public void criticalStop() {
+        return;
+    }
 
     /**
      * Returns system time for a unique String.
