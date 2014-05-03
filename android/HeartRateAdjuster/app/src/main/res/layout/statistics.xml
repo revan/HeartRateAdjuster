@@ -6,58 +6,36 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context=".MainActivity" >
 
-	<TableLayout 
-	    android:id="@+id/tableLayout1"
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent">
-	    
-	    <TableRow
-	        android:id="@+id/tableRow3"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:padding="5dip">
-    
-<!--     
-    <EditText android:id="@+id/edit_message"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:hint="@string/edit_message" />
--->
         <Button
+            android:layout_gravity="center"
 	  	    android:layout_width="wrap_content"
   	    	android:layout_height="wrap_content"
   	    	android:text="@string/graph_button"
-  	    	android:onClick="graphData" /> 
-  	    </TableRow>
-  	    <TableRow
-  	        android:id="@+id/tableRow4"
-  	        android:layout_width="wrap_content"
-  	        android:layout_height="wrap_content"
-  	        android:padding="5dip">
+  	    	android:onClick="graphData" />
 
     		<Button
+                android:layout_gravity="center"
 	        	android:layout_width="wrap_content"
   	    		android:layout_height="wrap_content"
   	    		android:text="@string/artist_chart"
   	    		android:onClick="graphArtist"/>
 
     		<Button
+                android:layout_gravity="center"
 		        android:layout_width="wrap_content"
   	    		android:layout_height="wrap_content"
   	    		android:text="@string/song_chart"
   	    		android:onClick="graphSong"/>
-  	
+
     		<Button
+                android:layout_gravity="center"
 		        android:layout_width="wrap_content"
   	    		android:layout_height="wrap_content"
   	    		android:text="@string/genre_chart"
   	    		android:onClick="graphGenre"/>
-    		
-    	</TableRow>
-    </TableLayout>
-  	
-    
+
+
 </LinearLayout>
