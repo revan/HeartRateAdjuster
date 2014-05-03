@@ -18,36 +18,24 @@
         </activity>
         <activity android:name="org.achartengine.GraphicalActivity" />
         <activity
-            android:name=".LineActivity"
+            android:name="com.example.heartrateadjuster.LineActivity"
             android:label="@string/title_activity_graph_data" >
         </activity>
         <activity
-            android:name=".StoreActivity"
-            android:label="@string/title_activity_store" >
-        </activity>
-        <activity
-            android:name=".RetrieveActivity"
-            android:label="@string/title_activity_retrieve" >
-        </activity>
-        <activity
-            android:name="com.example.datamanagement.LineChart"
-            android:label="@string/title_activity_line_chart" >
-        </activity>
-        <activity
-            android:name="com.example.datamanagement.PieActivity"
-            android:label="@string/title_activity_pie" >
-        </activity>
-        <activity
-            android:name=".SongActivity"
+            android:name="com.example.heartrateadjuster.SongActivity"
             android:label="@string/title_activity_song" >
         </activity>
         <activity
-            android:name=".ArtistActivity"
+            android:name="com.example.heartrateadjuster.ArtistActivity"
             android:label="@string/title_activity_artist" >
         </activity>
         <activity
-            android:name=".GenreActivity"
+            android:name="com.example.heartrateadjuster.GenreActivity"
             android:label="@string/title_activity_genre" >
+        </activity>
+        <activity
+            android:name="com.example.heartrateadjuster.StatisticsActivity"
+            android:label="Statistics Activity" >
         </activity>
     </application>
 

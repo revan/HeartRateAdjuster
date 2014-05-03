@@ -2,21 +2,20 @@ package com.example.heartrateadjuster;
 /**
  * This Android activity essentially is a script that runs the graphing of the data.
  */
-import java.util.List;
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.Menu;
 
+import org.achartengine.ChartFactory;
 import org.achartengine.chart.PointStyle;
 import org.achartengine.model.XYMultipleSeriesDataset;
 import org.achartengine.model.XYSeries;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
-import org.achartengine.ChartFactory;
 
-
-import android.os.Bundle;
-import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Color;
-import android.view.Menu;
+import java.util.List;
 
 /**
  * The LineActivity runs the script to test the graphing when the Graph button is pressed.
@@ -30,7 +29,7 @@ public class LineActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_graph_data);
 		
-		Intent graphIntent = getIntent(); // retrieve the intent from the MainActivity
+		Intent graphIntent = getIntent(); // retrieve the intent from the StatisticsActivity
 		
 		System.out.println("the Graph Data button was pressed");
 		
@@ -77,6 +76,7 @@ public class LineActivity extends Activity {
 		     //dataset.addSeries(fakeSeries);
 		      
 		     XYSeriesRenderer hrRenderer = new XYSeriesRenderer();
+
 		     hrRenderer.setColor(Color.GREEN);
 		     hrRenderer.setPointStyle(PointStyle.DIAMOND);
 		     hrRenderer.setFillPoints(true);
@@ -99,6 +99,8 @@ public class LineActivity extends Activity {
 		     multiRenderer.setChartTitle("Heart Rate vs Time");
 		     multiRenderer.setXTitle("Timestamps (s)");
 		     multiRenderer.setYTitle("Heart Rate");
+             multiRenderer.setApplyBackgroundColor(true);
+             multiRenderer.setBackgroundColor(Color.BLACK);
 		     multiRenderer.setZoomButtonsVisible(true);
 		     
 		     for(int i = 0; i < myTimes.length;i++)

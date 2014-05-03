@@ -1,20 +1,20 @@
 package com.example.heartrateadjuster;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.Menu;
 
 import org.achartengine.ChartFactory;
 import org.achartengine.model.CategorySeries;
 import org.achartengine.renderer.DefaultRenderer;
 import org.achartengine.renderer.SimpleSeriesRenderer;
 
-import android.os.Bundle;
-import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Color;
-import android.view.Menu;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
 
 public class ArtistActivity extends Activity {
 
@@ -87,6 +87,7 @@ public class ArtistActivity extends Activity {
 		defaultRenderer.setChartTitle("Frequencies of Artists");
 		defaultRenderer.setChartTitleTextSize(50);
 		defaultRenderer.setZoomButtonsVisible(true);
+        defaultRenderer.setApplyBackgroundColor(true);
 		defaultRenderer.setBackgroundColor(Color.BLACK);
 		
 		Intent intent = ChartFactory.getPieChartIntent(getBaseContext(), distributionSeries, defaultRenderer, "PieChart");

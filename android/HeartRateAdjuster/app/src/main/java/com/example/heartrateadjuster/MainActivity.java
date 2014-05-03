@@ -2,6 +2,7 @@ package com.example.heartrateadjuster;
 
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +14,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -47,6 +49,12 @@ public class MainActivity extends Activity implements CalculateTargetFragment.Ca
      * Non-final pointer to peak selector, needed to use popup
      */
     NumberPicker np22;
+
+    /**
+     * Database Object
+     */
+    private DataAssembler db = new DataAssembler(this);
+
     /**
      * Android fundamental method, used to instantiate all UI elements with callbacks.
      * @param savedInstanceState
@@ -130,6 +138,11 @@ public class MainActivity extends Activity implements CalculateTargetFragment.Ca
                     public void run() {
                         TextView textView = (TextView)findViewById(R.id.textView4);
                         textView.setText(chestStrap.getCurrentHeartRate() + " BPM");
+
+                        //store nowPlaying in database
+                        Record nowPlaying = audioSystem.getNowPlaying();
+                        nowPlaying.setHeartRate(chestStrap.getCurrentHeartRate());
+                        db.addRecord(nowPlaying);
                     }
                 });
             }
@@ -182,6 +195,11 @@ public class MainActivity extends Activity implements CalculateTargetFragment.Ca
 
         updateNowPlaying();
 
+        List<Record> recordList = db.getAllRecords(); // retrieves all the records that are currently in the database
+        for(Record record : recordList) { // deletes all the records from the database
+            db.deleteRecord(record);
+        }
+
     }
 
 
@@ -200,8 +218,8 @@ public class MainActivity extends Activity implements CalculateTargetFragment.Ca
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_statistics) {
-            //TODO start statistics activity
-            Toast.makeText(this, "Start Statistics Activity", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, StatisticsActivity.class);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -237,7 +255,7 @@ public class MainActivity extends Activity implements CalculateTargetFragment.Ca
      */
     void updateNowPlaying(){
         TextView textView = (TextView)findViewById(R.id.textView3);
-        textView.setText("Now Playing: "+audioSystem.getNowPlaying());
+        textView.setText("Now Playing: "+audioSystem.getNowPlaying().getSong());
     }
 
     /**

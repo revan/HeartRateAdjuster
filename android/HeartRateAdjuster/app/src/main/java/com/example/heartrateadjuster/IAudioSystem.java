@@ -24,5 +24,5 @@ public interface IAudioSystem {
      * Gets currently playing track.
      * @return The title of the currently playing track.
      */
-    public String getNowPlaying();
+    public Record getNowPlaying();
 }
