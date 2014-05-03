@@ -2,7 +2,26 @@
 <resources>
 
     <string name="app_name">Heart Rate Adjuster</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="successfulLogging">Data has been logged and retrieved successfully</string>
+    <string name="edit_message">Enter a message</string>
+    <string name="retrieve">Retrieve</string>
+    <string name="title_activity_begin_graphing">BeginGraphingActivity</string>
+    <string name="graph_button">Graph</string>
+    <string name="title_activity_graph_data">GraphDataActivity</string>
+    <string name="store_Current_Information">Store</string>
+    <string name="storage_Success">Records have been successfully inserted into the database</string>
+    <string name="retrieve_Success">Records have been successfully retrieved from the database</string>
+    <string name="title_activity_store">StoreActivity</string>
+    <string name="title_activity_retrieve">RetrieveActivity</string>
+    <string name="title_activity_line_chart">LineChart</string>
+    <string name="pie_chart">Pie</string>
+    <string name="title_activity_pie">PieActivity</string>
+    <string name="title_activity_song">SongActivity</string>
+    <string name="title_activity_artist">ArtistActivity</string>
+    <string name="artist_chart">Artist</string>
+    <string name="song_chart">Song</string>
+    <string name="title_activity_genre">GenreActivity</string>
+	<string name="genre_chart">Genre</string>
 
 </resources>
