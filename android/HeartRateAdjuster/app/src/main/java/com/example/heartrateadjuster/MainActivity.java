@@ -1,6 +1,7 @@
 package com.example.heartrateadjuster;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +21,7 @@ import java.util.TimerTask;
  * Initializes chestStrap and audioSystem objects and sets up the UI with callbacks.
  */
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements CalculateTargetFragment.CalculateListener{
 
     /**
      * Chest strap object, instantiated as a {@link com.example.heartrateadjuster.ChestStrapFake}
@@ -43,6 +44,10 @@ public class MainActivity extends Activity {
     private static String down = "Lowering";
 
     /**
+     * Non-final pointer to peak selector, needed to use popup
+     */
+    NumberPicker np22;
+    /**
      * Android fundamental method, used to instantiate all UI elements with callbacks.
      * @param savedInstanceState
      */
@@ -54,8 +59,9 @@ public class MainActivity extends Activity {
         //initialize number pickers. np1 is low, np2 is high
         final NumberPicker np1 = (NumberPicker)findViewById(R.id.numberPicker1);
         final NumberPicker np2 = (NumberPicker)findViewById(R.id.numberPicker2);
+        np22 = np2;
         final Button toggleDirection = (Button)findViewById(R.id.button1);
-        np1.setMinValue(40);
+        np1.setMinValue(0);
         np1.setMaxValue(200);
         np1.setValue(70);
         np1.setOnScrollListener(new NumberPicker.OnScrollListener() {
@@ -147,6 +153,24 @@ public class MainActivity extends Activity {
             }
         });
 
+        //initialize set button
+        final Button buttonSet = (Button)findViewById(R.id.button2);
+        buttonSet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                np1.setValue(chestStrap.getCurrentHeartRate());
+            }
+        });
+
+        //initialize calculate button
+        final Button buttonCalculate = (Button)findViewById(R.id.button3);
+        buttonCalculate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showCalculatePopup();
+            }
+        });
+
         //initialize fake now playing button. Calls updateNowPlaying with current time.
         final ImageButton fakeNowPlaying = (ImageButton)findViewById(R.id.imageButton);
         fakeNowPlaying.setOnClickListener(new View.OnClickListener() {
@@ -215,4 +239,24 @@ public class MainActivity extends Activity {
         TextView textView = (TextView)findViewById(R.id.textView3);
         textView.setText("Now Playing: "+audioSystem.getNowPlaying());
     }
+
+    /**
+     * Pops up {@link com.example.heartrateadjuster.CalculateTargetFragment} UI
+     * to calculate target heartrate
+     */
+    void showCalculatePopup(){
+        DialogFragment dialog = new CalculateTargetFragment();
+        dialog.show(getFragmentManager(), "calculate");
+    }
+
+    /**
+     * Callback for {@link com.example.heartrateadjuster.CalculateTargetFragment} pop-up
+     * @param dialog the popup object
+     * @param newTarget the new peak heartrate
+     */
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog, int newTarget) {
+        np22.setValue(newTarget);
+    }
 }
+
