@@ -15,3 +15,5 @@ Date | Members | Subject
 3-7 | Kenny, Samani, Nikhil, Revan | Restructured project organization and Use Cases
 3-13| Jonathan, Tae-Min, Nikhil, Revan | Divide work for rest of report 2
 3-14| Jonathan, Nikhil, Revan | Restructure project organization
+5-03| Jonathan, Nikhil, Revan | Merge code, work on report 3
+

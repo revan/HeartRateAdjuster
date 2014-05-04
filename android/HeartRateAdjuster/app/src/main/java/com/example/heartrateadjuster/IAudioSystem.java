@@ -24,5 +24,10 @@ public interface IAudioSystem {
      * Gets currently playing track.
      * @return The title of the currently playing track.
      */
-    public String getNowPlaying();
+    public Record getNowPlaying();
+
+    /**
+     * Immediately stops playback. Called when heart rate is too high.
+     */
+    public void criticalStop();
 }

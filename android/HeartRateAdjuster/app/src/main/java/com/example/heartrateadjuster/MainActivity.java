@@ -1,6 +1,8 @@
 package com.example.heartrateadjuster;
 
 import android.app.Activity;
+import android.app.DialogFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,6 +14,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -20,7 +23,7 @@ import java.util.TimerTask;
  * Initializes chestStrap and audioSystem objects and sets up the UI with callbacks.
  */
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements CalculateTargetFragment.CalculateListener{
 
     /**
      * Chest strap object, instantiated as a {@link com.example.heartrateadjuster.ChestStrapFake}
@@ -43,6 +46,16 @@ public class MainActivity extends Activity {
     private static String down = "Lowering";
 
     /**
+     * Non-final pointer to peak selector, needed to use popup
+     */
+    NumberPicker np22;
+
+    /**
+     * Database Object
+     */
+    private DataAssembler db = new DataAssembler(this);
+
+    /**
      * Android fundamental method, used to instantiate all UI elements with callbacks.
      * @param savedInstanceState
      */
@@ -54,8 +67,9 @@ public class MainActivity extends Activity {
         //initialize number pickers. np1 is low, np2 is high
         final NumberPicker np1 = (NumberPicker)findViewById(R.id.numberPicker1);
         final NumberPicker np2 = (NumberPicker)findViewById(R.id.numberPicker2);
+        np22 = np2;
         final Button toggleDirection = (Button)findViewById(R.id.button1);
-        np1.setMinValue(40);
+        np1.setMinValue(0);
         np1.setMaxValue(200);
         np1.setValue(70);
         np1.setOnScrollListener(new NumberPicker.OnScrollListener() {
@@ -122,8 +136,19 @@ public class MainActivity extends Activity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        //Update heart rate
                         TextView textView = (TextView)findViewById(R.id.textView4);
                         textView.setText(chestStrap.getCurrentHeartRate() + " BPM");
+
+                        //store nowPlaying in database
+                        Record nowPlaying = audioSystem.getNowPlaying();
+                        nowPlaying.setHeartRate(chestStrap.getCurrentHeartRate());
+                        db.addRecord(nowPlaying);
+
+                        //If heart rate critical, pause
+                        if(chestStrap.getCurrentHeartRate() > np2.getValue()+30){
+                            criticalStop();
+                        }
                     }
                 });
             }
@@ -147,6 +172,24 @@ public class MainActivity extends Activity {
             }
         });
 
+        //initialize set button
+        final Button buttonSet = (Button)findViewById(R.id.button2);
+        buttonSet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                np1.setValue(chestStrap.getCurrentHeartRate());
+            }
+        });
+
+        //initialize calculate button
+        final Button buttonCalculate = (Button)findViewById(R.id.button3);
+        buttonCalculate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showCalculatePopup();
+            }
+        });
+
         //initialize fake now playing button. Calls updateNowPlaying with current time.
         final ImageButton fakeNowPlaying = (ImageButton)findViewById(R.id.imageButton);
         fakeNowPlaying.setOnClickListener(new View.OnClickListener() {
@@ -157,6 +200,11 @@ public class MainActivity extends Activity {
         });
 
         updateNowPlaying();
+
+        List<Record> recordList = db.getAllRecords(); // retrieves all the records that are currently in the database
+        for(Record record : recordList) { // deletes all the records from the database
+            db.deleteRecord(record);
+        }
 
     }
 
@@ -176,8 +224,8 @@ public class MainActivity extends Activity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_statistics) {
-            //TODO start statistics activity
-            Toast.makeText(this, "Start Statistics Activity", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, StatisticsActivity.class);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -201,6 +249,14 @@ public class MainActivity extends Activity {
     }
 
     /**
+     * Passes on criticalStop command to audioSystem.
+     */
+    void criticalStop(){
+        Toast.makeText(this, "criticalStop()", Toast.LENGTH_SHORT).show();
+        audioSystem.criticalStop();
+    }
+
+    /**
      * Passes on skipTrack command to audioSystem.
      */
     void skipTrack(){
@@ -213,6 +269,26 @@ public class MainActivity extends Activity {
      */
     void updateNowPlaying(){
         TextView textView = (TextView)findViewById(R.id.textView3);
-        textView.setText("Now Playing: "+audioSystem.getNowPlaying());
+        textView.setText("Now Playing: "+audioSystem.getNowPlaying().getSong());
+    }
+
+    /**
+     * Pops up {@link com.example.heartrateadjuster.CalculateTargetFragment} UI
+     * to calculate target heartrate
+     */
+    void showCalculatePopup(){
+        DialogFragment dialog = new CalculateTargetFragment();
+        dialog.show(getFragmentManager(), "calculate");
+    }
+
+    /**
+     * Callback for {@link com.example.heartrateadjuster.CalculateTargetFragment} pop-up
+     * @param dialog the popup object
+     * @param newTarget the new peak heartrate
+     */
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog, int newTarget) {
+        np22.setValue(newTarget);
     }
 }
+

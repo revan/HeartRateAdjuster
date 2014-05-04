@@ -16,6 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="org.achartengine.GraphicalActivity" />
+        <activity
+            android:name="com.example.heartrateadjuster.StatisticsActivity"
+            android:label="Statistics Activity" >
+        </activity>
     </application>
 
 </manifest>
