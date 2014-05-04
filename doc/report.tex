@@ -335,7 +335,7 @@ Use Cases are specific tasks that are created together by the designer and the c
                 \hline
 			UC-8 & setResting & The user can set their resting heart rate to be their current heart rate \\
 		\hline
-			UC-9 & calculatePeak & The user can have the system calculate a recommended target heart rate
+			UC-9 & calculatePeak & The user can have the system calculate a recommended target heart rate \\
         \end{tabular}
 \end{center}
 
@@ -380,11 +380,11 @@ The Traceability Matrix allows the reader to cross the functional and non-functi
                 \hline
                         REQ-16 & 3 & X & X & X & X & X & X & X & X & X  \\
                 \hline
-        		REQ-17 & 1 & X & X & X & X & X & X & X & X & X  \\
+        		REQ-17 & 1 &   &   &   &   &   &   &   & X &    \\
                 \hline
-         		REQ-18 & 1 & X & X & X & X & X & X & X & X & X  \\
+         		REQ-18 & 1 &   &   &   &   &   &   &   &   & X  \\
                 \hline
-                  Total Weight &   & 39& 39& 23& 19& 27& 21& 23 & 12 & 13  \\
+                  Total Weight &   & 37& 37& 21& 17& 25& 19& 21 & 11 & 12  \\
                 \hline
         \end{tabular}
 \end{center}
@@ -758,6 +758,53 @@ If no data is received from the chest strap, the system will present the user wi
 \end{center}
 
 This use case describes the unfortunate scenario where, during the course of a user's workout, his heart rate has become dangerously high or dangerously low. The system therefore needs to notify the user of his condition. The Data Manager, which records the information from the chest strap makes the detection, and communicates to the UI to display a warning message. Normally, a user would take the advice of the notification and stop his workout. However, the user may choose to ignore the message, and if after 15 seconds, his heart rate has not dropped into the normal range, the system automatically pauses. A second message is sent informing the user of the pause, and the user is advised to see a health care provider. Our device is geared primarily towards the casual workout enthusiast, so prime athletes who can stand extreme heart conditions would not likely use this device. Meanwhile, if the user has a pre-existing heart condition where he might receive this warning, it would be best for him not to use our device. In any case, it is better to be safe and pause the system.
+
+\begin{center}
+        \begin{longtable}{|C{15cm}|}
+                \hline
+                        \textbf{Use Case UC-5: displayStatistics}\\
+
+                \hline
+                        \begin{flushleft}
+                                \textbf{Related Requirements: } REQ-1, REQ-5, REQ-6, REQ-8, REQ-9, REQ-13, REQ-14, REQ-16
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Initiating Actor: } User Interface
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Participating Actors: } Data Manager, Data Assembler, Graph Container
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Actor's Goal: } Return graphs about the user's workout.
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Preconditions: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The system is no longer playing music.
+                                        \item The system is no longer loggin data.
+                                        \item The user is no longer working out.
+                                        \item The User Interface has completed error checking on the user's request for graphs.
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Postconditions: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The User Interface will receive graphs of workout data that it requested through the Data Manager
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Flow of Events for Main Success Scenario: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item $\rightarrow$ User Interface makes call(s) to any or all of the following functions: getArtistVsBPM(), getGenreVsBPM(), getTempoVsBPM(), getHRVsTime(), or getPlaylist().
+                                        \item $\rightarrow$ The Data Manager will then make calls to the appropriate “assemble” function.
+                                        \item The assemble function will retrieve the data from the database, package it as either an ordered pair of doubles or an ordered pair of a string and a double (for the music sections).
+                                        \item $\rightarrow$ The Data Assembler will then be passed to the Graph Container, which will extract the data from the Data Assembler and graph the data that it contains. These graphs will be stored as an array in the Graph Container.
+                                \end{itemize}
+                       \\
+                \hline
+        \end{longtable}
+\end{center}
 
 \subsection{Use Case Diagram}
 \begin{figure}[H]
