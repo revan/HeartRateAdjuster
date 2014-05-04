@@ -1205,6 +1205,12 @@ If we assume that productivity factor is 28 hours per user case point. The effor
 	           \hline
 	           Listen for user input & D & general UI\\
 	           \hline
+		   Recommend target heart rate & D & peak calculator\\
+		   \hline
+		   Set the user's resting heart rate & D & rest setter\\
+		   \hline
+		   Alert the user in case of danger & D & user alerter\\
+		   \hline
 	           Graphically displaying music information & D & playback view\\
 	           \hline
 	           Graphically displaying heart rate info & D & heart beat view\\
@@ -1240,6 +1246,10 @@ If we assume that productivity factor is 28 hours per user case point. The effor
 				\hline
 	            music playerbacker $\leftrightarrow$ playback view & playback view displays information based on the data in music playerbacker & human data interface\\
 				\hline
+		    rest setter $\leftrightarrow$ HRM manager & HRM manager retrieves user's current heart rate to set as resting & human data interface\\
+				\hline
+		    user alerter $\leftrightarrow$ HRM manager & HRM manager retrieves user's current heart rate and activates user alerter if in dangerous levels & human data interface\\
+				\hline
 	            hrm manager $\leftrightarrow$ general UI & general UI pairs and reports hrm status based on hrm manager & human data interface\\
 				\hline
 	            heart beat view $\leftrightarrow$ hrm manager & retrieves and displays heart rate data from the hrm manager & human data interface\\
@@ -1264,11 +1274,17 @@ If we assume that productivity factor is 28 hours per user case point. The effor
 				\cline{1-1}
 	            track logger & & \\
 				\hline
-	            music playerbacker & \multirow{7}{*}{human data interface} & \multirow{7}{0.4\textwidth}{Human data interfaces deal with the interaction between the user and the data.}\\
+	            music playerbacker & \multirow{10}{*}{human data interface} & \multirow{7}{0.4\textwidth}{Human data interfaces deal with the interaction between the user and the data.}\\
 				\cline{1-1}
 	            track queuer & &\\
 				\cline{1-1}
+		    rest setter & &\\
+				\cline{1-1}
+		    peak calculator & &\\
+				\cline{1-1}
 	            general UI & &\\
+				\cline{1-1}
+		    user alerter & &\\
 				\cline{1-1}
 	            playback view &&\\
 				\cline{1-1}
@@ -1287,24 +1303,30 @@ If we assume that productivity factor is 28 hours per user case point. The effor
 	        \end{tabular}
 		\end{center}
 
-    \section{Tracability Matrix}
+    \section{Traceability Matrix}
 		\begin{center}
 			\renewcommand{\arraystretch}{1.5}
-	        \begin{tabular}[h]{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+	        \begin{tabular}[h]{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
 		        \hline
-		        & \rotatebox{90}{HRM manager} & \rotatebox{90}{log retriever} & \rotatebox{90}{track logger} & \rotatebox{90}{music playerbacker} & \rotatebox{90}{track queuer} & \rotatebox{90}{general UI} & \rotatebox{90}{playback view} & \rotatebox{90}{heart beat view} & \rotatebox{90}{workout view} & \rotatebox{90}{history view} & \rotatebox{90}{workout store} & \rotatebox{90}{metadata store} & \rotatebox{90}{music store}\\
+		        & \rotatebox{90}{HRM manager} & \rotatebox{90}{log retriever} & \rotatebox{90}{track logger} & \rotatebox{90}{music playerbacker} & \rotatebox{90}{track queuer} & \rotatebox{90}{general UI} & \rotatebox{90}{playback view} & \rotatebox{90}{heart beat view} & \rotatebox{90}{workout view} & \rotatebox{90}{history view} & \rotatebox{90}{workout store} & \rotatebox{90}{metadata store} & \rotatebox{90}{music store} & \rotatebox{90}{rest setter} & \rotatebox{90}{peak calculator} & \rotatebox{90}{user alerter}\\
 				\hline
-		        UC-1 & X &  &  & X & X & X & X &  &  &  & X & X &\\
+		        UC-1 & X &  &  & X & X & X & X &  &  &  & X & X &  &  &  &\\
 				\hline
-		        UC-2 & X &  &  & X & X & X & X &  &  &  & X & X &\\
+		        UC-2 & X &  &  & X & X & X & X &  &  &  & X & X &  &  &  &\\
 				\hline
-		        UC-3 &  &  & X & X & X & X & X &  &  &  &  & X & X\\
+		        UC-3 &  &  & X & X & X & X & X &  &  &  &  & X & X  &  &  &\\
 				\hline
-		        UC-4 & X &  &  & X &  & X & X & X & X &  & X &  &\\
+		        UC-4 & X &  &  & X &  & X & X & X & X &  & X &  &  &  &  &\\
 				\hline
-		        UC-5 &  & X &  &  &  & X &  &  &  & X & X &  &\\
+		        UC-5 &  & X &  &  &  & X &  &  &  & X & X &  &  &  &  &\\
 				\hline
-		        UC-6 & X &  &  &  &  & X &  & X & X &  & X &  &\\
+		        UC-6 & X &  &  &  &  & X &  & X & X &  & X &  &  &  &  &\\
+				\hline
+			UC-7 & X &  &  &  &  & X &  &  &  &  &  &  &  &  &  & X\\
+				\hline
+			UC-8 &  &  &  &  & X &  &  &  &  &  &  &  &  & X &  &\\
+				\hline
+			UC-9 & X &  &  &  & X &  &  &  &  &  &  &  &  &  & X  &\\
 				\hline
 	        \end{tabular}
 		\end{center}
