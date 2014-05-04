@@ -336,6 +336,7 @@ Use Cases are specific tasks that are created together by the designer and the c
 			UC-8 & setResting & The user can set their resting heart rate to be their current heart rate \\
 		\hline
 			UC-9 & calculatePeak & The user can have the system calculate a recommended target heart rate \\
+		\hline
         \end{tabular}
 \end{center}
 
@@ -842,14 +843,17 @@ This use case describes the scenario where the user is initiating his Heart Rate
                                 \textbf{Flow of Events for Main Success Scenario: }
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item $\rightarrow$ User Interface makes call(s) to any or all of the following functions: getCurrentHeartRate(), setRestingHeartRate()
-                                        \item $\rightarrow$ The System records the user's current heart rate
-                                        \item $\rightarrow$ The System sets the user's resting heart rate as the user's current heart rate.
+                                        \item $\rightarrow$ The user presses the "Calculate" button on the main screen
+                                        \item $\rightarrow$ The user enters his age and approximate level of activity
+                                        \item $\rightarrow$ The system accepts the user's input and calculates a recommended target heart rate
+					\item $\rightarrow$ The system will show the user what his recommended target heart rate is.
                                 \end{itemize}
                        \\
                 \hline
         \end{longtable}
 \end{center}
+
+This use case is very useful for maintaining the user's safety. Since there will be many users who are unaware of what target heart rate they should enter for the system, this use case allows them to input minimal personal information and be given a recommended target heart rate. By implementing this use case, the amount of people who enter dangerous target heart rates will be minimized. The system simply requires the target's age and level of activity and is able to determine a safe target heart rate for the user.
 
 \subsection{Use Case Diagram}
 \begin{figure}[H]
