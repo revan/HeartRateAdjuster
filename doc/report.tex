@@ -380,9 +380,9 @@ The Traceability Matrix allows the reader to cross the functional and non-functi
                 \hline
                         REQ-16 & 3 & X & X & X & X & X & X & X & X & X  \\
                 \hline
-        		REQ-17 & 1 &   &   &   &   &   &   &   & X &    \\
+        		REQ-17 & 1 &   &   &   &   &   &   &   &   &  X \\
                 \hline
-         		REQ-18 & 1 &   &   &   &   &   &   &   &   & X  \\
+         		REQ-18 & 1 &   &   &   &   &   &   &   & X &    \\
                 \hline
                   Total Weight &   & 37& 37& 21& 17& 25& 19& 21 & 11 & 12  \\
                 \hline
@@ -762,49 +762,97 @@ This use case describes the unfortunate scenario where, during the course of a u
 \begin{center}
         \begin{longtable}{|C{15cm}|}
                 \hline
-                        \textbf{Use Case UC-5: displayStatistics}\\
+                        \textbf{Use Case UC-8: setResting}\\
 
                 \hline
                         \begin{flushleft}
-                                \textbf{Related Requirements: } REQ-1, REQ-5, REQ-6, REQ-8, REQ-9, REQ-13, REQ-14, REQ-16
+                                \textbf{Related Requirements: } REQ-14, REQ-16, REQ-18
                         \end{flushleft}
                         \begin{flushleft}
                                 \textbf{Initiating Actor: } User Interface
                         \end{flushleft}
                         \begin{flushleft}
-                                \textbf{Participating Actors: } Data Manager, Data Assembler, Graph Container
+                                \textbf{Participating Actors: } Human User
                         \end{flushleft}
                         \begin{flushleft}
-                                \textbf{Actor's Goal: } Return graphs about the user's workout.
+                                \textbf{Actor's Goal: } Set the resting heart rate of the current user
                         \end{flushleft}
                         \begin{flushleft}
                                 \textbf{Preconditions: }
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item The system is no longer playing music.
-                                        \item The system is no longer loggin data.
-                                        \item The user is no longer working out.
-                                        \item The User Interface has completed error checking on the user's request for graphs.
+                                        \item The user has not begun his workout
+                                        \item The user is wearing the device correctly; the chest strap is securely fastened to the user’s chest near the solar plexus, and the musical heart rate application is open to the main screen on the Android device.
+                                        \item The heart rate monitor is currently recording data
+                                        \item The resting heart rate has not yet been set
                                 \end{itemize}
                         \begin{flushleft}
                                 \textbf{Postconditions: }
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item The User Interface will receive graphs of workout data that it requested through the Data Manager
+                                        \item The resting heart rate of the user will be set to the user's current heart rate
+					\item The UI will show the user's current heart rate as the user's resting heart rate
                                 \end{itemize}
                         \begin{flushleft}
                                 \textbf{Flow of Events for Main Success Scenario: }
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item $\rightarrow$ User Interface makes call(s) to any or all of the following functions: getArtistVsBPM(), getGenreVsBPM(), getTempoVsBPM(), getHRVsTime(), or getPlaylist().
-                                        \item $\rightarrow$ The Data Manager will then make calls to the appropriate “assemble” function.
-                                        \item The assemble function will retrieve the data from the database, package it as either an ordered pair of doubles or an ordered pair of a string and a double (for the music sections).
-                                        \item $\rightarrow$ The Data Assembler will then be passed to the Graph Container, which will extract the data from the Data Assembler and graph the data that it contains. These graphs will be stored as an array in the Graph Container.
+                                        \item $\rightarrow$ User Interface makes call(s) to any or all of the following functions: getCurrentHeartRate(), setRestingHeartRate()
+                                        \item $\rightarrow$ The System records the user's current heart rate
+                                        \item $\rightarrow$ The System sets the user's resting heart rate as the user's current heart rate.
                                 \end{itemize}
                        \\
                 \hline
         \end{longtable}
 \end{center}
+This use case describes the scenario where the user is initiating his Heart Rate Adjuster to begin his workout. The user must press the "Set Resting" button on the application so that the Heart Rate Adjuster will be able to accurately determine the user's resting heart rate. Assuming that the user has not yet begun his workout, the user's current heart rate and resting heart rate will be the same. Due to this fact, we may set the resting heart rate in the system to the current recorded heart rate of the  user.
+
+\begin{center}
+        \begin{longtable}{|C{15cm}|}
+                \hline
+                        \textbf{Use Case UC-9: calculatePeak}\\
+
+                \hline
+                        \begin{flushleft}
+                                \textbf{Related Requirements: } REQ-14, REQ-16, REQ-17
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Initiating Actor: } User Interface
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Participating Actors: } Human User
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Actor's Goal: } Recommend a target heart rate for the user
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Preconditions: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The user does not know what their target heart rate should be.
+                                        \item The user knows their age and approximate level of activity ranging from light to intense.
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Postconditions: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The system will calculate and recommend a target heart rate for the user's workout
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Flow of Events for Main Success Scenario: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item $\rightarrow$ The user presses the "Calculate" button on the main screen
+                                        \item $\rightarrow$ The user enters his age and approximate level of activity
+                                        \item $\rightarrow$ The system accepts the user's input and calculates a recommended target heart rate
+					\item $\rightarrow$ The system will show the user what his recommended target heart rate is.
+                                \end{itemize}
+                       \\
+                \hline
+        \end{longtable}
+\end{center}
+
+This use case is very useful for maintaining the user's safety. Since there will be many users who are unaware of what target heart rate they should enter for the system, this use case allows them to input minimal personal information and be given a recommended target heart rate. By implementing this use case, the amount of people who enter dangerous target heart rates will be minimized. The system simply requires the target's age and level of activity and is able to determine a safe target heart rate for the user.
 
 \subsection{Use Case Diagram}
 \begin{figure}[H]
