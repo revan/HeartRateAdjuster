@@ -978,7 +978,7 @@ This use case is very useful for maintaining the user's safety. Since there will
 
 {\bf OC-3: Select Function("Toggle Playback")}
 \begin{itemize}
-        \item {\bf Precondition: } The system is currently playing a song
+        \item {\bf Precondition: } The system is currently in a workout
         \item {\bf Postcondition: } If the system was playing a song, it stops playing the song and recording the data from the workout. If the system is paused, toggling the playback will cause the system to start playing a song and recording data from the workout.
 
 \end{itemize}
@@ -995,6 +995,22 @@ This use case is very useful for maintaining the user's safety. Since there will
         \item {\bf Postcondition: } The current heart rate is displayed on the screen of the Android application.
 \end{itemize}
 
+{\bf OC-6: Select Function("Set Resting Heart Rate")}
+\begin{itemize}
+	\item{\bf Precondition: } The user has not yet begin his workout.
+	\item{\bf Postcondition: } The user's resting heart rate is set equal to the user's current heart rate
+\end{itemize}
+
+{\bf OC-7: Select Function("Calculate Target Heart Rate")}
+\begin{itemize}
+	\item{\bf Precondition: } 
+		\begin{itemize}
+			\item The user has pressed the "Calculate" button on the main screen.
+			\item The user has entered his age and level of activity
+		\end{itemize}
+	\item{\bf Postcondition: } The system displays a recommended safe target heart rate
+\end{itemize}
+	
 
 \subsection{Mathematical Model}
 The selection of which track to play requires a mathematical model. At its simplest, this consists of selecting the track with the closest BPM, that is to say minimizing the difference in BPM:
