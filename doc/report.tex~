@@ -35,7 +35,7 @@
 
 \section*{Summary of Changes}
 
-Based on the feedback we received from Professor Marsic and the TAs during our previous demo, we decided that a few changes were in order. As Professor Marsic mentioned, it, would be helpful to the user if we could suggest a beneficial target heart rate instead of having them blindly guess and randomly adjust the slider. Also, Professor Marsic pointed out that there is the potential for the user to overexert himself during a workout. By Therefore, we ended up adding two new features which are also included below in our itemized list and described with further detail. 
+Based on the feedback we received from Professor Marsic and the TAs during our previous demo, we decided that a few changes were in order. As Professor Marsic mentioned, it, would be helpful to the user if we could suggest a beneficial target heart rate instead of having them blindly guess and randomly adjust the slider. Also, Professor Marsic pointed out that there is the potential for the user to overexert himself during a workout. Therefore, we ended up adding two new features which are also included below in our itemized list and described with further detail. 
 
 Obviously, our first demo was a more "bare-bones" presentation of the features we had implemented so far. Between the first and second demo, we have worked first and foremost, on integrating the data subsystem, the UI subsystem, and the chest strap subsystem. Now, we can directly access the graphs and data from the menu off of the home screen. Also, the graphs are "prettier," and there are more variations other than heart rate vs. time that the user can choose from. Suffice it to say, we were able to implement the suggestions given to us, as well as integrate the pieces that we promised.
 
@@ -45,13 +45,19 @@ To view the exact changes made, feel free to visit our project webpage: \url{ ht
  \section*{Itemized List of Changes}
 \begin{description}
 	\item[Integration of Subsystems] The UI can interact with the data subsystem directly, which is necessary for viewing the graphs of user exercise and song statistics.
-	\item[Critical Condition Alert] If the user's heart rate falls outside of a "safe" range, the system alerts the user accordingly. (The algorithm used to detect a critical condition is explained in the algorithms section under "Danger Detection" and cited in reference 17.)
-	\item[Automatically Calculate Target Heart Rate] (The algorithm we used in the critical condition calculation and the target heart rate calculation are described in the algorithms section under "Pattern Recognition" and cited in reference 18.) 
-	\item[UI Refinementsi]  As demonstrated in the second demo, our main screen has had a few minor changes from the preliminary design section. For example, there additions such as the use case where a user needs to be alerted about a dangerous heart condition, or if a user chooses to set or calculate his heart rate.
+	\item[Critical Condition Alert] If the user's heart rate falls outside of a "safe" range, the system alerts the user and initiates an emergency pause. The algorithm used to detect a critical condition is explained in the algorithms section under "Danger Detection" and cited in reference 17.
+	\item[Calculate Recommended Target Heart Rate] The user may now request that application to recommend a target heart rate for their workout, based on their age and level of activity ranging between light and intense. The algorithm used in this update is described in the aglorithms section under "Pattern Recognition" and is cited in reference 18.
+	\item[UI Refinements]  As demonstrated in the second demo, our main screen has had a few minor changes from the preliminary design section. For example, there additions such as the use case where a user needs to be alerted about a dangerous heart condition, or if a user chooses to set or calculate his heart rate.
 	\item[screenshots of UI and data subsystems] A few screenshots of the current UI and data subsystems have been included to show the changes visually. Sometimes images are easier to comprehend than words.
 	\item[Improved database/more, better graphs] Originally, our SQLite database was complete "barebones," and although the normal database functions such as "add record," worked, it was visually unappealing. Now, instead of having a single line graph, we have a few other options for users to select such as Genre or Artist. The graphs update continuously, and users can zoom in and out of the graphs and drag them around on the screen. 
 	\item[Design Patterns] A section that discusses the major design patterns used in our project has also been included.
 	\item[Object Constraint Language] A section on OCL has been added which includes the invariants, preconditions, and postconditions of all the important classes used in our code.
+	\item[System Requirements] Two new functional requirements have been implemented - REQ-17 and REQ-18. On-Screen requirements have been updated to include new graphical user interface.
+	\item[Use Cases] Three new use cases have been implemented - UC-7, UC-8, UC-9. Both casual and fully dressed descriptions have been included, as well as an updated traceability matrix. Releveant System Sequence Diagrams and System Operational Contracts have been included as well. The Use Case Diagram has been updated to include the newly implemented use cases as well.
+	\item[User Interface Specification] The images under this section have been renewed to illustrate our current graphical user interface. Effort estimation has also been updated to include the new use cases and weights.
+	\item[Domain Model] New concept definitions, association definitions, and attribute definitions have been included to reflect the newly implemented use cases. Traceability matrix has been updated as well.
+	\item[Interaction Diagrams] New interaction diagrams have been included to reflect the newly implemented use cases.
+	\item[System Architecture/Design] Figure 8.1: Subsystems has been updated to include the newly implemented use cases.
 \end{description}
 Because of the successful integration, and addition of important features, everything works a lot "cleaner" than compared to the first demo!
 
@@ -1475,6 +1481,27 @@ In UC-5, displayStatistics, the user begins with two button presses to achieve t
 \end{figure}
 
 UC-6, getHeartRate is very similar to UC-5. This use case is also applicable for UC-1, because the Heart Rate is important, needing to be determined continuously. The controller takes the request from the user and passes it to the Data Manager to handle. The database manager then takes the current BPM value from the Heart Rate Monitor and updates the value for the mobile interface to display to the user. 
+
+\begin{figure}[H]
+	\includegraphics[scale=.40]{img/Interaction_Diagrams/alertUser.png}\\
+	\caption {Interaction diagram for getHeartRate()} 
+\end{figure}
+
+UC-7, alertUser is very similar to UC-6 as well. The request is constantly checked by the system, with the controller constantly retrieving current heart rate from the data manager. If preconditions are met (the user's heart rate is at a dangerous level) then an emergency stop will be called to the controller.
+
+\begin{figure}[H]
+	\includegraphics[scale=.40]{img/Interaction_Diagrams/setRestingHeartRate.png}\\
+	\caption {Interaction diagram for getHeartRate()} 
+\end{figure}
+
+UC-8, setRestingHeartRate is very similar to UC-6 as well. The user must submit his request, and then the controller takes the request from the user and passes it tothe Data Manager to handle. The database manager will then retrieve the current BPM from the Heart Rate Monitor and update the value of the resting heart rate for the mobile interface to display to the user. 
+
+\begin{figure}[H]
+	\includegraphics[scale=.40]{img/Interaction_Diagrams/calculatePeak.png}\\
+	\caption {Interaction diagram for getHeartRate()} 
+\end{figure}
+
+UC-9, calculatePeak is solely between the user and the controller, not needing to bother the database or music player. This use case is simply an interaction between the User and the UI - the user requests a calculator, which requires input. Once input is entered, the UI returns a safe target heart rate to the user. 
 
 
 \section{Alternate Scenarios}
