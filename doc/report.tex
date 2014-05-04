@@ -7,6 +7,7 @@
 \usepackage{multirow}
 \usepackage{longtable}
 \usepackage[bookmarks=true]{hyperref}
+\usepackage{hyperref}
 
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
@@ -31,7 +32,36 @@
 	\item[Kenny Bambridge] IOS programming, web programming, Java, Python
 	\item[Jonathan Chang] documentation, organization, C++
 \end{description}
- 
+
+\section*{Summary of Changes}
+
+Based on the feedback we received from Professor Marsic and the TAs during our previous demo, we decided that a few changes were in order. As Professor Marsic mentioned, it, would be helpful to the user if we could suggest a beneficial target heart rate instead of having them blindly guess and randomly adjust the slider. Also, Professor Marsic pointed out that there is the potential for the user to overexert himself during a workout. By Therefore, we ended up adding two new features which are also included below in our itemized list and described with further detail. 
+
+Obviously, our first demo was a more "bare-bones" presentation of the features we had implemented so far. Between the first and second demo, we have worked first and foremost, on integrating the data subsystem, the UI subsystem, and the chest strap subsystem. Now, we can directly access the graphs and data from the menu off of the home screen. Also, the graphs are "prettier," and there are more variations other than heart rate vs. time that the user can choose from. Suffice it to say, we were able to implement the suggestions given to us, as well as integrate the pieces that we promised.
+
+To view the exact changes made, feel free to visit our project webpage: \url{ https://github.com/revan/HeartRateAdjuster} where each revision is automatically tracked by GitHub.
+
+
+ \section*{Itemized List of Changes}
+\begin{description}
+	\item[Integration of Subsystems] The UI can interact with the data subsystem directly, which is necessary for viewing the graphs of user exercise and song statistics.
+	\item[Critical Condition Alert] If the user's heart rate falls outside of a "safe" range, the system alerts the user accordingly. (The algorithm used to detect a critical condition is explained in the algorithms section under "Danger Detection" and cited in reference 17.)
+	\item[Automatically Calculate Target Heart Rate] (The algorithm we used in the critical condition calculation and the target heart rate calculation are described in the algorithms section under "Pattern Recognition" and cited in reference 18.) 
+	\item[UI Refinementsi]  As demonstrated in the second demo, our main screen has had a few minor changes from the preliminary design section. For example, there additions such as the use case where a user needs to be alerted about a dangerous heart condition, or if a user chooses to set or calculate his heart rate.
+	\item[screenshots of UI and data subsystems] A few screenshots of the current UI and data subsystems have been included to show the changes visually. Sometimes images are easier to comprehend than words.
+	\item[Improved database/more, better graphs] Originally, our SQLite database was complete "barebones," and although the normal database functions such as "add record," worked, it was visually unappealing. Now, instead of having a single line graph, we have a few other options for users to select such as Genre or Artist. The graphs update continuously, and users can zoom in and out of the graphs and drag them around on the screen. 
+	\item[Design Patterns] A section that discusses the major design patterns used in our project has also been included.
+	\item[Object Constraint Language] A section on OCL has been added which includes the invariants, preconditions, and postconditions of all the important classes used in our code.
+\end{description}
+Because of the successful integration, and addition of important features, everything works a lot "cleaner" than compared to the first demo!
+
+
+
+
+
+
+
+
 \chapter{Customer Statement of Requirements/Project Proposal}
  
 \section{Problem}
@@ -1683,6 +1713,14 @@ The Expert Doer Principle was not followed as closely because the communication 
 
     For the user interface and hardware communication, two other classes were derived rather clearly: the Graphical User Interface class, and the Hardware communication class. The graphical user interface is involved with many domains, save the few domains relating to data storage - that is taken care of by the data manager portion. The purpose of the graphical user interface is for users to be able to easily interact with the application. This includes being able to easily view different portions of the application such as information on their current workout, their history, etc. The next class, Hardware, was derived as a modularized way to communicate with the Heart Rate Monitor which is required to retrieve information about the user's heart rate. This class is simple - its only function is to receive information from the HRM being used, and to update the user's current heart rate in real time.
 
+\section{Design Patterns}
+
+	Although our system can be refactored to match any of the design patterns we learned in lecture, we believe that the command pattern most accurately describes our system. The command pattern is as simple as it seems: an object invokes methods on other objects. Because our project is an Android application, the user input occurs primarily through the touchscreen. Our UI is responsible for receiving these inputs and then calling the appropriate methods to fulfill these calls. Each "invoker" knows which object or method to call, and after requesting, the receiving class fulfills the requests. Our system does not really support reversible actions, which are physically impossible, but it can either pause or attempt to return to a previous state for instance by reverting to a previous song. 
+
+	Our system also makes use of the proxy class with the HeartRate class. As learned in lecture, a proxy object preprocesses requests before forwarding them to subjects when appropriate. In order to interface with our piece of hardware, the chest strap, we made an object to deal directly with the chest strap returning the information to the User Interface, and thus aid the process.  
+Meanwhile, the decorator pattern is used to add non-essential behavior to key objects in our design. In our project, we used a number of "fake" classes to simulate behavior that we were unable to implement for various reasons. For instance, the ChestStrapFake and AudioSystemFake classes were created so we could view the effect of interaction between the UI and Chest Strap or the UI and the Audio System. Upon pressing the appropriate button, we get a nice display on our UI that confirms that the appropriate method has been called. There are a number of other embellishments used that follow the decorator pattern such as the graph appearances within the data subsystem. However, these are non-essential functional-wise, and the command pattern captures the essence of our design.
+
+
 
 \chapter{System Architecture and System Design}
 
@@ -2195,6 +2233,28 @@ Total                   &     170.5     &      150      &     170.5     &    208
 Percentage              &      24.5\%   &      21\%     &      24.5\%     &     30\%      \\ \hline
 	\end{tabular}
 \end{center}
+
+
+
+\chapter*{History of Work, Current Status, and Future Work}
+
+\section{History of Work, Current Status, and Future Work}
+As emphasized in our Summary of Changes, our GitHub website lists every single change that has been made: https://github.com/revan/HeartRateAdjuster. Also, on the homepage, we have a log of the key meetings that took place over the semester. 
+In sections 5.1 and 12.3, the Gantt charts depict pretty accurately, our actual schedule of work. We stuck almost exclusively to schedule and after the split within our group, we made an effort to meet all the deadlines. The work completed was within the intervals specified by the Gantt charts, and the milestones were roughly achieved towards the end of the intervals. Although these dates may not match up exactly with our GitHub account, the work was completed, just not pushed. 
+
+\section{Key Accomplishments}
+\begin{description}
+\item Created an aesthetically pleasing Android Application
+\item Constructed a SQLite database that could store information from the heart rate monitor
+\item Application can calculate a good workout target heart rate and alert the user if their heart rate is at a dangerous level.
+\item Application can graph various statistics of the user workout information in real time.
+\item Integration between UI and Data Subsystems
+\end{description}
+
+\section{Possible Future Directions}
+There are so many possibilities for our project that we have only begun to scratch the surface. First off, we could consider expanding to other platforms, namely iOS and windows phone. This way, our project is more universal. We could also test our project to ensure compatibility with different heart rate monitors. We could then add other functionality, and record and convey other data to the user other than heart rate. However, the primary goal of our application is to aid the users in working out through the adjusting of their heart rates. Any other useful workout data is secondary. However, we could revise the algorithms used to suggest heart rate, or detect unsafe heart rates. We could add a personalized login for each user. We could compare workout data between friends. We could experiment more with the correlation between the music being played and its effects on heart rate.
+To conclude, there is always more work that can be done, and The Heart Rate Adjuster is definitely a project that is both reusable and can be built upon with a number of additional features. However, it was a good start, and a great way to familiarize ourselves with many of the concepts of software engineering. 
+
 
 \chapter*{References}
 
