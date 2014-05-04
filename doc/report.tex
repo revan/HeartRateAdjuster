@@ -180,6 +180,9 @@ and more critical to fulfilling the customer's needs.\\
 		\hline
 			REQ-12 & 1 & The user should be able to pause the current track if he needs to interrupt his activity for some reason \\
 		\hline
+			REQ-17 & 1 & The system should accept input from the user and calculate a recommended peak heart rate \\
+		\hline
+			REQ-18 & 1 & The system should be able to set an appropriate resting heart rate \\
 	\end{tabular}
 \end{center}
 
@@ -195,6 +198,8 @@ For our system to be able to accomplish any of its goals, it must first be able 
 In regards to music playback, it is desirable for our system to do the data processing and song section, to reduce the burden on the user. Again, after collecting the BPM data and storing it in our database, our system will use a pre-determined algorithm to analyze song tempo and bpm correlation to determine song selection (REQ-3 \& REQ-5). As for physical playback, the choice of whether to use headphones or speakers will not have any effect on the performance of the system. The choice is simply the user's preference (REQ-4).\\
 
 To safeguard against mistakes, and prevent negative side-effects, if the system makes an incorrect decision, there will be no negative consequences on the user's health. It should be able to re-adjust once it realizes that the song's tempo does not match the user's current and target heart rates (REQ-7). For REQ-9, this ranking system will be completely local and only relevant to the user of the system. This is just an optional improvement to our system to enhance the user's experience.\\
+
+In order for an uninformed user to safely select a target heart rate, the system should have a mechanism to calculate a recommended target heart rate based on the user's age and level of activity (REQ-17), maximizing the safety of the system. Along with recommending a target heart rate, the system will be able to set the user's resting heart rate based on their current heart rate at the beginning of the workout (REQ-18), also contributing to the safety of the system. \\
 
 
 \section{Non-Functional Requirements}
@@ -328,6 +333,9 @@ Use Cases are specific tasks that are created together by the designer and the c
                 \hline
                         UC-7 & alertUser & The heart-rate sensor detects an abnormally high or low heart rate and notifies the user at once.\\
                 \hline
+			UC-8 & setResting & The user can set their resting heart rate to be their current heart rate \\
+		\hline
+			UC-9 & calculatePeak & The user can have the system calculate a recommended target heart rate
         \end{tabular}
 \end{center}
 
@@ -336,43 +344,47 @@ The Traceability Matrix allows the reader to cross the functional and non-functi
 
 \renewcommand{\arraystretch}{0.4}
 \begin{center}
-        \begin{tabular}{|C{1cm}|C{1cm}|C{1cm}|C{1cm}|C{1cm}|C{1cm}|C{1cm}|C{1cm}|C{1cm}|}
+        \begin{tabular}{|C{1cm}|C{1cm}|C{1cm}|C{1cm}|C{1cm}|C{1cm}|C{1cm}|C{1cm}|C{1cm}|C{1cm}|C{1cm}|}
                 \hline
-                         & Priority Weight & UC-1 & UC-2 & UC-3 & UC-4 & UC-5 & UC-6 & UC-7\\
+                         & Priority Weight & UC-1 & UC-2 & UC-3 & UC-4 & UC-5 & UC-6 & UC-7 & UC-8 & UC-9\\
                 \hline
-                        REQ-1  & 5 & X &   &   & X & X & X & X \\
+                        REQ-1  & 5 & X &   &   & X & X & X & X &  & X  \\
                 \hline
-                        REQ-2  & 4 & X & X &   &   &   &   &   \\
+                        REQ-2  & 4 & X & X &   &   &   &   &   & X &   \\
                 \hline
-                        REQ-3  & 3 & X & X & X &   &   &   &   \\
+                        REQ-3  & 3 & X & X & X &   &   &   &   &  &   \\
                 \hline
-                        REQ-4  & 5 & X &   & X &   &   &   &   \\
+                        REQ-4  & 5 & X &   & X &   &   &   &   &  &   \\
                 \hline
-                        REQ-5  & 3 & X &   &   &   & X &   & X \\
+                        REQ-5  & 3 & X &   &   &   & X &   & X &  &   \\
                 \hline
-                        REQ-6  & 2 &   &   &   &   & X &   &   \\
+                        REQ-6  & 2 &   &   &   &   & X &   &   &  &   \\
                 \hline
-                        REQ-7  & 1 & X & X & X &   &   &   &   \\
+                        REQ-7  & 1 & X & X & X &   &   &   &   &  &   \\
                 \hline
-                        REQ-8  & 1 &   &   &   &   & X &   &   \\
+                        REQ-8  & 1 &   &   &   &   & X &   &   &  &   \\
                 \hline
-                        REQ-9  & 1 &   &   &   &   & X &   &   \\
+                        REQ-9  & 1 &   &   &   &   & X &   &   &  &   \\
                 \hline
-                        REQ-10 & 1 &   &   & X &   &   &   &   \\
+                        REQ-10 & 1 &   &   & X &   &   &   &   &  &   \\
                 \hline
-                        REQ-11 & 1 &   &   &   &   &   & X & X \\
-		        \hline
-			            REQ-12 & 1 &   &   &   & X &   &   & X \\
+                        REQ-11 & 1 &   &   &   &   &   & X & X &  &   \\
+		\hline
+			REQ-12 & 1 &   &   &   & X &   &   & X &  &   \\
                 \hline
-                        REQ-13 & 5 & X & X & X & X & X & X & X \\
+                        REQ-13 & 5 & X & X & X & X & X & X & X &  &   \\
                 \hline
-                        REQ-14 & 5 & X & X &   &   & X &   &   \\
+                        REQ-14 & 5 & X & X &   &   & X &   &   &  &   \\
                 \hline
-                        REQ-15 & 3 & X & X & X & X & X & X & X \\
+                        REQ-15 & 3 & X & X & X & X & X & X & X & X & X  \\
                 \hline
-                        REQ-16 & 3 & X & X & X & X & X & X & X \\
+                        REQ-16 & 3 & X & X & X & X & X & X & X & X & X  \\
                 \hline
-                  Total Weight &   & 37& 37& 21& 17& 25& 19& 21\\
+        		REQ-17 & 1 & X & X & X & X & X & X & X & X & X  \\
+                \hline
+         		REQ-18 & 1 & X & X & X & X & X & X & X & X & X  \\
+                \hline
+                  Total Weight &   & 39& 39& 23& 19& 27& 21& 23 & 12 & 13  \\
                 \hline
         \end{tabular}
 \end{center}
