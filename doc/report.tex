@@ -1668,6 +1668,7 @@ The Expert Doer Principle was not followed as closely because the communication 
 \end{center}
 \begin{center}
 	\begin{tabular}{|C{15cm}|}
+				\hline
 			\begin{flushleft}
 				\textbf{Functions: } \\
 			\end{flushleft}
@@ -1687,6 +1688,10 @@ The Expert Doer Principle was not followed as closely because the communication 
 					\item checkPlaying(): boolean. This function will return the data stored in the variable isREady.
 					\item menu(): void. This function will display the menu for the application.
 					\item getStatistics(): graph. This function will return graphs which contain statistics from the data manager.
+					\end{itemize}
+	\end{tabular}\\
+	\begin{tabular}{|C{15cm}|}
+					\begin{itemize}
 					\item openCalculator(): void. This function will open the peak heart rate calculator
 					\item alertUser(): boolean. This function will check to see if the user's current heart rate is safe. Alert user if false.
 					\item setAge(): void. This function will set the age of the user for peak heart rate calculation.
@@ -1767,7 +1772,7 @@ Meanwhile, the decorator pattern is used to add non-essential behavior to key ob
 \begin{center}
 \begin{tabular}{|l|C{4cm}|C{4cm}|C{4cm}|C{4cm}|}
  		\hline
- 		\textbf{Class}	&	\textbf{Invariant}	&	\textbf{Precondition}	& \textbf{Postconditionr}		\\ \hline
+ 		\textbf{Class}	&	\textbf{Invariant}	&	\textbf{Precondition}	& \textbf{Postcondition}		\\ \hline
  
  \textit{IHeartRateDevice}		&	The chest strap is properly connected via Bluetooth to the Android phone on which the application is running.	&	User begins a new session or updates his existing workout information. 										&	The current heart rate is returned from the chest strap.						\\ \hline
  \textit{ArtistActivity}			&	The database is able to continually receive artist entries.									&	User requests a graph displaying artist activity (“Pie button”), and the database holds the data to create the appropriate graphs.	&	TA pie chart of the frequency of each artist played is plotted and displayed.		\\ \hline
@@ -1775,13 +1780,18 @@ Meanwhile, the decorator pattern is used to add non-essential behavior to key ob
  \textit{DataAssembler}			&	The user has accumulated the data to necessitate an SQLite database.							&	The user begins a workout session that necessitates the storage of various data.								&	A SQLite structure is created and functions for adding, removing, or changing records to the database are provided.	\\ \hline
  \textit{LineActivity}			&	The database is updating the graph to continually display new heart rates 						&	The user presses the button to graph heart rate vs. time.												&	A line graph of heart rate vs. time is created and plotted and displayed on the screen for the user to analyze.		\\ \hline
  \textit{Record}				&	The chest strap is continuously sending heart rates over to the Data subsystem.					&	The user begins a workout session where record objects need to be used.								 	&	A record object is created that contains heart rate, time stamp, artist, genre, and song.		\\ \hline
- \textit{SongActivity}			&	The database continually updates the graph as new songs are being played.						&	The user presses the “song” button to view the graph of the songs played so far.								&	A pie graph of the frequency with which each unique song is played is displayed on the screen in different colors.		\\ \hline
+ \textit{SongActivity}			&	The database continually updates the graph as new songs are being played.						&	The user presses the “song” button to view the graph of the songs played so far.								&	A pie graph of the frequency with which each unique song is played is displayed on the screen in different colors.		\\
+
+\end{tabular} 
+\begin{tabular}{|l|C{4cm}|C{4cm}|C{4cm}|C{4cm}|}
+
  \textit{StatisticsActivity}			&	The user has accumulated data to be able to generate graphs. 								&	The user presses the graph button.															&	The system gives the user a variety of options to select from: Data, Artist, Song, and Genre.		\\ \hline
  \textit{IAudioSystem}			&	The UI is fully functional and stays on the home screen until the user presses to move onto a different screen.	&	The user opens the Android application.															&	The home screen displays a variety of options for the user to choose from (i.e. play and skip button)	\\ \hline
  \textit{GenreActivity}			&	The database can continue to update the graph as new songs are meanwhile being played in the background.	&	The user selects the genre graph button, desiring to view the mentioned graph.									&	A pie graph of the frequency with which each unique genre is played is displayed on the screen in different colors.. 	\\ \hline
  \textit{RetrieveActivity}			&	The database is readily accessible and contains proper records.								&	The user presses the retrieve button.															&	Records are retrieved from the database.				\\ \hline
  \textit{StoreActivity}			&	The database is readily accessible and has sufficient storage capacity.							&	The user presses the store button.															&	Records are stored in the database.
-	\end{tabular}
+ \\\hline
+\end{tabular}
 \end{center}
 
 
