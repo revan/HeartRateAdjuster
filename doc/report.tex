@@ -1691,6 +1691,12 @@ The Expert Doer Principle was not followed as closely because the communication 
 					\item checkPlaying(): boolean. This function will return the data stored in the variable isREady.
 					\item menu(): void. This function will display the menu for the application.
 					\item getStatistics(): graph. This function will return graphs which contain statistics from the data manager.
+					\item openCalculator(): void. This function will open the peak heart rate calculator
+					\item alertUser(): boolean. This function will check to see if the user's current heart rate is safe. Alert user if false.
+					\item setAge(): void. This function will set the age of the user for peak heart rate calculation.
+					\item setActivity(): void. This function will set the activity level of the user for peak heart rate calculation.
+					\item calculatePeak(): void. This function will calculate a recommended peak heart rate for the user.
+					\item displayRecommendation(): int. This function will display the calculated recommended target heart rate for the user.
 				\end{itemize}
 			\cr \hline
 	\end{tabular}
@@ -1734,14 +1740,17 @@ The Expert Doer Principle was not followed as closely because the communication 
  \textbf{Track Logger}		&	X	&		&		&		&		&		\\ \hline
  \textbf{Music Playerbacker}	&	X	&		&		&		&	X	&		\\ \hline
  \textbf{Track Queuer}		&	X	&	X	&		&		&		&		\\ \hline
- \textbf{General UI}			&	X	&	X	&		&		&	X	&		\\ \hline
+ \textbf{General UI}		&	X	&	X	&		&		&	X	&		\\ \hline
  \textbf{Playback View}		&	X	&	X	&	X	&		&	X	&		\\ \hline
- \textbf{Heart Beat View}		&	X	&	X	&	X	&		&	X	&		\\ \hline
+ \textbf{Heart Beat View}	&	X	&	X	&	X	&		&	X	&		\\ \hline
  \textbf{Workout View}		&	X	&	X	&	X	&		&	X	&		\\ \hline
  \textbf{History View}		&	X	&	X	&	X	&		&	X	&		\\ \hline
- \textbf{Workout Store}		&	X	&	X	&		&	X	&		&	\\ \hline
- \textbf{Metadata Store}		&	X	&	X	&		&	X	&		&	\\ \hline
- \textbf{Music Store}		&	X	&	X	&		&	X	&		&	\\ \hline
+ \textbf{Workout Store}		&	X	&	X	&		&	X	&		&		\\ \hline
+ \textbf{Metadata Store}	&	X	&	X	&		&	X	&		&		\\ \hline
+ \textbf{Music Store}		&	X	&	X	&		&	X	&		&		\\ \hline
+ \textbf{Rest Setter}		&		&		&		&		&	X	&	X	\\ \hline
+ \textbf{Peak Calculator}	&		&		&		&		&	x	&		\\ \hline
+ \textbf{User Alerter}		&	X	&	X	&		&		&	X	&	X	\\ \hline
 	\end{tabular}
 \end{center}
 
@@ -1928,7 +1937,8 @@ We also removed the About page, reasoning that the simple UI should be intuitive
 \\
 Since we now only have one element to display on the dropdown menu, we will instead have a fixed button to access the Statistics screen in place of the menu.
 This halves the user effort to access the Statistics screen, now only requiring one click, therefore friendlier to the exercising user.
-Otherwise, User Interface interactions remain as planned.
+Otherwise, User Interface interactions remain as planned.\\
+In an effort to maximize user safety in our product, we have also implemented three new UI components - setting the user's resting heart rate, recommending a target heart rate, and alerting the user if their current heart rate is at a dangerous level. These components have been implemented in areas which are simple and straight forward for the user to understand - setting the user's resting heart rate was placed under their resting heart rate selector, recommending a user's target heart rate was placed under the target heart rate selector, and the danger alert will only show up to the user when necessary, minimizing the amount of UI components the user is forced to look at.
 
 \chapter{Design of Tests}
 
@@ -2157,7 +2167,7 @@ Otherwise, User Interface interactions remain as planned.
                                 \textbf{Steps: }
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item The User Interface calls the storeInitialState() function form the Data Manager
+                                        \item The User Interface calls the storeInitialState() function from the Data Manager
                                         \item $\rightarrow$ Data Manager retrieves the current heart rate from the chest strap and time stamp from the device, and stores it in the database.
                                         \item $\leftarrow$ If the storage occurs successfully, a confirmation is sent to the Data Manager
                                         \item $\rightarrow$ Once confirmation is received, Data Manager begins calling storeCurrentHR() repeatedly.
@@ -2175,8 +2185,116 @@ Otherwise, User Interface interactions remain as planned.
                 \hline
         \end{tabular}
 \end{center}
-
-Further testing must be done in order to validate the accuracy of displaying the user's current heart rate. This accuracy, however, is hard to validate because the application simply displays the number that it receives directly from the heart rate monitor. If the displayed number appears to be off, then the heart rate monitor may be faulty. Otherwise, there is no way to check whether the displayed number is the actual number that the monitor records.
+\begin{center}
+         \begin{tabular}{|C{15cm}|}
+                 \hline
+                        \textbf{Set Resting Heart Rate} \\
+                \hline
+                        \begin{flushleft}
+                                \textbf{Tests: } Graphical User Interface, Data Manager, Hardware Component
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Assumption: } The User Interface has received an input from the user indicating a desire to set his resting heart rate.
+                        \end{flushleft}
+			\begin{center}
+				\textbf{Integration Testing}
+			\end{center}
+                        \begin{flushleft}
+                                \textbf{Steps: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The setResting() function is called from the Graphical User Interface.
+                                        \item $\rightarrow$ Data Manager retrieves the current heart rate from the chest strap.
+                                        \item $\leftarrow$ If retrieval is successful, the Data Manager will send the current heart rate to the Graphical User Interface.
+                                        \item $\rightarrow$ Once the current heart rate is received, the Graphical User Interface will update its resting heart rate.
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Expected: } The Graphical User Interface will display the user's current heart rate as the resting heart rate.
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Fails is: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The chest strap does not return a valid heart rate
+                                        \item The Graphical User Interface displays an obviously incorrect resting heart rate (either extremely high or extremely low)
+                                \end{itemize}\\
+                \hline
+        \end{tabular}
+\end{center}
+\begin{center}
+         \begin{tabular}{|C{15cm}|}
+                 \hline
+                        \textbf{Recommend Target Heart Rate} \\
+                \hline
+                        \begin{flushleft}
+                                \textbf{Tests: } User Interface
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Assumption: } The User Interface has received an input from the user which indicates a desire to calculate recommendation.
+                        \end{flushleft}
+			\begin{center}
+				\textbf{Integration Testing}
+			\end{center}
+                        \begin{flushleft}
+                                \textbf{Steps: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The User Interface receives input concerning the user's age and level of activity.
+                                        \item $\rightarrow$ The Graphical User Interface passes this information to our calculation algorithm.
+                                        \item $\leftarrow$ The calculation algorithm returns a recommended target heart rate
+                                        \item $\rightarrow$ The Graphical User Interface will display a recommended target heart rate to the user.
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Expected: } The Graphical User Interface will correctly display a recommended target heart rate to the user.
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Fails is: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The Graphical User Interface displays a recommendation which deviates from the recommendation algorithm.
+                                \end{itemize}\\
+                \hline
+        \end{tabular}
+\end{center}
+\begin{center}
+         \begin{tabular}{|C{15cm}|}
+                 \hline
+                        \textbf{Alert User} \\
+                \hline
+                        \begin{flushleft}
+                                \textbf{Tests: } Data Manager, User Interface, Hardware Component
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Assumption: } The Data Manager is receiving current heart rates from the Hardware Component.
+                        \end{flushleft}
+			\begin{center}
+				\textbf{Integration Testing}
+			\end{center}
+                        \begin{flushleft}
+                                \textbf{Steps: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The Data Manager correctly receives current heart rate from the Hardware Component
+                                        \item $\rightarrow$ The Data Manager recognizes that the current heart rate is within the danger zone.
+                                        \item $\leftarrow$ Data Manager alerts the User Interface that the current heart rate is dangerous.
+                                        \item $\rightarrow$ The Graphical User Interface will display an alert that the user is in danger and pause the workout.
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Expected: } The Graphical User Interface will initiate an emergency pause when the user is at a dangerous heart rate.
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Fails is: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The Graphical User Interface initiates an emergency pause when the user is at a safe heart rate.
+					\item The Graphical User Interface does not initiate an emergency pause when the user is at a dangerous heart rate.
+					\item The Hardware Component is not correctly sending current heart rate to the Data Manager.
+					\item The Data Manager does not correctly recognize whether a heart rate is in the danger zone or the safe zone.
+                                \end{itemize}\\
+                \hline
+        \end{tabular}
+\end{center}
+Further testing must be done in order to validate the accuracy of displaying the user's current heart rate. This accuracy, however, is hard to validate because the application simply displays the number that it receives directly from the heart rate monitor. If the displayed number appears to be off, then the heart rate monitor may be faulty. Otherwise, there is no way to check whether the displayed number is the actual number that the monitor records. 
 
 \chapter{Project Management and Plan of Work}
 \section{Merging Contributions}

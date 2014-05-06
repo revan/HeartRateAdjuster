@@ -48,8 +48,9 @@ To view the exact changes made, feel free to visit our project webpage: \url{ ht
 	\item[Critical Condition Alert] If the user's heart rate falls outside of a "safe" range, the system alerts the user and initiates an emergency pause. The algorithm used to detect a critical condition is explained in the algorithms section under "Danger Detection" and cited in reference 17.
 	\item[Calculate Recommended Target Heart Rate] The user may now request that application to recommend a target heart rate for their workout, based on their age and level of activity ranging between light and intense. The algorithm used in this update is described in the aglorithms section under "Pattern Recognition" and is cited in reference 18.
 	\item[UI Refinements]  As demonstrated in the second demo, our main screen has had a few minor changes from the preliminary design section. For example, there additions such as the use case where a user needs to be alerted about a dangerous heart condition, or if a user chooses to set or calculate his heart rate.
+	\item[Integration of Chest Strap] During our first demo, we did not have a way to communicate directly with the chest strap to record heart rates, and used a ChestStrapFake class to spoof heart rate information using a slider. We have now implemented a class which is able to receive information from the physical chest strap - however, due to a lack of resources (none of the developers own phones which support Bluetooth Low Energy) this could not be fully tested.
 	\item[screenshots of UI and data subsystems] A few screenshots of the current UI and data subsystems have been included to show the changes visually. Sometimes images are easier to comprehend than words.
-	\item[Improved database/more, better graphs] Originally, our SQLite database was complete "barebones," and although the normal database functions such as "add record," worked, it was visually unappealing. Now, instead of having a single line graph, we have a few other options for users to select such as Genre or Artist. The graphs update continuously, and users can zoom in and out of the graphs and drag them around on the screen. 
+	\item[Improved database/more, better graphs] Originally, our SQLite database was complete "barebones," and although the normal database functions such as "add record" worked, it was visually unappealing. Now, instead of having a single line graph, we have a few other options for users to select such as Genre or Artist. The data management subsystem now calculates the frequencies of different aspects of the songs played during the workout, such as genre, song, and artist, and graphs these frequencies at the end of the workout. The graphs update continuously, and users can zoom in and out of the graphs and drag them around on the screen.
 	\item[Design Patterns] A section that discusses the major design patterns used in our project has also been included.
 	\item[Object Constraint Language] A section on OCL has been added which includes the invariants, preconditions, and postconditions of all the important classes used in our code.
 	\item[System Requirements] Two new functional requirements have been implemented - REQ-17 and REQ-18. On-Screen requirements have been updated to include new graphical user interface.
@@ -280,33 +281,26 @@ The inputs used while exercising, such as the BPM sliders and the music controls
 \begin{figure}[H]
 	\centering
 	\includegraphics{img/mobile_ui/3.png}\\
-	\caption{Pressing the menu button opens the context menu, providing the option to view statistics, edit settings, and view information about the app.}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics{img/mobile_ui/7.png}\\
-	\caption{Selecting the Statistics option from the context menu displays a graph of user heart rate and song transitions.}
+	\caption{Pressing button on the top-right corner of the screen toggles between the statistics menu and main menu}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics{img/mobile_ui/4.png}\\
-	\caption{The settings page allows the user to open a menu to Log in, to edit the location of the media library (this is done via the OS's directory selection), and configure additional parameters such as music generation (if there is time to implement this feature).}
+	\caption{Pressing the "Graph" button will lead to a screen showing a graph of the user's heart rate over time}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics{img/mobile_ui/5.png}\\
-	\caption{Selecting the Log in option prompts the user for their credentials.}
+	\caption{Pressing the buttons "Artist", "Songs", or "Genre" will produce a pie-chart like this one.}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics{img/mobile_ui/6.png}\\
-	\caption{Selecting the About option from the context menu provides a description of the application.}
+	\caption{Pressing the "Calculate" Button will allow a user to input his age and level of activity for the program to recommend a target heart rate}
 \end{figure}
-
 
 \section{Organization}
 
@@ -674,8 +668,7 @@ The togglePlayback case is another straightforward, convenience-based use case. 
                                 \textbf{Flow of Events for Main Success Scenario: }
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item $\rightarrow$ User Interface makes call(s) to any or all of the following functions: getArtistVsBPM(), getGenreVsBPM(), getTempoVsBPM(), getHRVsTime(), or getPlaylist().
-                                        \item $\rightarrow$ The Data Manager will then make calls to the appropriate “assemble” function.
+                                        \item $\rightarrow$ User Interface makes call(s) to any or all of the following functions: graphData(), graphArtist(), graphGenre(), and graphSong(0                                        \item $\rightarrow$ The Data Manager will then make calls to the appropriate “assemble” function.
                                         \item The assemble function will retrieve the data from the database, package it as either an ordered pair of doubles or an ordered pair of a string and a double (for the music sections).
                                         \item $\rightarrow$ The Data Assembler will then be passed to the Graph Container, which will extract the data from the Data Assembler and graph the data that it contains. These graphs will be stored as an array in the Graph Container.
                                 \end{itemize}
@@ -1454,13 +1447,17 @@ Our team will be divided into three smaller sub-teams of two individuals each, t
 
 For our first use case, we wish to record information about the user's heart rate as well as some additional information. This includes a time stamp of when the heart rate data was recorded, and could also include some of the song metadata such as artist, album, or genre. For our main success scenario, the user interacts with the UI which communicates with the Database Manager. As long as user does not tell the UI to stop recording, the Database Manager will continually ask the Chest Strap for BPM Data and a time stamp for every piece of data received. When the user tells the UI to stop, we break out of our loop, and the Database Manager returns to the UI and displays updated information. Alternate scenarios could occur when the Chest Strap is not functioning correctly and reports an error in measurement, and when this occurs up to 10 times, the Database Manager stops recording. Another alternate scenario would be if the system detects an abnormal heart rate in the user, and alerts the user to stop his workout. This process is described more thoroughly in the Algorithms section.
 
+This interaction diagram incorporates the Publisher-Subscriber design pattern between the Mobile Interface Controller and the Database Manager. The Mobile Interface Controller will receive requests from the User, interpret them, and call the storeInitialState() method on the Database Manager. Once this method is called, the Database Manager completes all its tasks on its own. The Mobile Interface Controller doesn't care how those tasks are getting executed, nor whether the values are correct or not. It trusts the Database Manager to know that. Once the Mobile Interface Controller feels that the system should stop, its sends a message in the form of the stop() function call to end the operation.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=.40]{img/Interaction_Diagrams/newUC3.png}\\
 	\caption {Interaction diagram for getNextSong()} 
 \end{figure}
 
-For our third use case, the user's goal is to listen to another song. Similar to the ``skip'' button on most standard music players, we included a double fast-forward arrow for users' convenience. When pressed, the controller immediately contacts the database manager. The database manager selects another track based on its song-selection algorithm for the music player to play. (If the user is currently trying to change his/her heart rate, the database manager will take that into count and select a song of a similar speed.) It also returns the cover art and new song title for the mobile interface to display.
+For our second use case, the user's goal is to listen to another song. Similar to the ``skip'' button on most standard music players, we included a double fast-forward arrow for users' convenience. When pressed, the controller immediately contacts the database manager. The database manager selects another track based on its song-selection algorithm for the music player to play. (If the user is currently trying to change his/her heart rate, the database manager will take that into count and select a song of a similar speed.) It also returns the cover art and new song title for the mobile interface to display.
+
+Again, the Publisher-Subscriber model was implemented in this use case, with the User Interface as a Publisher and the Music Selector as the Subscriber. The User Interface just requests that the Music Selector give it a song, so the User Interface sends the Music Selector a message through the requestNext() function call. The User Interface then directs its attention back to the user. The Music Selector performs the selection algorithm on its own, and then returns the value to the User Interface once it is done.
 
 \begin{figure}[H]
 	\includegraphics[scale=.40]{img/Interaction_Diagrams/newUC4.png}\\
@@ -1538,24 +1535,22 @@ The Expert Doer Principle was not followed as closely because the communication 
                                 \textbf{Variables:} \\
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item workoutData: Data Assembler. This is a Data Assembler object which stores the data points retrieved from storage. It also stores the songs and their metadata.
-                                        \item workoutGraphs : Graph Container. This is a Graph Container object which stores the different graphs that were requested by the User Interface.
+					\item db: Data Assembler. This is a Data Assembler object which stores records created from the Audio Subsystem into the SQLite Database. It is responsible for managing all data and graphs in the database.
                                 \end{itemize} \\
                         \hline
                         \begin{flushleft}
                                 \textbf{Functions:} \\
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item storeInitialState(double initialRate, double targetRate) : bool. This function stores the initial state of the system, which is captured in the form of the user's initial heart rate and the target heart rate.
-                                        \item storeCurrentTrack(string song) : bool. This function is used by the Music Module to store the current track being played. This information is later used for the playlist.
-                                        \item storeCurrentHR(double heartRate) : bool. This function is used to store the current heart rate into the data storage. It is used by the User Interface while the user is working out with the system.
-                                        \item getArtistVsBPM() : graph. This function will access the data stored in the Data Assembler and create a histogram displaying the artist who's songs were played most often at different BPMs. The Data Manager will select the appropriate graph from the Graph Container and return it to the UI.
-                                        \item getGenreVsBPM() : graph. This function will create a histogram of the most frequent genres at different BPMs. The data will be accessed from the Data Assembler and plotted by the Graph Container. The final graph will be selected by the Data Manager from the Graph Container
-                                        \item getTempoVsBPM() : graph. This function will return a graph of the music's tempo versus the user's BPM.
-                                        \item getHRvsTime() : graph. This function will return a graph of the user's heart rate over time.
-                                        \item getPlaylist(): string array. This function will return an array of the music that was played during the workout.
-                                        \item storeCurrentTime() : bool. This is an auxiliary function which stores the current system time in the data storage every time storeCurrentHR() is called. It will associate the time with the current heart rate.
-                                \end{itemize}\\
+					 \item store(Record) : void. This function will pass Record objects to the Data Assembler object, which will then store the Record into the database. The Record object is assembled using data from the Audio Subsystem
+                                        \item graphArtist() : graph. This function will access the data stored in the Data Assembler and create a histogram displaying the artist who's songs were played most often at different BPMs. The Data Manager will select the appropriate graph from the Graph Container and return it to the UI.
+                                        \item graphGenre() : graph. This function will create a histogram of the most frequent genres at different BPMs. The data will be accessed from the Data Assembler and plotted by the Graph Container. The final graph will be selected by the Data Manager from the Graph Container
+                                        \item graphSong() : graph. This function will return a graph of the music's tempo versus the user's BPM.
+                                        \item graphData() : graph. This function will return a graph of the user's heart rate over time.
+                                        \item getTimestamp() : bool. This is an auxiliary function which retrieves the current system time in the data storage every time storeCurrentHR() is called. It will associate the time with the current heart rate.
+
+
+                               \end{itemize}\\
                         \hline
         \end{tabular}
 \end{center}
@@ -1569,22 +1564,28 @@ The Expert Doer Principle was not followed as closely because the communication 
                                 \textbf{Variables:} \\
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item playlist: string array. This variable will store the names of the songs that were played during the workout.
-                                        \item heartRates: Ordered Pair array. This variable will store the retrieved data points in ascending order.
+					\item DATABASE VERSION: int. Stores the version of the SQLite Database.
+                                        \item DATABASE NAME:String. Records the name of the database.
+                                        \item KEY HEARTRATE:String. Records a column name called "heart rate".
+                                        \item KEY TIMESTAMP:String. Records a column name called "time stamp".
+                                        \item KEY ARTIST:String. Records a column name called "artist".
+                                        \item KEY GENRE:String. Records a column name called "genre".
+                                        \item KEY SONG:String. Records a column name called "song".
+                                        \item TABLE RECORDS:String. Records the name of the table.
+
+
                                 \end{itemize} \\
                         \hline
                         \begin{flushleft}
                                 \textbf{Functions: } \\
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item assembleHRVsTime() : ordered pair array. This function assembles the data for an HR vs Time graph.
-                                        \item assembleArtistVsBPM() : string pair array. This function assembles the data for an Artist vs BPM table.
-                                        \item assembleGenreVsBPM() : string pair array. This function assembles the data for a Genre vs BPM table.
-                                        \item assembleTempoVsBPM() : string pair array. This function assembles the data for a Tempo vs BPM table.
-                                        \item assemblePlaylist() : string array. This function assembles the music playlist.
-                                        \item retrieveHR() : double. This function retrieves a heart rate from the data storage.
-                                        \item retrieveTime() : double. This function retrieves a time from the data storage.
-                                        \item retrieveSong() : string. This function retrieves a song name from data storage.
+					\item addRecord(Record): void. This function organizes the Record object into a correct format for insertion, and then stores the Record into the SQLite database.
+                                        \item getRecord(int timeStamp): Record. This function looks through the database and finds a Record with the given timeStamp. If there is no match, a Record is not returned. If there is a match, the corresponding Record object is returned.
+                                        \item getAllRecords(): Record array. This function goes through the entire database and returns all the Records in an array.
+                                        \item updateRecord(Record): int. This function updates the information in a particular Record. Returns 1 on success, 0 on failure.
+                                        \item deleteRecord(Record): void. This function deletes a particular Record from the database.
+
                                 \end{itemize} \\
                         \hline
         \end{tabular}
@@ -1615,55 +1616,37 @@ The Expert Doer Principle was not followed as closely because the communication 
         \end{tabular}
 \end{center}
 
-
-\begin{center}
-	\begin{tabular}{|C{15cm}|}
-		\hline
-			\textbf{Ordered Pair} \\
-		\hline
-			\begin{flushleft}
-				\textbf{Variables: }\\
-			\end{flushleft}
-				\begin{itemize}
-					\item x : double. This variable stores the x-coordinate of the data point.
-					\item y : double. This variable stores the y-coordinate of the data point.
-				\end{itemize} \\
-			\hline
-			\begin{flushleft}
-				\textbf{Functions: } \\
-			\end{flushleft}
-				\begin{itemize}
-					\item setX(double newX) : bool. This function sets the value of the variable x.
-					\item getX() : double. This function returns the current value of the variable x.
-					\item setY(double newY) : bool. This function sets the value of the variable y.
-					\item getY() : double. This function returns the current value of the variable y.
-				\end{itemize} \\
-			\hline
-	\end{tabular}
-\end{center}
-
 \begin{center}
         \begin{tabular}{|C{15cm}|}
                 \hline
-                        \textbf{String Pair} \\
+                        \textbf{Record} \\
                 \hline
                         \begin{flushleft}
                                 \textbf{Variables: }\\
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item doubleValue : double. This stores the double value of the pair
-                                        \item stringValue : string. This stores the string value of the pair.
+                                        \item heartRate : int. This variable stores the heart rate.
+                                        \item timeStamp : int. This variable stores the time stamp.
+                                        \item Artist : String. This variable stores the name of the Artist.
+                                        \item Genre : String. This variable stores the Genre of the song.
+                                        \item Song : String. This variable stores the name of the Song.
                                 \end{itemize} \\
-                        \hline
+ \hline
                         \begin{flushleft}
                                 \textbf{Functions: } \\
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item setDouble(double newDouble) : bool. This sets the double value of the pair
-                                        \item getDouble() : double. This returns the double value of the piar
-                                        \item setString() : double. This sets the string value of the pair.
-                                        \item getString() : string. This returns the string value of the pair
-                                \end{itemize} \\
+                                        \item getHeartRate() : int. This function returns the heart rate.
+                                        \item setHeartRate(int) : void. This function sets the heart rate.
+                                        \item getTimeStamp() : int. This function returns the time stamp.
+                                        \item setTimeStamp(int) : void. This function sets the time stamp.
+                                        \item getArtist() : String. This function returns the Artist's name.
+                                        \item setArtist(String) : void. This function sets the Artist's name.
+                                        \item getGenre() : String. This function returns the name of the Genre.
+                                        \item setGenre(String) : void. This function sets the name of the Genre.
+                                        \item getSong() : String. This function returns the name of the song.
+					 \item setSong(String) : void. This function sets the name of the song.
+                        \end{itemize} \\
                         \hline
         \end{tabular}
 \end{center}
@@ -1708,6 +1691,12 @@ The Expert Doer Principle was not followed as closely because the communication 
 					\item checkPlaying(): boolean. This function will return the data stored in the variable isREady.
 					\item menu(): void. This function will display the menu for the application.
 					\item getStatistics(): graph. This function will return graphs which contain statistics from the data manager.
+					\item openCalculator(): void. This function will open the peak heart rate calculator
+					\item alertUser(): boolean. This function will check to see if the user's current heart rate is safe. Alert user if false.
+					\item setAge(): void. This function will set the age of the user for peak heart rate calculation.
+					\item setActivity(): void. This function will set the activity level of the user for peak heart rate calculation.
+					\item calculatePeak(): void. This function will calculate a recommended peak heart rate for the user.
+					\item displayRecommendation(): int. This function will display the calculated recommended target heart rate for the user.
 				\end{itemize}
 			\cr \hline
 	\end{tabular}
@@ -1751,14 +1740,17 @@ The Expert Doer Principle was not followed as closely because the communication 
  \textbf{Track Logger}		&	X	&		&		&		&		&		\\ \hline
  \textbf{Music Playerbacker}	&	X	&		&		&		&	X	&		\\ \hline
  \textbf{Track Queuer}		&	X	&	X	&		&		&		&		\\ \hline
- \textbf{General UI}			&	X	&	X	&		&		&	X	&		\\ \hline
+ \textbf{General UI}		&	X	&	X	&		&		&	X	&		\\ \hline
  \textbf{Playback View}		&	X	&	X	&	X	&		&	X	&		\\ \hline
- \textbf{Heart Beat View}		&	X	&	X	&	X	&		&	X	&		\\ \hline
+ \textbf{Heart Beat View}	&	X	&	X	&	X	&		&	X	&		\\ \hline
  \textbf{Workout View}		&	X	&	X	&	X	&		&	X	&		\\ \hline
  \textbf{History View}		&	X	&	X	&	X	&		&	X	&		\\ \hline
- \textbf{Workout Store}		&	X	&	X	&		&	X	&		&	\\ \hline
- \textbf{Metadata Store}		&	X	&	X	&		&	X	&		&	\\ \hline
- \textbf{Music Store}		&	X	&	X	&		&	X	&		&	\\ \hline
+ \textbf{Workout Store}		&	X	&	X	&		&	X	&		&		\\ \hline
+ \textbf{Metadata Store}	&	X	&	X	&		&	X	&		&		\\ \hline
+ \textbf{Music Store}		&	X	&	X	&		&	X	&		&		\\ \hline
+ \textbf{Rest Setter}		&		&		&		&		&	X	&	X	\\ \hline
+ \textbf{Peak Calculator}	&		&		&		&		&	x	&		\\ \hilne
+ \textbf{User Alerter}		&	X	&	X	&		&		&	X	&	X	\\ \hline
 	\end{tabular}
 \end{center}
 
@@ -1930,9 +1922,7 @@ TimeStamp: int \textendash The time stamp is available in conjunction with BPM. 
 
 BPM : int \textendash Last but not least, we have the most critical piece of data, the beats per minute measure of a user"s heart rate which will probably be used in every graph. \newline
 
-As introduced earlier on, we will also need to introduce two classes, GraphContainer and OrderedPair. GraphContainer is essentially an array of possible graphs that the user requests. For instance, our most common graph will probably be the graph of Heart Rate vs. Time. We could also introduce BPM vs. Tempo or BPM vs. Song. However the data type that allows us to create this data structure in the first place is the Ordered Pair. Java does not contain such a class, so we implement our own as described in our class section. Our y variable will almost definitely include BPM as an int or double because we are interested in seeing change in heart rate. Meanwhile, our x value will usually be the time stamp, but could also include Tempo, Song Title, or other music metadata that will be retrieved from the audio subsystem. \newline
-
-Obviously, GraphContainer and OrderedPair are utilized to ensure that when a user requests a graph, it will be readily available. Our graphs will be stored under session number, which is the intuitive choice for a user to request a graph. If a user can request a graph during a session, it will be done using the current session number. 
+As introduced earlier on, we will also need to introduce a new class, Record. This Record object holds all the information about the song that is currently being played, the user's current heart rate, and the time at which this data was recorded. Our graphing engine can extract these Records from the SQLite database and graph a combination of the information within the Record.. For instance, a generated graph could show the change of the user's heart rate over time. We could also introduce the frequency of songs listened to, or the frequency of genre listened to. However, none of this would be possible without the Record class. Java does not contain a class that holds ordered pairs for graphing, so we implemented our own as described in our class section. The Record object is convenient in that it contains all the information about the system at a particular snapshot in time. Thus, the graphing engine can easily extract information about the system for the duration of the workout and assemble that data into meaningful graphs. \newline
 
 
 
@@ -1947,7 +1937,8 @@ We also removed the About page, reasoning that the simple UI should be intuitive
 \\
 Since we now only have one element to display on the dropdown menu, we will instead have a fixed button to access the Statistics screen in place of the menu.
 This halves the user effort to access the Statistics screen, now only requiring one click, therefore friendlier to the exercising user.
-Otherwise, User Interface interactions remain as planned.
+Otherwise, User Interface interactions remain as planned.\\
+In an effort to maximize user safety in our product, we have also implemented three new UI components - setting the user's resting heart rate, recommending a target heart rate, and alerting the user if their current heart rate is at a dangerous level. These components have been implemented in areas which are simple and straight forward for the user to understand - setting the user's resting heart rate was placed under their resting heart rate selector, recommending a user's target heart rate was placed under the target heart rate selector, and the danger alert will only show up to the user when necessary, minimizing the amount of UI components the user is forced to look at.
 
 \chapter{Design of Tests}
 
@@ -2176,7 +2167,7 @@ Otherwise, User Interface interactions remain as planned.
                                 \textbf{Steps: }
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item The User Interface calls the storeInitialState() function form the Data Manager
+                                        \item The User Interface calls the storeInitialState() function from the Data Manager
                                         \item $\rightarrow$ Data Manager retrieves the current heart rate from the chest strap and time stamp from the device, and stores it in the database.
                                         \item $\leftarrow$ If the storage occurs successfully, a confirmation is sent to the Data Manager
                                         \item $\rightarrow$ Once confirmation is received, Data Manager begins calling storeCurrentHR() repeatedly.
@@ -2194,8 +2185,116 @@ Otherwise, User Interface interactions remain as planned.
                 \hline
         \end{tabular}
 \end{center}
-
-Further testing must be done in order to validate the accuracy of displaying the user's current heart rate. This accuracy, however, is hard to validate because the application simply displays the number that it receives directly from the heart rate monitor. If the displayed number appears to be off, then the heart rate monitor may be faulty. Otherwise, there is no way to check whether the displayed number is the actual number that the monitor records.
+\begin{center}
+         \begin{tabular}{|C{15cm}|}
+                 \hline
+                        \textbf{Set Resting Heart Rate} \\
+                \hline
+                        \begin{flushleft}
+                                \textbf{Tests: } Graphical User Interface, Data Manager, Hardware Component
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Assumption: } The User Interface has received an input from the user indicating a desire to set his resting heart rate.
+                        \end{flushleft}
+			\begin{center}
+				\textbf{Integration Testing}
+			\end{center}
+                        \begin{flushleft}
+                                \textbf{Steps: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The setResting() function is called from the Graphical User Interface.
+                                        \item $\rightarrow$ Data Manager retrieves the current heart rate from the chest strap.
+                                        \item $\leftarrow$ If retrieval is successful, the Data Manager will send the current heart rate to the Graphical User Interface.
+                                        \item $\rightarrow$ Once the current heart rate is received, the Graphical User Interface will update its resting heart rate.
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Expected: } The Graphical User Interface will display the user's current heart rate as the resting heart rate.
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Fails is: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The chest strap does not return a valid heart rate
+                                        \item The Graphical User Interface displays an obviously incorrect resting heart rate (either extremely high or extremely low)
+                                \end{itemize}\\
+                \hline
+        \end{tabular}
+\end{center}
+\begin{center}
+         \begin{tabular}{|C{15cm}|}
+                 \hline
+                        \textbf{Recommend Target Heart Rate} \\
+                \hline
+                        \begin{flushleft}
+                                \textbf{Tests: } User Interface
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Assumption: } The User Interface has received an input from the user which indicates a desire to calculate recommendation.
+                        \end{flushleft}
+			\begin{center}
+				\textbf{Integration Testing}
+			\end{center}
+                        \begin{flushleft}
+                                \textbf{Steps: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The User Interface receives input concerning the user's age and level of activity.
+                                        \item $\rightarrow$ The Graphical User Interface passes this information to our calculation algorithm.
+                                        \item $\leftarrow$ The calculation algorithm returns a recommended target heart rate
+                                        \item $\rightarrow$ The Graphical User Interface will display a recommended target heart rate to the user.
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Expected: } The Graphical User Interface will correctly display a recommended target heart rate to the user.
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Fails is: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The Graphical User Interface displays a recommendation which deviates from the recommendation algorithm.
+                                \end{itemize}\\
+                \hline
+        \end{tabular}
+\end{center}
+\begin{center}
+         \begin{tabular}{|C{15cm}|}
+                 \hline
+                        \textbf{Alert User} \\
+                \hline
+                        \begin{flushleft}
+                                \textbf{Tests: } Data Manager, User Interface, Hardware Component
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Assumption: } The Data Manager is receiving current heart rates from the Hardware Component.
+                        \end{flushleft}
+			\begin{center}
+				\textbf{Integration Testing}
+			\end{center}
+                        \begin{flushleft}
+                                \textbf{Steps: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The Data Manager correctly receives current heart rate from the Hardware Component
+                                        \item $\rightarrow$ The Data Manager recognizes that the current heart rate is within the danger zone.
+                                        \item $\leftarrow$ Data Manager alerts the User Interface that the current heart rate is dangerous.
+                                        \item $\rightarrow$ The Graphical User Interface will display an alert that the user is in danger and pause the workout.
+                                \end{itemize}
+                        \begin{flushleft}
+                                \textbf{Expected: } The Graphical User Interface will initiate an emergency pause when the user is at a dangerous heart rate.
+                        \end{flushleft}
+                        \begin{flushleft}
+                                \textbf{Fails is: }
+                        \end{flushleft}
+                                \begin{itemize}
+                                        \item The Graphical User Interface initiates an emergency pause when the user is at a safe heart rate.
+					\item The Graphical User Interface does not initiate an emergency pause when the user is at a dangerous heart rate.
+					\item The Hardware Component is not correctly sending current heart rate to the Data Manager.
+					\item The Data Manager does not correctly recognize whether a heart rate is in the danger zone or the safe zone.
+                                \end{itemize}\\
+                \hline
+        \end{tabular}
+\end{center}
+Further testing must be done in order to validate the accuracy of displaying the user's current heart rate. This accuracy, however, is hard to validate because the application simply displays the number that it receives directly from the heart rate monitor. If the displayed number appears to be off, then the heart rate monitor may be faulty. Otherwise, there is no way to check whether the displayed number is the actual number that the monitor records. 
 
 \chapter{Project Management and Plan of Work}
 \section{Merging Contributions}
