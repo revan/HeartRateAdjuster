@@ -136,7 +136,7 @@ public class StatisticsActivity extends Activity {
 
         }
 
-        int[] colors = {Color.BLUE,Color.GREEN};
+        int[] colors = {Color.BLUE,Color.GREEN,Color.RED,Color.CYAN,Color.MAGENTA};
         CategorySeries distributionSeries = new CategorySeries("Frequencies of Artists");
         for(int i = 0; i < frequencies.length;i++)
         {
@@ -148,7 +148,7 @@ public class StatisticsActivity extends Activity {
         for(int i = 0; i < frequencies.length; i++)
         {
             SimpleSeriesRenderer seriesRenderer = new SimpleSeriesRenderer();
-            seriesRenderer.setColor(colors[i%2]);
+            seriesRenderer.setColor(colors[i%5]);
             seriesRenderer.setDisplayChartValues(true);
             defaultRenderer.addSeriesRenderer(seriesRenderer);
         }
@@ -159,6 +159,7 @@ public class StatisticsActivity extends Activity {
         defaultRenderer.setZoomButtonsVisible(true);
         defaultRenderer.setApplyBackgroundColor(true);
         defaultRenderer.setBackgroundColor(Color.BLACK);
+	defaultRenderer.setDisplayValues(true);
 
         Intent intent = ChartFactory.getPieChartIntent(getBaseContext(), distributionSeries, defaultRenderer, "PieChart");
 
@@ -195,7 +196,7 @@ public class StatisticsActivity extends Activity {
 
         }
 
-        int[] colors = {Color.BLUE,Color.GREEN};
+        int[] colors = {Color.BLUE,Color.GREEN,Color.RED,Color.CYAN,Color.MAGENTA};
         CategorySeries distributionSeries = new CategorySeries("Frequencies of Songs");
         for(int i = 0; i < frequencies.length;i++)
         {
@@ -207,7 +208,7 @@ public class StatisticsActivity extends Activity {
         for(int i = 0; i < frequencies.length; i++)
         {
             SimpleSeriesRenderer seriesRenderer = new SimpleSeriesRenderer();
-            seriesRenderer.setColor(colors[i%2]);
+            seriesRenderer.setColor(colors[i%5]);
             seriesRenderer.setDisplayChartValues(true);
             defaultRenderer.addSeriesRenderer(seriesRenderer);
         }
@@ -218,6 +219,7 @@ public class StatisticsActivity extends Activity {
         defaultRenderer.setZoomButtonsVisible(true);
         defaultRenderer.setApplyBackgroundColor(true);
         defaultRenderer.setBackgroundColor(Color.BLACK);
+	defaultRenderer.setDisplayValues(true);
 
         Intent intent = ChartFactory.getPieChartIntent(getBaseContext(), distributionSeries, defaultRenderer, "PieChart");
 
@@ -254,7 +256,7 @@ public class StatisticsActivity extends Activity {
 
         }
 
-        int[] colors = {Color.BLUE,Color.GREEN};
+        int[] colors = {Color.BLUE,Color.GREEN,Color.RED,Color.CYAN,Color.MAGENTA};
         CategorySeries distributionSeries = new CategorySeries("Frequencies of Genres");
         for(int i = 0; i < frequencies.length;i++)
         {
@@ -266,7 +268,7 @@ public class StatisticsActivity extends Activity {
         for(int i = 0; i < frequencies.length; i++)
         {
             SimpleSeriesRenderer seriesRenderer = new SimpleSeriesRenderer();
-            seriesRenderer.setColor(colors[i%2]);
+            seriesRenderer.setColor(colors[i%5]);
             seriesRenderer.setDisplayChartValues(true);
             defaultRenderer.addSeriesRenderer(seriesRenderer);
         }
@@ -277,6 +279,7 @@ public class StatisticsActivity extends Activity {
         defaultRenderer.setZoomButtonsVisible(true);
         defaultRenderer.setApplyBackgroundColor(true);
         defaultRenderer.setBackgroundColor(Color.BLACK);
+	defaultRenderer.setDisplayValues(true);
 
         Intent intent = ChartFactory.getPieChartIntent(getBaseContext(), distributionSeries, defaultRenderer, "PieChart");
 
