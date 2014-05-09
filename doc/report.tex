@@ -454,8 +454,8 @@ The Traceability Matrix allows the reader to cross the functional and non-functi
                                 \textbf{Flow of Events for Main Success Scenario: }
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item $\rightarrow$ User Interface calls the storeInitialState() function in the Data Manager to record the initial heart rate and time stamp of the user.
-                                        \item The Data Manager calls the storeCurrentHeartRate() while there is no stop signal from the User Interface. This retrieves the current heart rate from the chest strap, combines it with the time stamp, and stores it in the database.
+                                        \item $\rightarrow$ User Interface calls the store() function in the Data Manager to record the initial heart rate and time stamp of the user.
+                                        \item The Data Manager calls the getTimeStamp() while there is no stop signal from the User Interface. This retrieves the current heart rate from the chest strap, combines it with the time stamp, and stores it in the database.
                                         \item $\rightarrow$ UI sends the stop signal, and the Data Manager stops recording data in the database.
                                         \item $\leftarrow$ Data Manager sends signal back to the User Interface to indicate that the recording has stopped successfully.
                                \end{itemize}
@@ -464,7 +464,7 @@ The Traceability Matrix allows the reader to cross the functional and non-functi
                                 \textbf{Flow of Events for Alternate Success Scenario (Start Error): }
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item $\rightarrow$ User Interface calls the storeInitialState() function in the Data Manager to record the initial heart rate and time stamp of the user
+                                        \item $\rightarrow$ User Interface calls the store() function in the Data Manager to record the initial heart rate and time stamp of the user
                                         \item Chest strap reports an error in measurement. Sends signal to Data Manager about invalid data.
                                         \item $\leftarrow$ Data Manager returns signal to the User Interface that the data was unable to be retrieved and that the data logging has not begun.
                                 \end{itemize}
@@ -472,7 +472,7 @@ The Traceability Matrix allows the reader to cross the functional and non-functi
                                 \textbf{Flow of Events for Alternate Success Scenario (Error During Data Logging): }
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item $\rightarrow$ User Interface calls the storeInitialState() function in the Data Manager to record the initial heart rate and time stamp of the user.
+                                        \item $\rightarrow$ User Interface calls the store() function in the Data Manager to record the initial heart rate and time stamp of the user.
                                         \item $\rightarrow$ Data Manager starts recording data in the database.
                                         \item $\leftarrow$ Chest strap reports at least 10 successive errors in measurement. Sends signal to Data Manager about invalid data.
                                         \item $\leftarrow$ Data Manager stops recording data. Sends signal that invalid data was received from the chest strap, but some data was recorded.
@@ -482,7 +482,7 @@ The Traceability Matrix allows the reader to cross the functional and non-functi
         \end{longtable}
 \end{center}
 
-This use case describes how the system will begin storing data. The User Interface, via the commands entered by the user, will initiate the data storage by calling the storeInitialState() function in the Data Manager. The Data Manager will then retrieve the initial state of the system and current time stamp of the system and then store it in the database. Then the Data Manager will loop into the storeCurrentHeartRate() call until it receives a stop signal from the User Interface. Once this signal is received, the Data Manager will stop the loop and send a signal back saying that the data logging has stopped successfully. Two error scenarios could occur during this use case; the initial retrieval of the user's state could be unsuccessful, or a particular retrieval during the data logging could be invalid. To address the first case, the Data Manager will check for a signal from the chest strap to make sure that it is ready to transmit data and that the reading the strap picks up is correct. If the Data Manager receives a low signal, then it will send a signal to the User Interface that the storage of the initial state did not succeed. If the chest strap records some invalid data during the data storage, then it will send a signal to the Data Manager that an invalid value was recorded. The Data Manager will keep a counter of how many successive invalid entries were received. If the number of consecutive invalid entries crosses 10, then the Data Manager will send a signal to the User Interface that the chest strap is recording invalid values. Thus, this use case accounts for the success of the main scenario and reactions to the two error scenarios. \\
+This use case describes how the system will begin storing data. The User Interface, via the commands entered by the user, will initiate the data storage by calling the store() function in the Data Manager. The Data Manager will then retrieve the initial state of the system and current time stamp of the system and then store it in the database. Then the Data Manager will loop into the store() call until it receives a stop signal from the User Interface. Once this signal is received, the Data Manager will stop the loop and send a signal back saying that the data logging has stopped successfully. Two error scenarios could occur during this use case; the initial retrieval of the user's state could be unsuccessful, or a particular retrieval during the data logging could be invalid. To address the first case, the Data Manager will check for a signal from the chest strap to make sure that it is ready to transmit data and that the reading the strap picks up is correct. If the Data Manager receives a low signal, then it will send a signal to the User Interface that the storage of the initial state did not succeed. If the chest strap records some invalid data during the data storage, then it will send a signal to the Data Manager that an invalid value was recorded. The Data Manager will keep a counter of how many successive invalid entries were received. If the number of consecutive invalid entries crosses 10, then the Data Manager will send a signal to the User Interface that the chest strap is recording invalid values. Thus, this use case accounts for the success of the main scenario and reactions to the two error scenarios. \\
 
 
 \begin{center}
@@ -665,7 +665,7 @@ The togglePlayback case is another straightforward, convenience-based use case. 
                         \end{flushleft}
                                 \begin{itemize}
                                         \item $\rightarrow$ User Interface makes call(s) to any or all of the following functions: graphData(), graphArtist(), graphGenre(), and graphSong()
-                                        \item $\rightarrow$ The Data Manager will then make calls to the appropriate “graph” function.
+                                        \item $\rightarrow$ The Data Manager will then make calls to the appropriate ``graph'' function.
                                         \item The graph function will tell the Data Assembler to retrieve the data from the database.
                                         \item $\leftarrow$ The Data Assembler will then return Record objects, from which the Data Manager can extract data and create graphs.
                                 \end{itemize}
@@ -1444,7 +1444,7 @@ Our team will be divided into three smaller sub-teams of two individuals each, t
 
 For our first use case, we wish to record information about the user's heart rate as well as some additional information. This includes a time stamp of when the heart rate data was recorded, and could also include some of the song metadata such as artist, album, or genre. For our main success scenario, the user interacts with the UI which communicates with the Database Manager. As long as user does not tell the UI to stop recording, the Database Manager will continually ask the Chest Strap for BPM Data and a time stamp for every piece of data received. When the user tells the UI to stop, we break out of our loop, and the Database Manager returns to the UI and displays updated information. Alternate scenarios could occur when the Chest Strap is not functioning correctly and reports an error in measurement, and when this occurs up to 10 times, the Database Manager stops recording. Another alternate scenario would be if the system detects an abnormal heart rate in the user, and alerts the user to stop his workout. This process is described more thoroughly in the Algorithms section.
 
-This interaction diagram incorporates the Publisher-Subscriber design pattern between the Mobile Interface Controller and the Database Manager. The Mobile Interface Controller will receive requests from the User, interpret them, and call the storeInitialState() method on the Database Manager. Once this method is called, the Database Manager completes all its tasks on its own. The Mobile Interface Controller doesn't care how those tasks are getting executed, nor whether the values are correct or not. It trusts the Database Manager to know that. Once the Mobile Interface Controller feels that the system should stop, its sends a message in the form of the stop() function call to end the operation.
+This interaction diagram incorporates the Publisher-Subscriber design pattern between the Mobile Interface Controller and the Database Manager. The Mobile Interface Controller will receive requests from the User, interpret them, and call the store() method on the Database Manager. Once this method is called, the Database Manager completes all its tasks on its own. The Mobile Interface Controller doesn't care how those tasks are getting executed, nor whether the values are correct or not. It trusts the Database Manager to know that. Once the Mobile Interface Controller feels that the system should stop, its sends a message in the form of the stop() function call to end the operation.
 
 \begin{figure}[H]
 	\centering
@@ -1492,7 +1492,7 @@ UC-8, setRestingHeartRate is very similar to UC-6 as well. The user must submit 
 
 \begin{figure}[H]
 	\includegraphics[scale=.40]{img/Interaction_Diagrams/calculatePeak.png}\\
-	\caption {Interaction diagram for getHeartRate()} 
+	\caption {Interaction diagram for calculatePeak()} 
 \end{figure}
 
 UC-9, calculatePeak is solely between the user and the controller, not needing to bother the database or music player. This use case is simply an interaction between the User and the UI - the user requests a calculator, which requires input. Once input is entered, the UI returns a safe target heart rate to the user. 
@@ -2149,7 +2149,7 @@ In an effort to maximize user safety in our product, we have also implemented th
                                 \textbf{Steps: }
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item The User Interface calls the storeInitialState() function from the Data Manager
+                                        \item The User Interface calls the store() function from the Data Manager
                                         \item $\rightarrow$ Data Manager retrieves the current heart rate from the chest strap and time stamp from the device, and stores it in the database.
                                         \item $\leftarrow$ If the storage occurs successfully, a confirmation is sent to the Data Manager
                                         \item $\rightarrow$ Once confirmation is received, Data Manager begins calling storeCurrentHR() repeatedly.
