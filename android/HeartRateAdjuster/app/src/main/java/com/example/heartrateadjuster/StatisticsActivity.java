@@ -288,6 +288,15 @@ public class StatisticsActivity extends Activity {
 
     }
 
+	public int getCurrentHR() {
+	DataAssembler db = new DataAssembler(this);	
+	
+	List<Record> temp = db.getAllRecords();
+	Record last = temp.get(temp.size()-1);
+	
+	return temp.getHeartRate();
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
