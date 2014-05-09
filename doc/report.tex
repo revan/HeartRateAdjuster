@@ -1438,7 +1438,7 @@ Our team will be divided into three smaller sub-teams of two individuals each, t
 	
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=.78]{img/Interaction_Diagrams/UC1_logData.png}\\
+	\includegraphics[scale=.40]{img/Interaction_Diagrams/logData.png}\\
 	\caption {Interaction diagram for the logData() use case.} 
 \end{figure}
 
@@ -1478,14 +1478,14 @@ UC-6, getHeartRate is very similar to UC-5. This use case is also applicable for
 
 \begin{figure}[H]
 	\includegraphics[scale=.40]{img/Interaction_Diagrams/alertUser.png}\\
-	\caption {Interaction diagram for getHeartRate()} 
+	\caption {Interaction diagram for alertUser()} 
 \end{figure}
 
 UC-7, alertUser is very similar to UC-6 as well. The request is constantly checked by the system, with the controller constantly retrieving current heart rate from the data manager. If preconditions are met (the user's heart rate is at a dangerous level) then an emergency stop will be called to the controller.
 
 \begin{figure}[H]
 	\includegraphics[scale=.40]{img/Interaction_Diagrams/setRestingHeartRate.png}\\
-	\caption {Interaction diagram for getHeartRate()} 
+	\caption {Interaction diagram for setRestingHeartRate()} 
 \end{figure}
 
 UC-8, setRestingHeartRate is very similar to UC-6 as well. The user must submit his request, and then the controller takes the request from the user and passes it tothe Data Manager to handle. The database manager will then retrieve the current BPM from the Heart Rate Monitor and update the value of the resting heart rate for the mobile interface to display to the user. 
@@ -1545,6 +1545,7 @@ The Expert Doer Principle was not followed as closely because the communication 
                                         \item graphSong() : graph. This function will return a graph of the music's tempo versus the user's BPM.
                                         \item graphData() : graph. This function will return a graph of the user's heart rate over time.
                                         \item getTimestamp() : bool. This is an auxiliary function which retrieves the current system time in the data storage every time storeCurrentHR() is called. It will associate the time with the current heart rate.
+					\item getCurrentHR() : int. This function will return the user's current heart rate.
 
 
                                \end{itemize}\\
