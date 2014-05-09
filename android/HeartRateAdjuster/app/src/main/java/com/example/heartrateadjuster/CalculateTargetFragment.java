@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 /**
  * Class handling the UI popup for calculating target heartrate
+ * @author Revan
  */
 public class CalculateTargetFragment extends DialogFragment{
     NumberPicker np;

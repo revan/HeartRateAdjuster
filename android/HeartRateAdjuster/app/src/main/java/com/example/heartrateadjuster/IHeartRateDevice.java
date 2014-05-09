@@ -1,6 +1,7 @@
 package com.example.heartrateadjuster;
 /**
  * Interface with the Chest Strap.
+ * @author Revan
  */
 
 public interface IHeartRateDevice {

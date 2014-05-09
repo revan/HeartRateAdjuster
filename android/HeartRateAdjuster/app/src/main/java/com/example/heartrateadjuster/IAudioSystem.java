@@ -1,6 +1,7 @@
 package com.example.heartrateadjuster;
 /**
  * Interface to the Audio System.
+ * @author Revan
  */
 
 public interface IAudioSystem {

@@ -1,6 +1,7 @@
 package com.example.heartrateadjuster;
 /**
  * This Data Assembler class is responsible for creating the SQLite structure, as as providing functions to modify, add, or remove Records from the database.
+ * @author Nikhil
  */
 
 
@@ -18,29 +19,29 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DataAssembler extends SQLiteOpenHelper {
 
-	
+
 		// All Static variables
 	// Database Version
 	private static final int DATABASE_VERSION = 1;
-	
+
 	//Database Name
 	private static final String DATABASE_NAME = "heartRateMonitor";
-			
+
 	// Records table name
 	private static final String TABLE_RECORDS = "records";
-	
+
 	//Records Table columns names
 	private static final String KEY_HEARTRATE = "heart_rate";
 	private static final String KEY_TIMESTAMP = "time_stamp";
 	private static final String KEY_ARTIST = "artist";
 	private static final String KEY_GENRE = "genre";
 	private static final String KEY_SONG = "song";
-	
-	
+
+
 	public DataAssembler(Context context) {
 		super(context,DATABASE_NAME,null,DATABASE_VERSION);
 	}
-	
+
 	/**
 	 * This method sets up SQL Database with the arrangement of its parameters
 	 * @param db This is the SQLite database to be loaded.
@@ -49,10 +50,10 @@ public class DataAssembler extends SQLiteOpenHelper {
 		String CREATE_RECORDS_TABLE = "CREATE TABLE " + TABLE_RECORDS + " ("
 				+ KEY_HEARTRATE + " INTEGER," + KEY_TIMESTAMP + " INTEGER PRIMARY KEY,"
 				+ KEY_ARTIST + " TEXT," + KEY_GENRE + " TEXT," + KEY_SONG + " TEXT" + ")";
-			
+
 		db.execSQL(CREATE_RECORDS_TABLE);
 	}
-	
+
 	// Upgrading the database
 	/**
 	 * This function will upgrade the SQLite database if a new version is released
@@ -64,15 +65,15 @@ public class DataAssembler extends SQLiteOpenHelper {
 		// Create tables again
 		onCreate(db);
 	}
-	
-	
+
+
 	/**
 	 * This function adds a record to the database
 	 * @param record This record contains information about the heart rate, time stamp, artist, genre, and song
 	 */
 	void addRecord(Record record) {
 		SQLiteDatabase db = this.getWritableDatabase();
-		
+
 		ContentValues values = new ContentValues();
 		values.put(KEY_HEARTRATE, record.getHeartRate()); // Record heart Rate
 		values.put(KEY_TIMESTAMP, record.getTimeStamp()); // Record time stamp
@@ -84,7 +85,7 @@ public class DataAssembler extends SQLiteOpenHelper {
 		db.insert(TABLE_RECORDS, null, values);
 		db.close(); // Closing database connection
 	}
-	
+
 	/**
 	 * This method retrieves a record from the database based on its time stamp
 	 * @param timeStamp The time stamp is primary key used to fetch the record
@@ -105,8 +106,8 @@ public class DataAssembler extends SQLiteOpenHelper {
 			// return record
 			return record;
 		}
-	
-	
+
+
 	/**
 	 * This function returns a list of all the records in the database
 	 * @return A list containing all the Record objects in the database is returned
@@ -137,7 +138,7 @@ public class DataAssembler extends SQLiteOpenHelper {
 			// return contact list
 			return recordList;
 		}
-		
+
 		/**
 		 * This function allows a Record to be updated with new information.
 		 * @param record The parameter is the record object to be updated.
@@ -153,7 +154,7 @@ public class DataAssembler extends SQLiteOpenHelper {
 			values.put(KEY_ARTIST, record.getArtist());
 			values.put(KEY_GENRE, record.getGenre());
 			values.put(KEY_SONG, record.getSong());
-			
+
 			// updating row
 			return db.update(TABLE_RECORDS, values, KEY_TIMESTAMP + " = ?",
 					new String[] { String.valueOf(record.getTimeStamp()) });
@@ -186,6 +187,6 @@ public class DataAssembler extends SQLiteOpenHelper {
 			return cursor.getCount();
 		}
 
-	
-	
+
+
 }

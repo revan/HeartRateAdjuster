@@ -21,6 +21,7 @@ import java.util.TimerTask;
 /**
  * The main screen of the application.
  * Initializes chestStrap and audioSystem objects and sets up the UI with callbacks.
+ * @author Revan
  */
 
 public class MainActivity extends Activity implements CalculateTargetFragment.CalculateListener{
@@ -211,7 +212,7 @@ public class MainActivity extends Activity implements CalculateTargetFragment.Ca
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        
+
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
@@ -291,4 +292,3 @@ public class MainActivity extends Activity implements CalculateTargetFragment.Ca
         np22.setValue(newTarget);
     }
 }
-

@@ -4,6 +4,7 @@ import java.util.Random;
 
 /**
  * Implementation of {@link com.example.heartrateadjuster.IAudioSystem} for faking Audio System with UI element.
+ * @author Revan
  */
 public class AudioSystemFake implements IAudioSystem{
     Random rn = new Random();

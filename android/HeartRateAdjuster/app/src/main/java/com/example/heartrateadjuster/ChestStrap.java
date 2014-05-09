@@ -11,6 +11,7 @@ import java.util.Set;
 
 /**
  * Class providing access to the physical heart rate chest strap, through Bluetooth
+ * @author Revan
  */
 public class ChestStrap implements IHeartRateDevice {
     BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();

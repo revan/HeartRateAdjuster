@@ -1,6 +1,7 @@
 package com.example.heartrateadjuster;
 /**
  * Implementation of {@link com.example.heartrateadjuster.IHeartRateDevice} for faking chest strap data with UI element.
+ * @author Revan
  */
 public class ChestStrapFake implements IHeartRateDevice{
     /**

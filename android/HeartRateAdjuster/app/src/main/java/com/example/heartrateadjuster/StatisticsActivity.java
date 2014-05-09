@@ -1,6 +1,7 @@
 package com.example.heartrateadjuster;
 /**
  * This StatisticsActivity is the entry point for the data management module, and it provides three basic functions with which other modules can interface.
+ * @author Nikhil, Revan
  */
 
 import android.app.Activity;
