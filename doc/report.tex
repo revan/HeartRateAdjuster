@@ -640,7 +640,7 @@ The togglePlayback case is another straightforward, convenience-based use case. 
                                 \textbf{Initiating Actor: } User Interface
                         \end{flushleft}
                         \begin{flushleft}
-                                \textbf{Participating Actors: } Data Manager, Data Assembler, Graph Container
+                                \textbf{Participating Actors: } Data Manager, Data Assembler
                         \end{flushleft}
                         \begin{flushleft}
                                 \textbf{Actor's Goal: } Return graphs about the user's workout.
@@ -664,9 +664,10 @@ The togglePlayback case is another straightforward, convenience-based use case. 
                                 \textbf{Flow of Events for Main Success Scenario: }
                         \end{flushleft}
                                 \begin{itemize}
-                                        \item $\rightarrow$ User Interface makes call(s) to any or all of the following functions: graphData(), graphArtist(), graphGenre(), and graphSong(0                                        \item $\rightarrow$ The Data Manager will then make calls to the appropriate “assemble” function.
-                                        \item The assemble function will retrieve the data from the database, package it as either an ordered pair of doubles or an ordered pair of a string and a double (for the music sections).
-                                        \item $\rightarrow$ The Data Assembler will then be passed to the Graph Container, which will extract the data from the Data Assembler and graph the data that it contains. These graphs will be stored as an array in the Graph Container.
+                                        \item $\rightarrow$ User Interface makes call(s) to any or all of the following functions: graphData(), graphArtist(), graphGenre(), and graphSong()
+                                        \item $\rightarrow$ The Data Manager will then make calls to the appropriate “graph” function.
+                                        \item The graph function will tell the Data Assembler to retrieve the data from the database.
+                                        \item $\leftarrow$ The Data Assembler will then return Record objects, from which the Data Manager can extract data and create graphs.
                                 \end{itemize}
                        \\
                 \hline
@@ -1499,7 +1500,7 @@ UC-9, calculatePeak is solely between the user and the controller, not needing t
 
 \section{Alternate Scenarios}
 
-Alternate scenarios could occur mainly during the getStatistics() use case. Here, the user can select which particular graphs or data he may want to see. In the original diagram,  dedicated Data Assembler and Graph Container objects were created to handle the organization and display of all statistics. These objects greatly simplify the displayStatistics() case because all the calculations are done outside of the database. However, this is not the only way to solve the case, with the alternative solution being that the statistics are generated directly by the database. Advantages of this are that there is no need to transfer the data between two objects and worry about the communication scheme between them. Also, the time needed to flesh out an entirely new class to handle the calculations would be eliminated. Although the statistics-generation functionality can be contained entirely within the database, we implemented it through the Data Assembler and Graph Container combination. This decision was made to keep consistency with the High Cohesion and Low Coupling Principles. If we hadn`t made the separation, then the database would have too many responsibilities to take care of. By creating dedicated Assembling and Graphing objects, the statistics can be fully fleshed out and managed without having to worry about other responsibilities.
+Alternate scenarios could occur mainly during the getStatistics() use case. Here, the user can select which particular graphs or data he may want to see. In the original diagram,  dedicated Data Assembler and Record objects were created to handle the organization and display of all statistics. These objects greatly simplify the displayStatistics() case because all the calculations are done outside of the database. However, this is not the only way to solve the case, with the alternative solution being that the statistics are generated directly by the database. Advantages of this are that there is no need to transfer the data between two objects and worry about the communication scheme between them. Also, the time needed to flesh out an entirely new class to handle the calculations would be eliminated. Although the statistics-generation functionality can be contained entirely within the database, we implemented it through the Data Assembler and Record combination. This decision was made to keep consistency with the High Cohesion and Low Coupling Principles. If we hadn`t made the separation, then the database would have too many responsibilities to take care of. By creating dedicated Assembling and Record objects, the statistics can be fully fleshed out and managed without having to worry about other responsibilities.
 
 \section{Design Patterns}
 
@@ -1517,7 +1518,7 @@ The Expert Doer Principle was not followed as closely because the communication 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=.55]{img/Class_Diagrams/dataManagement.png}\\
+	\includegraphics[scale=.55]{img/Class_Diagrams/revisedDataDiagram.png}\\
 	\caption {Class relationship for managing data}
 \end{figure}
 
@@ -1539,8 +1540,8 @@ The Expert Doer Principle was not followed as closely because the communication 
                         \end{flushleft}
                                 \begin{itemize}
 					 \item store(Record) : void. This function will pass Record objects to the Data Assembler object, which will then store the Record into the database. The Record object is assembled using data from the Audio Subsystem
-                                        \item graphArtist() : graph. This function will access the data stored in the Data Assembler and create a histogram displaying the artist who's songs were played most often at different BPMs. The Data Manager will select the appropriate graph from the Graph Container and return it to the UI.
-                                        \item graphGenre() : graph. This function will create a histogram of the most frequent genres at different BPMs. The data will be accessed from the Data Assembler and plotted by the Graph Container. The final graph will be selected by the Data Manager from the Graph Container
+                                        \item graphArtist() : graph. This function will access the data stored in the Data Assembler and create a histogram displaying the artist who's songs were played most often at different BPMs. 
+                                        \item graphGenre() : graph. This function will create a histogram of the most frequent genres at different BPMs. 
                                         \item graphSong() : graph. This function will return a graph of the music's tempo versus the user's BPM.
                                         \item graphData() : graph. This function will return a graph of the user's heart rate over time.
                                         \item getTimestamp() : bool. This is an auxiliary function which retrieves the current system time in the data storage every time storeCurrentHR() is called. It will associate the time with the current heart rate.
@@ -1582,31 +1583,6 @@ The Expert Doer Principle was not followed as closely because the communication 
                                         \item updateRecord(Record): int. This function updates the information in a particular Record. Returns 1 on success, 0 on failure.
                                         \item deleteRecord(Record): void. This function deletes a particular Record from the database.
 
-                                \end{itemize} \\
-                        \hline
-        \end{tabular}
-\end{center}
-
-\begin{center}
-        \begin{tabular}{|C{15cm}|}
-                \hline
-                        \textbf{Graph Container} \\
-                \hline
-                        \begin{flushleft}
-                                \textbf{Variables:} \\
-                        \end{flushleft}
-                                \begin{itemize}
-                                        \item graphs : graph array. This variable contains an array of the different graphs that were requested by the User Interface.
-                                \end{itemize} \\
-                        \hline
-                        \begin{flushleft}
-                                \textbf{Functions: } \\
-                        \end{flushleft}
-                                \begin{itemize}
-                                        \item ArtistVsBPM(Data Assembler workoutData) : graph. This function takes the names of the artists and heart rates stored in the Data Assembler and graphs them against each other.
-                                        \item GenreVsBPM(Data Assembler workoutData) : graph. This function graphs the genre of the music versus the user's heart rate using the data from workoutData.
-                                        \item TempoVsBPM(Data Assembler workoutData) : graph. This function graphs the tempo of the music versus the user's heart rate using the workoutData object.
-                                        \item HRVsTime(Data Assembler workoutData) : graph. This function graphs the user's heart rate versus time using the workoutData object.
                                 \end{itemize} \\
                         \hline
         \end{tabular}
@@ -1804,7 +1780,7 @@ Our system utilizes a three-tier architecture system and consists of 3 layers. T
 
 These three tiers are separated from each other to allow for encapsulation and data abstraction. We want each tier to hide its usage from implementation and to preserve the integrity of our data. We also want to reduce the overall complexity of our system. However, each tier must maintain a sufficient level of communication and be able to retrieve needed data from each other. In a common scenario for our system, our application layer may request information from the data tier. It then processes this information and returns it to the presentation tier in response to the user request. A visual diagram was provided in our earlier stage of planning in the section titled System Architecture Diagram.
 
-The Data Management section in specific implements a two-tiered layered architecture. The first tier consists of the Data Manager, which serves as an interface between the Data Managment module and the other two modules. It provides functions which the other modules can use to store and access data from the database. In the second tier of the architecture, we have the Graph Container and the Data Assembler components. These components handle the actual manipulation and graphing of the data. The main reason for this architecture is to implement data hiding and abstraction; the Data Manager in the first tier serves as an intermediary which commands the Graph Container and Data Assembler to perform certain actions. Thus, the management of the data is done internally, and all the other modules get to see is the interface provided by the Data Manager.
+The Data Management section in specific implements a two-tiered layered architecture. The first tier consists of the Data Manager, which serves as an interface between the Data Managment module and the other two modules. It provides functions which the other modules can use to store and access data from the database. In the second tier of the architecture, we have the Record and the Data Assembler components. These components handle the actual manipulation and graphing of the data. The main reason for this architecture is to implement data hiding and abstraction; the Data Manager in the first tier serves as an intermediary which commands the Data Assembler to perform certain actions. Thus, the management of the data is done internally, and all the other modules get to see is the interface provided by the Data Manager.
 
 \section{Identifying Subsystems}
 Our software is designed around three primary subsystems.
